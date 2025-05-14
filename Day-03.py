@@ -46,22 +46,28 @@
 # a = [13,17,21,23,22,7,29]
 # print(loop(a,0))
 
-
 def trueorfalse(n,count = 0):
+    if n == 1:
+        return True
+    elif n <= 0:
+        return False 
+    return trueorfalse(n-3) or trueorfalse(n-5)
+
+
+# Counting minimum no of subtraction to get 1
+def trueorfalse1(n, count=0):
     if n == 1:
         return count
     elif n <= 0:
         return 99999 
-    return min(trueorfalse(n-3,count+1) , trueorfalse(n-5,count+1))
+    return min(trueorfalse1(n - 3, count + 1), trueorfalse1(n - 5, count + 1))
 
-
-# input 20 3 5
 n = 4
-ans =trueorfalse(n)
-if(ans) == 99999:
+ans = trueorfalse1(n)
+if ans == 99999:
     print(False)
 else:
-    print(ans)  
+    print(ans)
 
     
 
