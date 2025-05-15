@@ -99,24 +99,24 @@ def function(n,temp):
     function(n-5,temp + [n-5])
     
 function(n,[])
-# print(res)
+print(res)
 
 
 # using loops
-res = []
-for i in range(n//3 +1):
-    for j in range(n//5 + 1):
-        if 3*i + 5 *j == n-1:
-            path = []
-            current = n
-            path_steps = [3]*i + [5]*j
-            for step in path_steps:
-                current -= step
-                path.append(current)
-            res.append(path)
+# res = []
+# for i in range(n//3 +1):
+#     for j in range(n//5 + 1):
+#         if 3*i + 5 *j == n-1:
+#             path = []
+#             current = n
+#             path_steps = [3]*i + [5]*j
+#             for step in path_steps:
+#                 current -= step
+#                 path.append(current)
+#             res.append(path)
     
             
-print(res)
+# print(res)
             
 
     
