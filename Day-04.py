@@ -104,21 +104,90 @@ def function07(arr,i,target):
 #method 04
 #same code as shown above but here we are coming from back side
 arr =[1,2,3,4,5,6,7,8,9,10]
+arr=[2,4,6,8]
 def function07(arr,i,target):
     if target == 0:
         return True
     if i == -1 or target < 0:
         return False
     return function07(arr,i-1,target-arr[i]) or function07(arr,i-1,target)
-print(function07(arr,len(arr)-1,55))
+# print(function07(arr,len(arr)-1,13))
+
+#print  minimum no of values to get the target value
+#method 01  using recursion
+arr = [2,4,6,8]
+def function08(arr,i,target,count):
+    if target == 0:
+        return count
+    if i == -1 or target < 0:
+        return float("inf")
+    return min(function08(arr,i-1,target-arr[i],count + 1),function08(arr,i-1,target,count))
+ans = function08(arr,len(arr)-1,1,0)
+    
+# print( ans if ans != float("inf") else -1)
+
+#using bitmanipulation method
+#method 02
+arr = [2,4,6,8]
+res = []
+def function09(arr,target):
+    n = len(arr)
+    subsets = 1 << n
+    for i in range(subsets):
+        temp = []
+        for j in range(len(arr)):
+            if i  & (1 << j):
+                temp.append(arr[j])
+        res.append(temp)
+    for i in res:
+        if sum(i) == target:
+            print(i,end=" ")   
+# function09(arr,10)
+
+
+#take list ele from user and find largest even and smallest odd no
+#inputs = 2 7 211 45 78 90 1 8 34 123 77 42
+
+list1 = [] #list(map(int,input().split()))
+mini = float("inf")
+maxi = float("-inf")
+
+for i in list1:
+    if i > maxi and not i & 1:
+        maxi = i
+    if i < mini and i & 1:
+        mini = i
+# print(maxi,mini)
 
 
 
 
+
+#secound largest no in the list
+list1 =[2 ,10 ,211, 45, 78, 90, 1, 8, 34, 123, 77, 42]
+secound = -1
+maxi = float("-inf")
+for i in list1:
+    if maxi < i:
+        secound = maxi
+        maxi = i
+    list1 =[2 ,10 ,211, 45, 78, 90, 1, 8, 34, 123, 77, 42]
+secound = -1
+maxi = float("-inf")
+for i in list1:
+    if maxi < i:
+        secound = maxi
+        maxi = i
+    elif i > secound and i < maxi:
+        secound = i
+print(secound)
+        
 
     
+     
+
     
-    
+
     
     
     
