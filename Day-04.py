@@ -78,7 +78,7 @@ def function06(arr,ans,i,target):
     function06(arr,ans+[arr[i]],i+1,target)
     function06(arr,ans,i+1,target)
 function06(arr,[],0,10)
-# print(res)
+print(res)
 
 #method 02
 #returning true or false
@@ -171,16 +171,9 @@ for i in list1:
     if maxi < i:
         secound = maxi
         maxi = i
-    list1 =[2 ,10 ,211, 45, 78, 90, 1, 8, 34, 123, 77, 42]
-secound = -1
-maxi = float("-inf")
-for i in list1:
-    if maxi < i:
-        secound = maxi
-        maxi = i
-    elif i > secound and i < maxi:
+    elif i > secound and i < maxi:  # imp condition
         secound = i
-print(secound)
+# print(secound)
         
 
     
