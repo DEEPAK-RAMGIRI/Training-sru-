@@ -261,13 +261,14 @@ for i in set(arr):
     res.append((i,count))
 
 sorting = [[] for _ in range(maxi+1)]
-print(sorting)
+
 for i,j in res:
     sorting[j].append(i)
+    
 ans = []
 for i in range(len(sorting)):
     ans.extend(i * sorting[i])
-print(ans)
+# print(ans)
     
     
     
