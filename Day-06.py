@@ -207,6 +207,68 @@ for i in range(len(arr)):
             arr[j],arr[j+1] = arr[j+1],arr[j]
             flag =False
     if flag: break
-print(arr)
+# print(arr)
+
+
+# sort string accroding to it's word length
+
+string = "an apple a day keeps docter away"
+
+string = list(string.split())
+list1 = [len(i) for i in string]
+# print(list1)
+
+for i in range(len(list1)-1):
+    flag = False
+    for j in range(len(list1)-i-1):
+        if list1[j] > list1 [j+1]:
+            string[j],string[j+1] = string[j+1],string[j]
+            list1[j],list1[j+1] = list1[j+1],list1[j]
+            flag = True
+    if not flag: break
+# print(string)
+
+
+
+arr = [4,4,5,6,3,2,2,3,1,5,7,8,9,2,1,1]
+# arr = [7,2,6,3,6,7,7,2,2,2]
+hashmap = {}
+
+for i in arr:
+    hashmap[i] = hashmap.get(i,0)+ 1
+
+for i in range(len(arr)):
+    flag = True
+    for j in range(len(arr)-i-1):
+        if hashmap[arr[j]] > hashmap[arr[j+1]] or (hashmap[arr[j]] == hashmap[arr[j+1]] and arr[j] > arr[j+1]):
+           arr[j],arr[j+1] = arr[j+1],arr[j]
+           flag=False
+    if flag: break
+# print(arr)
+
+#output = 3,6,6,7,7,7,2,2,2,2
+
+
+
+#using bucket sort
+
+arr = [7,2,6,3,6,7,7,2,2,2]
+res = []
+maxi = 0
+for i in set(arr):
+    count = arr.count(i)
+    maxi = max(count,maxi)
+    res.append((i,count))
+
+sorting = [[] for _ in range(maxi+1)]
+print(sorting)
+for i,j in res:
+    sorting[j].append(i)
+ans = []
+for i in range(len(sorting)):
+    ans.extend(i * sorting[i])
+print(ans)
+    
+    
     
             
