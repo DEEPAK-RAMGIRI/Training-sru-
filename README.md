@@ -1,1 +1,2 @@
-# Training-sru-
+# Training-sru
+:)
