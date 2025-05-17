@@ -34,6 +34,7 @@ for i in list1:
         
 # Printing the number of islands in the matrix
 visted = [[False for _ in range(len(list1[0]))] for _ in range(len(list1))]
+print(visted)
 def island(list1, i, j):
     if i < 0 or i >= len(list1) or j >= len(list1[0]) or j < 0:
         return 0
