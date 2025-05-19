@@ -163,7 +163,36 @@ for i in range(1,len(nums)):
         count+=1
     else:
         count-=1
-print(res)
+# print(res)
+
+#printing last occurence of value in the array:
+#method 01
+arr1 = [2,4,3,1,4,2,3,4,5]
+first = last = -1
+key = 4
+for i in range(len(arr1)):
+    if arr1[i] == key:
+        if first == -1:
+            first = last = i
+        else:
+            last = i
+print(first,last)
+
+#method 2
+last = -1
+for i in range(len(arr1)):
+    if key == arr1[i]: last = i
+print(last)
+
+#method 3
+last =-1
+for i in range(len(arr1)-1,-1,-1):
+    if arr1[i] ==key: 
+        print(i)
+        break
+ 
+    
+
         
     
                 
