@@ -176,21 +176,87 @@ for i in range(len(arr1)):
             first = last = i
         else:
             last = i
-print(first,last)
+# print(first,last)
 
 #method 2
 last = -1
 for i in range(len(arr1)):
     if key == arr1[i]: last = i
-print(last)
+# print(last)
 
-#method 3
-last =-1
-for i in range(len(arr1)-1,-1,-1):
-    if arr1[i] ==key: 
-        print(i)
-        break
+# #method 3
+# last =-1
+# for i in range(len(arr1)-1,-1,-1):
+#     if arr1[i] ==key: 
+#         # print(i)
+#         break
  
+ 
+ 
+ #code for binary search
+key = 7
+arr = [2,3,5,6,7,7,7,7,78,9,10,10,10,13,15] 
+left = 0
+right = len(arr) - 1
+
+#method 01
+# i have doubt in this one:)
+while left < right:
+    mid = left + ((right - left) >> 1)
+    if arr[mid] == key:
+        while arr[mid] == key:
+            mid+=1
+        break
+    elif arr[mid] <= key:
+        left = mid+1
+    else:
+        right = mid-1
+# print(mid-1)
+
+#method 02
+
+last = -1
+while left < right:
+    mid = left + ((right - left) >> 1)
+    if arr[mid] == key:
+        last = mid
+        left = mid+1
+    elif arr[mid] < key:
+        left = mid + 1
+    else:
+        right = mid - 1
+# print(last)
+
+# check element present in array if present return it's index else return its correct possition
+#method 01
+arr1 = [2,4,6,7,8,10,13,15]
+key = 3
+for i in range(len(arr1)):
+    if key == arr1[i]:
+        print("found at",i)
+        break
+    elif arr1[i] > key:
+        print("Here it should be added: ",i)
+        break
+    
+#method 02
+left = 0
+right = len(arr1) - 1
+while left < right:
+    mid  = left + ((right - left) >> 1)
+    if arr[left] == arr[right]:
+        break
+    elif arr[mid] < key:
+        left = mid+1
+    else:
+        right = mid -1
+print(mid)
+        
+        
+        
+        
+    
+     
     
 
         
