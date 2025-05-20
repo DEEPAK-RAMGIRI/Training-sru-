@@ -5,7 +5,7 @@ right = n
 while left <=  right:
     mid = left + ((right - left) >> 1)
     square = mid * mid 
-    if mid == square:
+    if n == square:
         print(mid)
         break
     elif square <= n:
