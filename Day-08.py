@@ -81,10 +81,8 @@ while left < right:
 
 
 # koko eating banana
-
-
 def trueorfalse(piles,mid,h):
-        count = 0
+        count = 1
         for i in piles:
             count += i// mid if i % mid == 0 else (i// mid) + 1
             if count > h:
@@ -102,6 +100,42 @@ def minEatingSpeed(piles, h):
     return left
 arr = [3,6,7,11] 
 h = 8
-print(minEatingSpeed(arr,h))
+# print(minEatingSpeed(arr,h))
     
     
+#Aggressive cows problem
+def trueorfalse(arr,mid,cows):
+    previous = arr[0]
+    count = 1
+    for i in range(1,len(arr)):
+        if arr[i] - previous >= mid:
+            count+=1
+            previous = arr[i]
+    return count >= cows
+        
+def usinglinear(arr,cows):
+    start = arr[0]
+    last = arr[-1]
+    for i in range(start,last):
+        if not trueorfalse(arr,i,cows):
+            print(i-1)
+            break
+
+# def agressivecows(arr,cows):
+#     left = min(arr)
+#     right = max(arr)
+#     res = -1
+#     while left <= right:
+#         mid = left + ((right - left) >> 1)
+#         if trueorfalse(arr,mid,cows):
+#             res = mid
+#             left = mid + 1
+#         else:
+#             right = mid - 1
+#     print(res)
+        
+    
+arr = [1, 2, 4, 8, 9] 
+cows = 5
+usinglinear(arr,cows)
+# agressivecows(arr,cows)
