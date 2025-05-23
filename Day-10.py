@@ -58,7 +58,7 @@ for i in range(len(arr)-1):
 
 # print(total_waiting//len(arr))
     
-    
+#greedy alogrithm   
 def possible(g, s):
     g.sort()
     s.sort()
@@ -70,12 +70,66 @@ def possible(g, s):
         j += 1
     return count
 
-print(possible([1,6,2,3,4,5], [4,2,3,1,1,2]))
+# print(possible([1,6,2,3,4,5], [4,2,3,1,1,2]))
 
-            
+import math
+
+def sqrt(n,precision):
+    left = 0
+    right = n
+    while (right - left) > 1e-6:
+        mid = (left + right) / 2
+        if mid * mid < n:
+            left = mid 
+        else:
+            right = mid 
+    print(round(left,precision))
+sqrt(10,3)
+def sqrt(n,precision):
+    left = 0
+    right = n
+    while (right - left) > 1e-6:
+        mid = (left + (right - left) >> 1)
+        if mid * mid < n:
+            left = mid 
+        else:
+            right = mid 
+    # print(round(left,precision))
+# sqrt(10,3)
+#method 01
+arr1 = [1,4,5,7]
+arr2 = [10,20,30,40]
+x = 32
+mini = float("inf")
+for i in arr1:
+    for j in arr2:
+        if abs( i + j - x) > mini:
+            flag = True
+            break
+        mini = min(mini,abs(i+j-x))
+        a,b = i,j
+    if flag: break
+# print(a,b)
+#Time Complexcity O( n * m)
+
+#method 02
+arr1 = [1,4,5,7]
+arr2 = [10,20,30,40]
+x = 32
+left = 0
+right = len(arr2) - 1
+mini = float("inf")
+while left < len(arr1) and right >= 0:
+    total = arr1[left] + arr2[right]
+    diff = abs(total-x)
+    if diff < mini:
+        a,b = left,right
+        mini = diff
+    if total > x:
+        right -=1
+    else:
+        left+=1 
+print(a,b)
+
+                
         
-    
-    
-    
-
-    
