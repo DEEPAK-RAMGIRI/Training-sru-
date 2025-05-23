@@ -95,21 +95,22 @@ for i in range(len(arr)):
             ans = arr[i:j+1]
 # print(ans)
 
-
+#printing the length longest subarray whose sum is k
+#Time Complexcity O(n)
 arr = [2, 1, 6, 4, 2, 3, 1, 1, 4, 2, 6, 7, 3]
 left = 0
-k = 6
+k = 11
 ans = 0
 maxlen = -1
 res = []
 for right in range(len(arr)):
     ans += arr[right]
-    while left <right and ans > k:
+    while left < right and ans > k:
         ans -= arr[left]
         left+=1
     if ans == k:
         maxlen = max(maxlen,right - left + 1)
         res.append(arr[left:right+1])
-print(maxlen)
+print(maxlen)   
 print(res)
     
