@@ -121,15 +121,15 @@ right = len(arr2) - 1
 mini = float("inf")
 while left < len(arr1) and right >= 0:
     total = arr1[left] + arr2[right]
-    diff = abs(total-x)
-    if diff < mini:
+    difference = abs(total-x)
+    
+    if difference < mini:
         a,b = left,right
-        mini = diff
+        mini = difference
     if total > x:
         right -=1
     else:
         left+=1 
-print(a,b)
+# print(a,b)
 
-                
-        
+print("hello world")
