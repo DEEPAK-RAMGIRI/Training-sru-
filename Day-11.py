@@ -15,7 +15,7 @@ while i < len(arr1):
 #     time_intervals.append(i)
 
 time_intervals.sort(key = lambda x:(x[-1],x[0])) # sorting the time_intervals values
-print(time_intervals)
+# print(time_intervals)
 count = 1
 last = time_intervals[0]
 
@@ -67,8 +67,10 @@ while left < right:
     right-=1
 # print(''.join(string))
     
-    
-# i am visting a library 
+# find the subarray value in the k size contiguous array
+#Time Complexcity O(n)
+#Space Complexcity O(1)
+
 arr = [2,1,6,4,2,3,1,1,4,2,6,7,3]
 k = 5
 maxi = sum(arr[:k])
@@ -78,5 +80,36 @@ for right in range(k,len(arr)):
     maxi +=  (arr[right]-arr[left])
     left+=1
     ans= max(maxi,ans)
-print(ans)
+# print(ans)
+
+
+# find the longest subarray with smallest sum
+maxi = float("inf")
+arr = [2,1,6,4,2,3,1,1,4,2,6,7,3]
+for i in range(len(arr)):
+    currsum = arr[i]
+    for j in range(i+1,len(arr)-1):
+        currsum += arr[j]
+        if  currsum < maxi:
+            maxi = currsum
+            ans = arr[i:j+1]
+# print(ans)
+
+
+arr = [2, 1, 6, 4, 2, 3, 1, 1, 4, 2, 6, 7, 3]
+left = 0
+k = 6
+ans = 0
+maxlen = -1
+res = []
+for right in range(len(arr)):
+    ans += arr[right]
+    while left <right and ans > k:
+        ans -= arr[left]
+        left+=1
+    if ans == k:
+        maxlen = max(maxlen,right - left + 1)
+        res.append(arr[left:right+1])
+print(maxlen)
+print(res)
     
