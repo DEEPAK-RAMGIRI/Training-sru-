@@ -111,6 +111,127 @@ for right in range(len(arr)):
     if ans == k:
         maxlen = max(maxlen,right - left + 1)
         res.append(arr[left:right+1])
-print(maxlen)   
+# print(maxlen)   
+# print(res)
+    
+#length of the largest substring
+#Time Complexity: O(n²)
+
+#method 01
+def checkpalindrome(s,left,right):
+    while left >=0 and right < len(s) and s[left] == s[right]:
+        left-=1
+        right+=1
+    return s[left+1:right]
+s = 'ababba'
+maxlen = ""
+for i in range(len(s)):
+    odd_oc = checkpalindrome(s,i,i)
+    even_oc = checkpalindrome(s,i,i+1)
+    maxlen = max(maxlen,odd_oc,even_oc,key = len)
+# print(maxlen)
+# print(len(maxlen))
+
+
+#method 02
+
+def checkpalindrome(s,left,right):
+    while left >=0 and right < len(s) and s[left] == s[right]:
+        left-=1
+        right+=1
+    return (right - left - 1)
+s = 'ababba'
+maxlen = 0
+for i in range(len(s)):
+    odd_oc = checkpalindrome(s,i,i)
+    even_oc = checkpalindrome(s,i,i+1)
+    maxlen = max(maxlen,odd_oc,even_oc)
+# print(maxlen)
+
+
+#method 03
+# Time Complexcity O(n^2)
+maxi = 0
+for i in range(len(s)):
+    for j in range(i,len(s)):
+        if s[i:j+1] == s[i:j+1][::-1]:
+            maxi = max(maxi,(j - i + 1)) 
+# print(maxi)   
+
+
+#print all substring with length k
+s ="abba"
+count = 0
+substring = []
+for i in range(len(s)):
+    string = ""
+    for j in range(i,len(s)):
+        string += s[j]
+        substring.append(string)
+        count+=1
+# print(substring)
+# print(count)
+
+#find it in using recursion at hostel :)
+res = []
+def substring_len_k(i,j):
+    if i == len(s):
+        return
+    if j == len(s):
+        substring_len_k(i+1,i+1)
+        return
+    res.append(s[i:j+1])
+    substring_len_k(i,j+1)
+        
+        
+substring_len_k(0,0)  
 print(res)
+
+# string = "abcdaecdb"
+# string ="abcdbef"
+string ="abcda"
+string = "abfehcbdaf"
+
+left = 0
+count = 0
+seen_or_not = set()
+
+#find the length of longest substring without repeating characters
+#Time Complexcity O(n)
+
+for right in range(len(string)):
+    if string[right] in seen_or_not:
+        while string[left] in seen_or_not:
+            seen_or_not.remove(string[left])
+            left+=1
+    seen_or_not.add(string[right])
+    count = max(count,(right-left+1))
+# print(count)
+
+# using dictionary
+
+
+# string = "abcdaecdb"
+string ="abcdbef"
+# string ="abcda"
+# string = "abfehcbdaf"
+# string = "abcdcecdb"
+string = "abcdcecdb"
+seen = {}
+start = 0
+max_len = 0
+
+for i in range(len(string)):
+    if string[i] in seen and seen[string[i]] >= start:
+        start = seen[string[i]] + 1
+    seen[string[i]] = i
+    max_len = max(max_len, i - start + 1)
+
+# print(max_len)
+
+    
+    
+    
+    
+
     
