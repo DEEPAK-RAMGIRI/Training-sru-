@@ -188,19 +188,65 @@ class Linkedlist:
             while temp2:
                 if temp1.data + temp2.data < k:
                     print([temp1.data,temp2.data])
-                    count+=1
-                    
+                    count+=1 
                 temp2 = temp2.next
             temp1 = temp1.next
-        print(count)
+        # print(count)
+        
+    # given sorted linked list and print the secound of the linked list
+    def secound_half(self):
+        fast = slow = self.head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        self.head = slow
+    
+    
+    def find_middle_node(self):
+        slow = self.head
+        fast = self.head.next
+       
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        print(slow.data) 
+        
+    #method 01
+    def kth_last_node(self,k):
+        temp = self.head
+        count = 0
+        while temp:
+            count+=1
+            temp = temp.next
+        temp =self.head
+        if count < k:
+            print(None)
+            return
+        for _ in range(count-k):
+            temp = temp.next
+        print(temp.data)
+        
+    #method 02 optimised version 🔥
+    def kth_last_node2(self,k):
+        slow = self.head
+        fast = self.head
+        
+        for _ in range(k):
+            if not fast:
+                print(None)
+                return
+            fast = fast.next
+        
+        while fast:
+            slow = slow.next
+            fast = fast.next
+        print(slow.data)
         
         
-        
-        
-            
+          
 arr1 = [10,9,8,7,6,5,4,3,2,1]   
 arr1=[1,2,0,3,4]
-arr1 =[5,2,4,7,3,6,5,8]
+arr1 =[5,2,4,7,3,6,5,8,9]
 k = 10
 ll = Linkedlist()
 # for i in arr1:
@@ -222,5 +268,11 @@ for i in arr1:
 # ll.sum_continues_pair(k)
 # ll.count_continues_pair_whose_sum_is_less_then_k(k)
 
-ll.possible_pairs(k)
+# ll.possible_pairs(k)
+# ll.secound_half()
+# ll.print_linked_list()
+# ll.find_middle_node()
+# ll.kth_last_node(2)
+
 ll.print_linked_list()
+ll.kth_last_node2(2)
