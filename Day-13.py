@@ -320,7 +320,18 @@ class Linkedlist:
         
         
             
-    
+    #selection sort
+    def selection_sort(self):
+        temp = self.head
+        while temp:
+            mini = temp
+            temp2 = temp.next
+            while temp2:
+                if mini.data > temp2.data:
+                    mini = temp2
+                temp2 = temp2.next
+            temp.data,mini.data = mini.data,temp.data 
+            temp = temp.next
         
           
 arr1 = [10,9,8,7,6,5,4,3,2,1]   
@@ -359,5 +370,6 @@ for i in arr1:
 # ll.perform_buble_sort()
 
 # ll.kth_largest(3)
+ll.selection_sort()
 ll.print_linked_list()
 
