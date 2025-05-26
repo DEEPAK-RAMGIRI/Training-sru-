@@ -370,6 +370,6 @@ for i in arr1:
 # ll.perform_buble_sort()
 
 # ll.kth_largest(3)
-ll.selection_sort()
-ll.print_linked_list()
+# ll.selection_sort()
+# ll.print_linked_list()
 
