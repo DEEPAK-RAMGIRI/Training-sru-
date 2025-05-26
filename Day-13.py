@@ -28,7 +28,7 @@ class Linkedlist:
         
     def add_middle(self,data):
         node = Node(data)
-        if not self.head and self.head.next:
+        if not self.head:
             self.add_front(node)
             return
         slow = self.head
@@ -242,6 +242,85 @@ class Linkedlist:
             fast = fast.next
         print(slow.data)
         
+    def delte_kth_last_node(self,k):
+        slow = self.head
+        fast = self.head
+        
+        for _ in range(k):
+            if not fast:
+                print(None)
+                return
+            fast = fast.next
+        # If fast is None after moving k steps, delete head
+        if not fast:
+            self.head = self.head.next
+            return
+        prev = None
+        while fast:
+            prev = slow
+            slow = slow.next
+            fast = fast.next
+        if prev: prev.next = slow.next
+        
+    
+    
+    def swap_2_element(self):
+        temp = self.head
+        prev = None
+        while temp and temp.next:
+            temp.data,temp.next.data = temp.next.data,temp.data
+            temp = temp.next.next       
+            
+            
+    def perform_buble_sort(self,ans):
+        while True:
+            temp2 = self.head
+            flag = True
+            k-=1
+            if k == 0:
+                break
+            while temp2 and temp2.next:
+                if temp2.data > temp2.next.data:
+                    temp2.data,temp2.next.data = temp2.next.data,temp2.data
+                    flag =False
+                temp2 = temp2.next
+            
+            if flag: break
+        self.kth_largest()
+            
+    #print the kth lagest element in the unsoerted list
+    def kth_largest(self,k):
+        #performing bubble sort
+        a = k
+        while True:
+            temp2 = self.head
+            flag = True
+            k-=1
+            if not k:
+                break
+            while temp2 and temp2.next:
+                if temp2.data > temp2.next.data:
+                    temp2.data,temp2.next.data = temp2.next.data,temp2.data
+                    flag =False
+                temp2 = temp2.next
+            if flag: break
+        self.kth_last_node2(a)
+        
+    def cycle_in_linkedlist(self):
+        slow = self.head
+        fast = self.head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                print("cycle exists")
+                break
+        else:
+            print("not exists")
+        
+        
+            
+    
         
           
 arr1 = [10,9,8,7,6,5,4,3,2,1]   
@@ -274,5 +353,11 @@ for i in arr1:
 # ll.find_middle_node()
 # ll.kth_last_node(2)
 
+# ll.kth_last_node2(2)
+# ll.swap_k_elements(2)
+# ll.swap_2_element()
+# ll.perform_buble_sort()
+
+# ll.kth_largest(3)
 ll.print_linked_list()
-ll.kth_last_node2(2)
+
