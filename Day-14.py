@@ -212,4 +212,24 @@ ll  = Linkedlist()
 # # ll.print_linkedlist() 
 
 # common_node_in_linked_list()   
-ll.add_two_numbers()         
+# ll.add_two_numbers()         
+
+
+
+def valid_parenthesis(string):
+    valid = [False] * len(string)
+    stack = []
+    for i,ch in enumerate(string):
+        if ch == "(":
+            stack.append(i)
+        elif ch == ")":
+            if stack:
+                valid[i] = True
+                valid[stack.pop()] = True
+        else:
+            valid[i] = True 
+    ans = ""
+    ans += ''.join([string[i] for i in range(len(string)) if valid[i]])
+    print(ans)
+valid_parenthesis("((abc)((de))")
+valid_parenthesis("((de)()()))(ab(c)))")
