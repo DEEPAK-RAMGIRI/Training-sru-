@@ -178,7 +178,7 @@ def answer(stack):
             a = ans.pop()
             ans.append(operation[i] (int(a),int(b)))
             
-    print(ans[-1])       
+    # print(ans[-1])                                                                                                              
 ans = infix_to_postfix(string)
 # answer(ans)
 
@@ -234,7 +234,7 @@ for i in list2:
 while ans: matching[ans.pop()] = -1
 
 for i in list1: ans.append(matching[i])
-print(ans)
+# print(ans)
 
 
 #we have sorted with full of dupicates
@@ -242,8 +242,7 @@ arr = [2,2,2,3,3,4,5,5,6,6,6,10,10]
             
 
         
-# Trees 🌲🌳
-
+# 🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳Trees🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲
 class Node:
     def __init__(self,data):
         self.data = data
@@ -300,10 +299,62 @@ def height_of_tree(root):
         return 0
     return 1 + max(height_of_tree(root.left),height_of_tree(root.right))
 
+def balanced_Tree(root):
+    if not root:
+        return
+    return (height_of_tree(root.left) - height_of_tree(root.right))
+
+# functional method
+def sum_of_nodes_in_tree(root):
+    if not root:
+        return 0
+    return root.data + sum_of_nodes_in_tree(root.left) + sum_of_nodes_in_tree(root.right)
+
+# parameterised method
+def _sum_of_nodes_in_tree(maxi,root):
+    if not root:
+        return maxi
+    maxi+=root.data
+    maxi = _sum_of_nodes_in_tree(maxi,root.left)
+    maxi = _sum_of_nodes_in_tree(maxi,root.right)
+    return maxi
+
+
+#sum of even node in the tree:
+# method 01 
+def sum_of_even_nodes(root):
+    if not root:
+        return 0
+    elif not root.data & 1:
+        return root.data + sum_of_even_nodes(root.left) + sum_of_even_nodes(root.right)
+    return sum_of_even_nodes(root.left) + sum_of_even_nodes(root.right)
+    
+#method 02
+def _sum_of_even_nodes(root):
+    if not root: return 0
+    elif not root.data & 1: k = root.data
+    else: k = 0
+    return k + _sum_of_even_nodes(root.left) + _sum_of_even_nodes(root.right)
+
+def search_element(root,key):
+    if not root:
+        return "Not Found"
+    elif root.data == key:
+        return "Found"
+    elif root.data < key:
+        return search_element(root.right,key)
+    else:
+        return search_element(root.left,key) 
+       
 root = None  
-arr = [1,2,3,4,5]
+arr = [10,1,22,33,4,5]
 for i in arr:
     root = insert(root,i)
 # root = balanced(root,arr)
-print(height_of_tree(root))
+# print(height_of_tree(root))
+# print(balanced_Tree(root))
 traversal('root',root)
+# print(sum_of_nodes_in_tree(root))
+# print(_sum_of_nodes_in_tree(0,root))
+# print(sum_of_even_nodes(root))
+print(search_element(root,10))
