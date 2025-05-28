@@ -200,7 +200,9 @@ for i in string:
 # print("NotValid" if stack else "Valid")
 
 
-#
+# #method 01
+# find first largest element fro list1 elements from the list2
+
 list1 = [4,1,2]
 list2 = [2,1,3,4]
 ans = []
@@ -217,7 +219,24 @@ for i in list1:
                 break
     else:
         ans.append(-1)
+# print(ans)
+
+#method 02
+ans = []
+matching = dict()
+for i in list2:
+    while ans and ans[-1] < i:
+        matching[ans.pop()] = i
+    ans.append(i)
+    
+while ans: matching[ans.pop()] = -1
+
+for i in list1: ans.append(matching[i])
 print(ans)
+
+
+#we have sorted with full of dupicates
+arr = [2,2,2,3,3,4,5,5,6,6,6,10,10]
             
 
         
