@@ -1,5 +1,5 @@
+#stack = 📦
 # yesterday exam prefix to postfix conversion
-
 s = '*+AB-CD'
 
 s = s[::-1]
@@ -222,13 +222,15 @@ for i in list1:
 # print(ans)
 
 #method 02
+list1 = [4,1,2]
+list2 = [2,1,3,4]
 ans = []
 matching = dict()
 for i in list2:
     while ans and ans[-1] < i:
         matching[ans.pop()] = i
     ans.append(i)
-    
+ 
 while ans: matching[ans.pop()] = -1
 
 for i in list1: ans.append(matching[i])
@@ -240,4 +242,68 @@ arr = [2,2,2,3,3,4,5,5,6,6,6,10,10]
             
 
         
-    
+# Trees 🌲🌳
+
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.left = None
+        self.right = None
+        
+# inserting nodes      
+def insert(root,data):
+    if not root:
+        return Node(data)
+    elif data < root.data:
+        root.left = insert(root.left,data)
+    else: 
+        root.right = insert(root.right,data)
+    return root
+
+# tree traversals
+def traversal(value,root):
+    if root:
+        traversal('left',root.left)
+        print(value, root.data)
+        traversal('right',root.right)
+        
+def inorder_traversal(root):
+    if root:
+        traversal(root.left)
+        print(root.data,end=" ")
+        traversal(root.right)
+
+def preorder_traversal(root):
+    if root:
+        print(root.data,end=" ")
+        traversal(root.left)
+        traversal(root.right)
+        
+def postorder_traversal(root):
+    if root:
+        traversal(root.left)
+        traversal(root.right)
+        print(root.data,end=" ")
+        
+#balanced tree
+def balanced(root,arr):
+    if not arr:
+        return None
+    n = len(arr) // 2
+    root = Node(arr[n])
+    root.left = balanced(root.left,arr[:n])
+    root.right = balanced(root.right,arr[n+1:])
+    return root 
+
+def height_of_tree(root):
+    if not root:
+        return 0
+    return 1 + max(height_of_tree(root.left),height_of_tree(root.right))
+
+root = None  
+arr = [1,2,3,4,5]
+for i in arr:
+    root = insert(root,i)
+# root = balanced(root,arr)
+print(height_of_tree(root))
+traversal('root',root)
