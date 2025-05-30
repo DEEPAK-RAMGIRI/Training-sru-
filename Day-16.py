@@ -244,12 +244,17 @@ def sum_of_the_nodes(root,sums):
 #         maxi = max(maxi,left+right)
 #         return maxi
 #     return  function(root,maxi)
-def height_of_tree(root):
-    if not root: return 0
-    return 1 + max(height_of_tree(root.left),height_of_tree(root.right))
 def balanced_or_not(root):
-    if not root: return 0
-    return (height_of_tree(root.left) - height_of_tree(root.right))
+    def check(root):
+        if not root:
+            return 0
+        left = check(root.left)
+        right = check(root.right)
+        if left == -1 or right == -1 or abs(left - right) > 1:
+            return -1
+        return 1 + max(left, right)
+
+    return check(root) != -1
 
 root = None
 # arr = [3,9,20,15,7,2,1,0]
