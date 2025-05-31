@@ -182,7 +182,14 @@ def bfs(graph,start,visited):
     print(visited)
 
 
-# def loop_exits
+# def loop_exits(graph,start,visited):
+#     if start == None:
+#         return False
+#     if start in visited:
+#         return True
+#     visited.add(start)
+#     for i in graph[start]:
+#         return loop_exits(graph,i,visited)
 
        
     
@@ -213,7 +220,7 @@ graph = defaultdict(list)
 for i, j in nodes:
     graph[i].append(j)
     graph[j].append(i)
-print(dict(graph))
+# print(dict(graph))
 # print(find_no_of_paths(graph,'A','F'))
 # print(min_way_to_reach_the_end(graph,'A','F'))
 # bfs(graph,'A',set())
@@ -235,7 +242,10 @@ graph = defaultdict(list)
 for i,j,w in edges:
     graph[i].append([j,w])
     graph[j].append([i,w])  
-print(graph)  
+# print(graph)  
+
+
+
 
 # Acyclic Graph
 def count_no_of_paths(graph,start,end):
@@ -264,3 +274,42 @@ for i,j in edges:
 # print(count_no_of_paths(graph,'A','F'))
 
 
+# components graph
+
+from collections import deque,defaultdict
+#print no of connected graphs in the given nodes
+nodes = [(1,2),(1,3),(2,4),(3,4),(5,6),(6,7),(7,5),(8,9),(10,10)]
+#ouput should be 4
+
+graph = defaultdict(list)
+end = float("-inf")
+start = float("inf")
+
+
+for i,j in nodes:
+    end = max(end,i,j)
+    start = min(i,j,start)
+    graph[i].append(j)
+    graph[j].append(i)
+    
+    
+visit = set()
+
+def check(visit,graph,start):
+    q = deque([start])
+    while q:
+        value = q.popleft()
+        for i in graph[value]:
+            if i not in visit:
+                visit.add(i)
+                q.append(i)
+    
+                
+            
+
+count = 0
+for i in range(start,end+1):
+    if i not in visit:
+        check(visit,graph,i)
+        count+=1
+print(count)
