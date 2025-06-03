@@ -172,19 +172,26 @@ def function(n):
     right = function(n - 1)
     dp[n] = max(left,right)
     return dp[n]
-# print(function(n - 1))
+print(function(n - 1))
 
 #Tabulation
-def function(n):
-    n = len(arr1)
-    if n == 0: return 0 
-    elif n == 1: return arr1[0]
-    dp[0] = arr1[0]
-    dp[1] = max(arr1[0],arr1[1])
-    for i in range(2,len(arr1)):
-        dp[i] = max(dp[i - 1],arr1[i] + dp[i - 2])
-    print(dp[n - 1])
-function(n)
+# def function(n):
+#     n = len(arr1)
+#     if n == 0: return 0 
+#     elif n == 1: return arr1[0]
+#     dp[0] = arr1[0]
+#     dp[1] = max(arr1[0],arr1[1])
+#     for i in range(2,len(arr1)):
+#         dp[i] = max(dp[i - 1],arr1[i] + dp[i - 2])
+#     print(dp[n - 1])
+# function(n)
+
+def robber_tabulation(houses):
+        prev = curr = 0
+        for amount in houses:
+            prev, curr = curr, max(curr, prev + amount)
+        return curr
+print("check ",robber_tabulation(arr1))
 
 
 # robber 02 problem
@@ -201,25 +208,29 @@ def Robber_02_dp(n,arr,dp):
     return dp[n]
 
 #Using Tabulation
-def Robber_02_Tabulation(n,arr1):
-    n = len(arr1)
-    if n == 0: return 0 
-    elif n == 1: return arr1[0]
-    dp[0] = arr1[0]
-    dp[1] = max(arr1[0],arr1[1])
-    for i in range(2,len(arr1)):
-        dp[i] = max(dp[i - 1],arr1[i] + dp[i - 2])
-    return dp[n - 1]
+# def Robber_02_Tabulation(n,arr1):
+#     n = len(arr1)
+#     if n == 0: return 0 
+#     elif n == 1: return arr1[0]
+#     dp[0] = arr1[0]
+#     dp[1] = max(arr1[0],arr1[1])
+#     for i in range(2,len(arr1)):
+#         dp[i] = max(dp[i - 1],arr1[i] + dp[i - 2])
+#     return dp[n - 1]
+def Robber_02_tabulation(arr):
+    curr = prev = 0
+    for house in arr:
+        curr,prev = prev,max(curr,house + prev)
+    return curr
 
     
 arr =[2,3,2]
 temp1 = arr[1:]
 temp2 = arr[:-1]
 
-print(max(Robber_02_recursion(len(temp1) - 1,temp1),Robber_02_recursion(len(temp2) - 1,temp2)))
-print(max(Robber_02_dp(len(temp1) - 1,temp1,[-1] * (len(temp1)+1)),Robber_02_dp(len(temp2) - 1,temp2,[-1] * (len(temp1)+1))))
-print(max(Robber_02_Tabulation(len(temp1)- 1,temp1),Robber_02_recursion(len(temp2)-1,temp2)))
-
-
+# print(max(Robber_02_recursion(len(temp1) - 1,temp1),Robber_02_recursion(len(temp2) - 1,temp2)))
+# print(max(Robber_02_dp(len(temp1) - 1,temp1,[-1] * (len(temp1)+1)),Robber_02_dp(len(temp2) - 1,temp2,[-1] * (len(temp1)+1))))
+# print(max(Robber_02_Tabulation(len(temp1)- 1,temp1),Robber_02_recursion(len(temp2)-1,temp2)))
+print(max(Robber_02_tabulation(temp1),Robber_02_tabulation(temp2)))
 
 
