@@ -78,7 +78,6 @@ def find_pivot(arr,left,right):
     arr[i],arr[right] = arr[right],arr[i]
     return i
         
-    
 def quicksort(arr,left,right):
     if left <= right:
         pivot = find_pivot(arr,left,right)
@@ -89,27 +88,33 @@ arr = [23,1,9,45,43,23,89,6,7,46,67,12]
 # quicksort(arr,0,len(arr)-1)
 # print(arr)
 
-#Naive approach for pivot or quick sort
+# Permute two arrays such that sum of every pair is greater or equal to K
+# sort and sorted use timsort which is developed by tim in 2002 didn't take extra space
+#time complexcity is O(logn) for .sort()
+#Time Comnplexcity is O(n) for sorted()
+#Brute Force Using permutaion
+from itertools import permutations
+a = [2, 1, 3]
+b = [ 7, 8, 9 ] 
+k = 10
+for i in permutations(a):
+    for j in permutations(b):
+        if all(x + y >= k for x, y in zip(i,j)):
+            print(True)
+            print("hi")
+            exit()
+print(False)
+        
+#Time Cmoplexcity O(n log n)
+#Space Complexcity O(1)
+a = [2, 1, 3]
+b = [ 7, 8, 9 ] 
+k = 10
+a.sort(reverse = True)
+b.sort()
+for i in range(len(a)):
+        if a[i] + b[i] < k:
+            print(False)
+            exit(0)
+else: print(True)
 
-def partion(arr,left,right):
-    pivot = arr[right]
-    output = []
-    for i in range(left,right+1):
-        if pivot <= arr[i]:
-            output.append(arr[i])
-    
-    for i in range(left,right+1):
-        if pivot > arr[i]:
-            output.append(arr[i])
-    
-    for i in range(len(output)):
-        arr[left+i] = output(i)
-            
-def quicksort(arr,left,right):
-    if left <= right:
-        pivot = find_pivot(arr,left,right)
-        quicksort(arr,left,pivot-1)
-        quicksort(arr,pivot+1,right)
-    return
-quicksort(arr,0,len(arr)-1)
-print(arr)
