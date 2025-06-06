@@ -92,18 +92,23 @@ arr = [23,1,9,45,43,23,89,6,7,46,67,12]
 # sort and sorted use timsort which is developed by tim in 2002 didn't take extra space
 #time complexcity is O(logn) for .sort()
 #Time Comnplexcity is O(n) for sorted()
+
 #Brute Force Using permutaion
+#Time Complexcity O(n!^2 * n)
+# n! for all permutaion for a and b so n!^2
+# using all here which checks time Complexcity is O(n)
 from itertools import permutations
 a = [2, 1, 3]
 b = [ 7, 8, 9 ] 
 k = 10
+flag = False
 for i in permutations(a):
     for j in permutations(b):
         if all(x + y >= k for x, y in zip(i,j)):
-            print(True)
-            print("hi")
-            exit()
-print(False)
+            flag = True
+            # print(True)
+    if flag: break
+# print(False)
         
 #Time Cmoplexcity O(n log n)
 #Space Complexcity O(1)
@@ -113,8 +118,46 @@ k = 10
 a.sort(reverse = True)
 b.sort()
 for i in range(len(a)):
-        if a[i] + b[i] < k:
-            print(False)
-            exit(0)
-else: print(True)
+    if a[i] + b[i] < k:
+        # print(False)
+        break
+# else: print(True)
 
+#count sort
+arr = [4, 3, 12, 1, 5, 5, 3, 9]
+
+count = [0] * (max(arr)+1)
+for i in arr:
+    count[i]+=1
+
+# for i in range(len(count)):
+#     while count[i] > 0:
+#         print(i,end=" ")
+#         count[i]-=1
+
+# Find common elements in three sorted arrays
+arr1 = [1, 5, 10, 20, 30]
+arr2 = [5, 13, 15, 20]
+arr3 = [5, 20] 
+
+#Brute Force O(n^3)
+# for i in arr1:
+#     for j in arr2:
+#         for k in arr3:
+#             if i == j == k:
+#                 # print(i,end=" ")
+                
+# Optimised version 🔥🔥🔥
+i = j = k = 0
+while i < len(arr1)  and j < len(arr2) and k <  len(arr3):
+    if arr1[i] == arr2[j] == arr3[k]:
+        print(arr1[i])
+        i+=1
+        j+=1
+        k+=1
+    else:
+        mini = min(arr1[i],arr2[j],arr3[k])
+        if arr1[i] == mini: i+=1
+        elif arr2[j] == mini:j+=1
+        else:k+=1
+        
