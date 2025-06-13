@@ -22,18 +22,23 @@ for i in range(len(arr)):
         if sums == k:
             maxi = max(maxi,j-i+1)
 # print(maxi)
-sums = 0
+
+# Longest subarray with sum k using prefix sum and hashmap
+# Time Complexcity O(N)
+# Space Complexcity O(N)
 arr = [10, 5, 2, 7, 1, -10]
 k = 15
+prefix_sum = 0
 maxi = 0
-left = 0
-for right in range(len(arr)):
-    sums += arr[right]
-    while left < right and sums > k:
-        sums -= arr[left]
-        left+=1
-    if sums == k: maxi = max(maxi,right - left + 1)
+prefix_map = {0: -1}
+
+for i in range(len(arr)):
+    prefix_sum += arr[i]
+    if (prefix_sum - k) in prefix_map:
+        maxi = max(maxi, i - prefix_map[prefix_sum - k])
+    if prefix_sum not in prefix_map:
+        prefix_map[prefix_sum] = i
+
 print(maxi)
-         
             
   

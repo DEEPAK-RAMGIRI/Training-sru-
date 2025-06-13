@@ -69,19 +69,22 @@ for i in queries:
 n= 5
 k = 5
 arr = [-1, 1, 3, 2, -1]
-seen = dict()
 
+
+seen = dict()
 maxi = float("-inf")
 lefty = 0
 for righty in range(len(arr)):
         
     seen[arr[righty]] = seen.get(arr[righty],0)+1
+    maxi = max(arr[righty],maxi+arr[righty])
     while len(seen) > k:
+        if arr[lefty] >= 0:
+            maxi -=arr[lefty]
         seen[arr[lefty]] -=1
         if not seen[arr[lefty]]: 
             del  seen[arr[lefty]]
         lefty+=1
-    maxi =max(maxi,sum(arr[lefty:righty + 1]))
 
 print(maxi)
     
