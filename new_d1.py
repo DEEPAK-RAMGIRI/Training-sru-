@@ -87,12 +87,11 @@ for _ in range(count_2):
 # print(nums)
 
 
-#Dutch national flag alog
+#Dutch national flag algo
 #Time Complexcity O(n)
 #Space Complexcity O(1)
 
 nums = [2,0,2,1,1,0]
-
 low = mid = 0
 high =len(nums)-1
 while mid <= high:
@@ -106,6 +105,56 @@ while mid <= high:
         mid+=1
     else:
         mid+=1
-print(nums)
+# print(nums)
         
          
+# Majority Element
+#Brute Force  Time Complexcity O(n^2)
+#Space Complexcity O(1)
+nums = [3,2,3]
+n = len(nums)//2
+for i in range(len(nums)):
+    count = 1
+    for j in range(i+1,len(nums)):
+        if nums[i] == nums[j]: 
+            count+=1
+    if count > n:
+        print(nums[i])
+        break
+else:print(-1)
+        
+ 
+#Time Complexcity O(n^2)
+#Space Complexcity O(1)
+for i in set(nums):
+    if nums.count(i) > n:
+        print(i)
+        break
+    
+    
+#Use hashmap
+#Time Complexcity O(n)
+#Space Complexcity O(1)
+freq = dict()
+for i in nums:
+    freq[i] = freq.get(i,0)+1
+    if freq[i] > n:
+        print(i)
+        break
+else: print(-1)
+
+#Sortit and find the element
+#Time Complexcity O(n log n)
+#Space Complexcity O(1)
+nums.sort()
+print(nums[n+1])
+    
+ 
+# Moore's algorithm
+freq = 0
+for i in nums:
+    if not freq: ans = i
+    elif ans == i: freq+=1
+    else: freq-=1
+print(ans)
+    
