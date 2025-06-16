@@ -323,9 +323,11 @@ temp.extend(nums1[i:] if i < len(nums1) else nums2[j:])
         
 #Bonus 
 #maximum subarray with kadane's algorithm 
+#Time Complexcity O(n)
+#Space Complexcity O(1)
 nums = [-2,1,-3,4,-1,2,1,-5,4]
 total = maxi = nums[0]
-temp = -1
+temp = ind1 = ind2 = 0
 
 for i in range(1,len(nums)):
     if nums[i] > nums[i]+maxi:
@@ -339,21 +341,6 @@ for i in range(1,len(nums)):
         total = maxi
 print(nums[ind1:ind2+1])
 print(total)
-        
-
-        
-
-    
-        
-
-    
-    
-    
 
 
-
-        
-
-        
-
-
+print("completed")
