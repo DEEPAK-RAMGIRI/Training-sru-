@@ -1,14 +1,13 @@
 # Training-sru
-[Day 01]:(https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/Day-01.py)
-### ✅ Topics:
+✅[Day 01 Topics:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/Day-01.py)
+
 - Prime Number Check 
 - Remove Duplicates While Maintaining Order
 - Sum of First N Natural Numbers using Formula
 - Find Element with Odd Frequency using XOR
 - Find Unique Element using Brute Force
 
-[Day 02]:(https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/Day-02.py)
-### ✅ Topics:
+✅[Day 02 Topics:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/Day-02.py)
 - XOR from 0 to N (Optimized Pattern-Based)
 - XOR of Range (m to n)
 - Check if a Number is Power of 2 (Bitwise Techniques)
@@ -16,8 +15,7 @@
 - Longest Consecutive Subsequence in an Array
 - Character Frequency Grouping in Strings (Run-Length Encoding)
 
-[Day 03]:(https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/Day-03.py)
-### ✅ Topics:
+✅[Day 03 Topics:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/Day-03.py)
 - Sum of Even Elements in a List using Recursion
 - Reverse a Number using Recursion
 - Count Primes in a List using Recursive Prime Check
@@ -25,8 +23,7 @@
 - Minimum Subtractions to Reach 1 (Recursive and BFS-style Approach)
 - Find All Sequences of Subtractions (3 and 5) to Reach 1 from N
 
-[Day 04]:(https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/Day-04.py)
-### ✅ Topics:
+✅[Day 04 Topics:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/Day-04.py)
 - Count Frequency of an Element in Array using Recursion
 - Find First Element Occurring Exactly Twice using Dictionary or Recursion
 - Generate All Subsets of an Array using Recursion
@@ -37,8 +34,7 @@
 - Find Largest Even and Smallest Odd Number in User Input
 - Find Second Largest Element in a List
   
-[Day 05]:(https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/Day-05.py)
-### ✅ Topics:
+✅[Day 05 Topics:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/Day-05.py)
 - Max Profit from Stock Prices (Greedy Approach)
 - Weighted Scoring from Binary Grid
 - Count Number of Islands in a Matrix (DFS)
@@ -49,7 +45,7 @@
 - Generate All Parentheses Combinations
 - Generate Only Valid Parentheses Combinations (Backtracking)
 
-[Day 06]:(https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/Day-06.py)
+✅[Day 06 Topics:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/Day-06.py)
 ### ✅ Topics: Bubble Sort Variations and Applications
 - Standard Bubble Sort (Basic Implementation)
 - Optimized Bubble Sort (Early Stopping with Flag)
