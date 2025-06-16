@@ -302,7 +302,7 @@ while left < right:
 print(right)
 
 
-#merge sort
+#merge (two arrays) sort 
 nums1 = [1,2,3,0,0,0]
 nums2 = [2,5,6]
 i = j = 0
@@ -316,13 +316,33 @@ while i < len(nums1) and j < len(nums2):
         temp.append(nums2[j])
         j+=1
     while i < len(nums1) and not nums1[i]:i+=1
-    while  j < len(nums2) and not nums2[j]:j+=1 
+    while j < len(nums2) and not nums2[j]:j+=1 
 temp.extend(nums1[i:] if i < len(nums1) else nums2[j:])
-print(temp)
+# print(temp)
     
         
-    
-    
+#Bonus 
+#maximum subarray with kadane's algorithm 
+nums = [-2,1,-3,4,-1,2,1,-5,4]
+total = maxi = nums[0]
+temp = -1
+
+for i in range(1,len(nums)):
+    if nums[i] > nums[i]+maxi:
+        temp = i
+        maxi = nums[i]
+    else:
+        maxi += nums[i]
+    if maxi > total:
+        ind1 = temp
+        ind2 = i
+        total = maxi
+print(nums[ind1:ind2+1])
+print(total)
+        
+
+        
+
     
         
 
