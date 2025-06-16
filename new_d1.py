@@ -182,7 +182,6 @@ nums = [-2,1,-3,4,-1,2,1,-5,4]
 for i in range(len(nums)):
     for j in range(i,len(nums)):
         count = sum(nums[i:j])
-        print(nums[i:j],count)
         maxi = max(maxi,count)
 print(maxi)
 
@@ -196,14 +195,145 @@ for i in range(len(nums)):
         sums += nums[j]
         maxi = max(maxi,sums)
 # print(maxi)
-
+   
 #Kadane algorithm
 #Time Complexcity O(n)
 #Space Complexcity O(1)
-maxi = nums[0]
-ans = nums[0]
+ans = maxi = nums[0]
 nums = [-2,1,-3,4,-1,2,1,-5,4]
 for i in range(len(nums)):
     maxi = max(nums[i],maxi+nums[i])
     ans = max(ans,maxi)
 # print(ans)
+
+
+
+#printing the maximum subarray
+nums = [-2,1,-3,4,-1,2,1,-5,4]
+ans = maxi = nums[0]
+for i in range(i+1,len(nums)):
+    if maxi + nums[i] < nums[i]:
+        ind1 = i 
+    if ans > maxi:
+        pass
+        
+
+# print(ans)
+
+
+#Rotate matrix by 90 deg
+
+mat = [[1,2,3],[4,5,6],[7,8,9]]
+
+temp = [ [0 for  _ in range(len(mat[0]))] for _ in range(len(mat))]
+
+
+new_mat = [[0 for _ in range(len(mat))] for _ in range(len(mat))]
+n = len(mat)
+for i in range(len(mat)):
+    for j in range(len(mat)):
+        new_mat[i][j] = mat[j][i]
+
+for i in range(len(new_mat)):
+    for j in range(len(new_mat)):
+        mat[i][n-j-1] = new_mat[i][j]
+        
+# print(mat)
+        
+
+#Time Complexcity O(n*m)
+#Space Complexcity O(1) 
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+for i in range(len(matrix)):
+    for j in range(i,len(matrix[0])):
+        matrix[i][j],matrix[j][i] = matrix[j][i],matrix[i][j]
+for i in matrix:
+    i.reverse()      
+# print(matrix)
+    
+    
+#find the duplicate in array
+#Time Complexcity O(n^2)
+#Space Complexcity O(1)
+nums = [4,3,2,7,8,2,3,1]
+for i in range(len(nums)):
+    for j in range(i+1,len(nums)):
+        if nums[i] == nums[j]:
+            # print("ans",nums[i])
+            break
+        
+# Time Complexcity O(n)
+#Space Complexcity O(n) 
+count = [0]* (max(nums) + 1)
+for i in range(len(nums)):
+    if count[nums[i]]+1 == 2:
+        # print(count[nums[i]])
+        break
+    count[nums[i]]+=1   
+
+nums = [4,3,2,7,8,2,3,1]
+
+#Time Complexcity O(n log n)
+#Space Complexcity O(1)
+nums.sort()
+for i in range(len(nums)-1):
+    if nums[i] ==nums[i+1]:
+        # print(nums[i])
+        break
+  
+
+#Bouns
+nums = [1,2,3,4,5,6,6]
+def function(mid):
+    count = 0
+    for i in nums:
+        if i <= mid:
+            count+=1
+    return count <= mid
+
+left = min(nums)
+right = max(nums)
+while left < right:
+    mid = left + ((right - left) >> 1)
+    if function(mid):
+        left = mid +1
+    else:
+        right = mid-1   
+print(right)
+
+
+#merge sort
+nums1 = [1,2,3,0,0,0]
+nums2 = [2,5,6]
+i = j = 0
+temp = []
+while i < len(nums1) and j < len(nums2):
+    
+    if nums1[i] < nums2[j]:
+        temp.append(nums1[i])
+        i+=1
+    else:
+        temp.append(nums2[j])
+        j+=1
+    while i < len(nums1) and not nums1[i]:i+=1
+    while  j < len(nums2) and not nums2[j]:j+=1 
+temp.extend(nums1[i:] if i < len(nums1) else nums2[j:])
+print(temp)
+    
+        
+    
+    
+    
+        
+
+    
+    
+    
+
+
+
+        
+
+        
+
+
