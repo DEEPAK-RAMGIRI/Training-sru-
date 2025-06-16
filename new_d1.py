@@ -119,42 +119,91 @@ for i in range(len(nums)):
         if nums[i] == nums[j]: 
             count+=1
     if count > n:
-        print(nums[i])
+        # print(nums[i])
         break
-else:print(-1)
+# else:print(-1)
         
  
 #Time Complexcity O(n^2)
 #Space Complexcity O(1)
 for i in set(nums):
     if nums.count(i) > n:
-        print(i)
+        # print(i)
         break
     
     
 #Use hashmap
 #Time Complexcity O(n)
-#Space Complexcity O(1)
+#Space Complexcity O(n)
 freq = dict()
 for i in nums:
     freq[i] = freq.get(i,0)+1
     if freq[i] > n:
-        print(i)
+        # print(i)
         break
-else: print(-1)
+# else: print(-1)
 
 #Sortit and find the element
 #Time Complexcity O(n log n)
 #Space Complexcity O(1)
 nums.sort()
-print(nums[n+1])
+# print(nums[n+1])
     
  
-# Moore's algorithm
+# Boyer's Moore algorithm
+# Time Complexcity O(n)
+# Space Complexcity O(1)
 freq = 0
 for i in nums:
     if not freq: ans = i
     elif ans == i: freq+=1
     else: freq-=1
-print(ans)
+# print(ans)
     
+    
+#maximum subarray
+
+#Time Complexcity O(n^3)
+#Space Complexcity O(1)
+maxi = 0
+nums = [-2,1,-3,4,-1,2,1,-5,4]
+for i in range(len(nums)):
+    for j in range(i,len(nums)):
+        count = 0
+        for k in range(i,j+1):
+            count+=nums[k]
+        maxi = max(maxi,count)
+# print(maxi)
+
+# ---- or ----
+
+maxi = 0
+nums = [-2,1,-3,4,-1,2,1,-5,4]
+for i in range(len(nums)):
+    for j in range(i,len(nums)):
+        count = sum(nums[i:j])
+        print(nums[i:j],count)
+        maxi = max(maxi,count)
+print(maxi)
+
+#Time Complexcty O(n^2)
+#Space Complexcity O(1)
+maxi = 0
+nums = [-2,1,-3,4,-1,2,1,-5,4]
+for i in range(len(nums)):
+    sums = 0
+    for j in range(i,len(nums)):
+        sums += nums[j]
+        maxi = max(maxi,sums)
+# print(maxi)
+
+#Kadane algorithm
+#Time Complexcity O(n)
+#Space Complexcity O(1)
+maxi = nums[0]
+ans = nums[0]
+nums = [-2,1,-3,4,-1,2,1,-5,4]
+for i in range(len(nums)):
+    maxi = max(nums[i],maxi+nums[i])
+    ans = max(ans,maxi)
+# print(ans)
