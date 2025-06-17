@@ -372,6 +372,8 @@ if not found:
 
 
 # Minimum Number of Days to Make m Bouquets
+#Time Complexcity O(max(bloomDay) * n)
+#Space Complexcity O(1)
 bloomDay = [1,10,3,10,2]
 m = 3
 k = 1
@@ -398,13 +400,6 @@ for i in range(left,right + 1):
         break
 print(res)
     
-    
-
-
-
-
-
-
 #Time Complexcity O(n log n)
 #Space Complexcity O(1)
 def function1(mid,k,m,bloomday):
@@ -438,3 +433,6 @@ else:
         else:
             left =  mid + 1
 # print(mid)
+
+
+print("Completed")
