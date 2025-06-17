@@ -436,3 +436,69 @@ else:
 
 
 print("Completed")
+#Exam Question
+
+# Q1
+#reverse the linked list
+## Q2
+#print the linked list with values less than average of arr
+
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+        
+class Linkedlist:
+    def __init__(self):
+        self.size = 0
+        self.sums = 0
+        self.head = None
+        
+    def insert(self,data):
+        self.sums += data
+        node = Node(data)
+        self.size+=1
+        
+        if not self.head:
+            self.head = node
+        else:
+            temp = self.head
+            while temp.next:
+                temp = temp.next
+            temp.next = node
+    
+    def reverse(self):
+        temp,prev = self.head,None
+        while temp:
+            nextnode,temp.next = temp.next,prev
+            prev,temp = temp,nextnode
+        self.head = prev
+        
+    def printing(self):
+        temp = self.head
+        while temp:
+            print(temp.data,end=" ")
+            temp = temp.next
+            
+            
+    def linked_list_with_less_than_avg_values(self):
+        avg = self.sums / self.size
+        while self.head and self.head.data > avg:
+            self.head = self.head.next
+        curr = self.head
+        while curr and curr.next:
+            if curr.next.data > avg: curr.next = curr.next.next
+            else:curr = curr.next
+            
+arr = [1,2,3,4,5,6,7,8,10,9] 
+ll= Linkedlist()
+for i in arr:
+    ll.insert(i)
+# ll.printing()
+#Q1 ans
+# ll.reverse()
+# ll.printing()
+
+#q2
+ll.linked_list_with_less_than_avg_values()
+ll.printing()
