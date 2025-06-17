@@ -280,7 +280,7 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
 - Coin Change – 2D DP with Memoization (Minimum coins)
 - Coin Change – 1D DP Tabulation (Minimum coins)
 - Longest Subsequence Match – Basic nested loop comparison
-- 
+## TRAINING 02
 [Day 01 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d1.py)
 ### Topics Covered:
 - Single Number (All Approaches)
@@ -291,3 +291,6 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
 - Merge Two Sorted Arrays (With Extra Space)
 - Rotate Matrix 90 Degrees (Transpose + Reverse & New Matrix)
 - Kadane algo subarray
+
+[Day 02 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d2.py)
+### Topics Covered:
