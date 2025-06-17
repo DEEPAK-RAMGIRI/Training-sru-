@@ -184,14 +184,20 @@ while left <= right:
 # print(left)
 
 
-
 #Find the peak element
+#Time Complexcity O(n)
+#Space Complexcity O(1)
 nums = [1,2,3,1]
 maxi = nums[0]
-for i in range(1,len(nums)-1):
-    if nums[i-1] < nums[i] > nums[i+1]:    
+for i in range(len(nums)-1):
+    if nums[i] > nums[i+1]:    
         print(i)
         break
+else: len(nums) -1
+
+#Time Complexcity O(log n)
+#Space Complexcity O(1)
+nums = [1,2,3,1]
 left = 0
 right =len(nums) - 1
 while left < right:
@@ -201,7 +207,234 @@ while left < right:
     else:
         left= mid + 1
         
-print(left)
-        
+# print(left)
+    
+#search element in rotated array 2
+
+#Time Complexcity O(n)
+#Space Complexcity O(1)
+nums = [2,5,6,0,0,1,2]
+target = 100
+
+left = 0
+right = len(nums) - 1
+while left <= right:
+    mid = left + ((right - left) >> 1) 
+    if nums[mid] ==  target:
+        # print(True) 
+        break 
+    while left < mid and nums[left] == nums[mid]: left += 1
+    while mid < right and nums[right] == nums [mid]: right -= 1
+    if nums[left] <= nums[mid]:
+        if nums[left] <= target < nums[mid]:
+            right = mid - 1
+        else:  left = mid + 1
+    else:
+        if nums[mid] < target <= nums[right]:
+            left = mid + 1
+        else: right = mid - 1
+# else:print("Not found")
+    
+#Time Complexcity O(n)
+#Space Complexcity O(1)  
+left = 0
+right = len(nums) - 1
+while left <= right:
+    mid = left + ((right - left) >> 1)
+    if nums[mid] == target: 
+        # print(True)
+        break
+    elif nums[mid] == nums[left] and nums[mid] == nums[right]: 
+        left +=1
+        right -=1
+    elif nums[left] <= nums[mid]:
+        if nums[left] <= target < nums[mid]:
+            right=  mid - 1
+        else:
+                left = mid + 1
+    else:
+        if nums[mid] < target <= nums[right]:
+            left = mid + 1
+        else:
+            right = mid - 1
+# print(False)
 
 
+#Search element in the 2d matrix
+matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]]
+target = 3
+
+#Brute Force O(m *n)
+# if m = n then O(n^2)
+flag = True
+for i in range(len(matrix)):
+    for j in range(len(matrix[0])):
+        if matrix[i][j] == target:
+            # print("found")
+            flag = False
+            break
+    if not flag: break
+# else: print("not found") 
+
+
+# using Binary search
+#Time Complexcity O(m log n)
+#Space Complexcity O(1)
+
+matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]]
+target = 3
+flag = True
+for i in matrix:
+    left = 0
+    right = len(i) - 1
+    if i[left] <= target <= i[right]: 
+        while left <= right:
+            mid = left + ((right - left) >> 1)
+            if i[mid] == target: 
+                # print("found")
+                flag = False
+                break
+            elif i[mid] < target: left = mid + 1
+            else: right = mid - 1
+        if not flag: break
+# else: print("not Found")
+
+# Time Complexcity O(m+log n)
+# Space Complexcity O(1)
+
+matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]]
+target = 3
+flag = True
+for i in matrix:
+    if i[0] <= target <= i[-1]: 
+        arr = i
+i =arr 
+while left <= right:
+    mid = left + ((right - left) >> 1)
+    if i[mid] == target: 
+        print("found")
+        break
+    elif i[mid] < target: left = mid + 1
+    else: right = mid - 1
+else: print("not Found")
+
+
+#Time Complexcity O(log m + log n)
+#Space Complexcity O(1)
+matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]]
+target = 3
+#Don't use below code
+# left = 0
+# right = len(matrix) - 1
+# while left < right:
+#     mid = left + ((right - left ) >> 1)
+#     if matrix[mid][-1] < target: left = mid + 1
+#     else: right = mid - 1
+# arr = matrix[left]
+# left = 0
+# right = len(arr) - 1
+# while left < right:
+#     mid = left + ((right - left) >> 1)
+#     if arr[mid] == target:
+#         print("found")
+#         break
+#     elif arr[mid] < target: left = mid + 1
+#     else: right = mid - 1
+# else: print("not Found")
+
+
+
+#Time Complexcity O(log(m * n))
+#Space Complexcity O(1)
+matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]]
+key = 3
+n = len(matrix)
+m = len(matrix[0])
+left = 0
+right = n * m - 1
+
+found = False
+while left <= right:
+    mid = left + ((right - left) >> 1)
+    row = mid // m
+    col = mid % m
+    if matrix[row][col] == key:
+        # print("Found at position:", (row, col))
+        found = True
+        break
+    elif key < matrix[row][col]:
+        right = mid - 1
+    else:
+        left = mid + 1
+
+if not found:
+    print("Not found")
+
+
+# Minimum Number of Days to Make m Bouquets
+bloomDay = [1,10,3,10,2]
+m = 3
+k = 1
+
+def function1(mid,k,m,bloomday):
+    count= 0 
+    bou = 0
+    for i in bloomDay:
+        if i <= mid:
+            count+=1
+        else:
+            bou += count//k
+            count = 0
+    bou += count//k
+    return bou >= m 
+
+left = min(bloomDay)
+right = max(bloomDay)
+
+for i in range(left,right + 1):
+    
+    if function1(i,k,m,bloomDay):
+        res = i
+        break
+print(res)
+    
+    
+
+
+
+
+
+
+#Time Complexcity O(n log n)
+#Space Complexcity O(1)
+def function1(mid,k,m,bloomday):
+    count= 0 
+    bou = 0
+    for i in bloomDay:
+        if i <= mid:
+            count+=1
+        else:
+            bou += count//k
+            count = 0
+    bou += count//k
+    return bou >= m 
+    
+    
+bloomDay = [1,10,3,10,2]
+m = 3
+k = 1
+left = min(bloomDay)
+right = max(bloomDay)
+
+if m * n < len(bloomDay):
+    print(-1)
+else:
+    value = -1
+    while left <= right:
+        mid = left + ((right - left) >> 1)
+        if function1(mid,k,m,bloomDay):
+            value = mid
+            right = mid - 1
+        else:
+            left =  mid + 1
+# print(mid)
