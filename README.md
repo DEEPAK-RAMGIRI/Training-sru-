@@ -294,3 +294,17 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
 
 [Day 02 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d2.py)
 ### Topics Covered:
+- Search Insert Position
+- First and Last Occurrence of an Element in a Sorted Array
+- Search in Rotated Sorted Array (with and without duplicates)
+- Capacity to Ship Packages Within D Days
+  - Brute Force Approach
+  - Binary Search Optimization
+- Find the Peak Element in an Array
+- Search Element in 2D Matrix
+  - Brute Force Search
+  - Row-wise Binary Search
+  - Flattened Binary Search (O(log(m*n)))
+- Minimum Number of Days to Make m Bouquets
+  - Linear Search Approach
+  - Binary Search Optimization
