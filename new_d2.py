@@ -85,9 +85,10 @@ def find_first_and_last_occurenece(nums,i,j):
     return lefty,righty
 
 left,right = find_first_and_last_occurenece(nums,0,len(nums) - 1)
-if left <= right and nums[left] == target  and nums[right] == target:
-    print([left,right])
-else:[-1,-1]
+# if left <= right and nums[left] == target  and nums[right] == target:
+#     print([left,right])
+    
+# else:print([-1,-1])
 
 #Search in Rotated Sorted Array
 nums = [4,5,6,7,0,1,2]
@@ -97,7 +98,7 @@ target = 0
 #Space Complexcity O(1)
 for i in range(len(nums)):
     if target == nums[i]:
-        print(i)
+        # print(i)
         break
     
 # Time Complexcity O(n)
@@ -108,26 +109,99 @@ target = 0
     
 #Time Complexcity O(log n)
 #Space Complexcity O(1)
-
 nums = [4,5,6,7,0,1,2]
 target = 0
-
 left = 0
 right = len(nums) - 1
-
 while left <= right:
     mid = left + ((right - left) >> 1)
     if nums[mid] == target:
-        print(mid)
+        # print(mid)
         break
     if nums[left] <= nums[mid]:
-        if nums[left] <= target < nums[right]:
+        if nums[left] <= target < nums[mid]:
             right = mid - 1
         else: left  = mid + 1
     else:
-        if nums[left] < target <= nums[right]:
+        if nums[mid] < target <= nums[right]:
             left = mid + 1
         else: right = mid - 1
-else:print(-1)
+# else:print(-1)
     
+#Capacity to ship packages within D days
+#Time Complexcity O(max(weights),sum(weights)) * n)
+#Space Complexcity O(1)
+weights = [1,2,3,4,5,6,7,8,9,10]
+days = 5
+res =-1
+for we in range(max(weights),sum(weights)+1):
+    total = 0
+    day = 1
+    flag = True
+    for i in weights:
+        if total+i > we:
+            total = i
+            day+=1
+        else:
+            total+= i
+    if day <= days:
+        res = we
+        break
+# print(res)
+
+
+
+
+#Optimal approach
+#Time Complexcity O(n logn)
+#Space Complexcity O(1)
+        
+weights = [1,2,3,4,5,6,7,8,9,10]
+days = 5
+weights = [3,2,2,4,1,4]
+days = 3
+weights = [1,2,3,1,1]
+days = 4
+
+def function1(mid,days):
+    day = 1
+    maxi = 0
+    for i in weights:
+        if i+maxi > mid:
+            day+=1
+            maxi = i
+        else:
+            maxi += i
+    return day <= days
+left = 0
+right = sum (weights)
+while left <= right:
+    mid = left + ((right - left) >> 1)
+    if function1(mid,days):
+        right = mid -1
+    else:
+        left = mid +1
+# print(left)
+
+
+
+#Find the peak element
+nums = [1,2,3,1]
+maxi = nums[0]
+for i in range(1,len(nums)-1):
+    if nums[i-1] < nums[i] > nums[i+1]:    
+        print(i)
+        break
+left = 0
+right =len(nums) - 1
+while left < right:
+    mid = left + ((right - left) >> 1)
+    if nums[mid] > nums[mid + 1]:
+        right = mid
+    else:
+        left= mid + 1
+        
+print(left)
+        
+
 
