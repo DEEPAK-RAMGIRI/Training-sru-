@@ -308,3 +308,12 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
 - Minimum Number of Days to Make m Bouquets
   - Linear Search Approach
   - Binary Search Optimization
+
+[Day 03 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d3.py)
+### Topics  Covered:
+- Maximum Points You Can Obtain from Cards
+- Maximum Number of Vowels in a Substring of Given Length
+- Max Consecutive Ones III
+- Longest Substring Without Repeating Characters
+- Subarrays with Sum Equal to Goal
+- Count Number of Nice Subarrays
