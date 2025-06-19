@@ -317,3 +317,20 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
 - Longest Substring Without Repeating Characters
 - Subarrays with Sum Equal to Goal
 - Count Number of Nice Subarrays
+
+[Day 03 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d3.py)
+### Topics  Covered:
+
+Linked List Problems
+- Insert and Print Linked List
+- Find Middle of Linked List
+- Check Palindrome in Linked List
+- Odd-Even Linked List Rearrangement
+- Swap Kth Node from Start and End
+- Merge Nodes Between Zeros
+- Minimum and Maximum Nodes Between Critical Points
+
+Stack-Based Problems
+- Remove All Adjacent Duplicates in a String
+- Evaluate Reverse Polish Notation
+- Daily Temperatures
