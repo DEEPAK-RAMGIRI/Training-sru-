@@ -116,7 +116,6 @@ class Linkedlist:
             temp = temp.next
         odd.extend(even)
         
-        
         dummy = Node(0)
         temp = dummy
         for i in odd:
@@ -124,7 +123,10 @@ class Linkedlist:
             temp = temp.next
         self.printing(dummy.next)
         
-        
+    
+    #Time Complexcity O(n)
+    #Space Complexcity O(1)
+    
     def oddEven_Linkedlist2(self):
         slow,fast = self.head,self.head.next
         even = fast
@@ -136,6 +138,128 @@ class Linkedlist:
         slow.next = even
         
         self.printing(self.head)
+        
+        
+    # Swapping Nodes in a Linked List
+    #Time Complexcity O(n)
+    #Space Complexcity O(n)
+    def swap_k_node1(self,k):
+        temp = self.head
+        arr = []
+        while temp:
+            arr.append(temp)
+            temp = temp.next
+        arr[k-1].data,arr[~k+1].data = arr[~k+1].data,arr[k-1].data
+
+        self.printing()
+        
+    #Time Complexcity O(n) 
+    #Space Complexcity O(1)
+    def swap_k_node2(self,k):
+        temp = self.head
+        count = 0
+        while temp:
+            temp = temp.next
+            count+=1
+
+        temp = self.head
+        secound = self.head
+        for _ in range(k-1):
+            temp = temp.next
+        for _ in range(count - k):
+            secound = secound.next
+        temp.data,secound.data =secound.data,temp.data
+        self.printing()
+        
+    def swap_k_node3(self):
+        temp = self.head
+        secound = self.head
+        count = 0
+        while temp:
+            count+=1
+            if count == k: start = temp
+            if count > k: secound = secound.next
+            temp = temp.next
+        start.data,secound.data =secound.data,start.data
+        self.printing() 
+        
+        
+    def swap_k_node4(self):
+        pass
+    #have error herre
+    # dummy = ListNode()
+    #     secound = dummy
+    
+    #     temp = head
+    #     while temp and temp.next:
+    #         if temp.next.data >= x:
+    #             secound.next = temp.next
+    #             temp.next = temp.next.next
+    #             secound = secound.next
+    #         else:
+    #             temp = temp.next
+    #     temp.next = dummy.next
+    #     return head
+    
+    
+    # Merge Nodes in Between Zeros
+    #Time Complexcity O(n)
+    #Space Complexcity O(1)
+    def merge_nodes_bw_zeros1(self):
+        arr = []
+        temp = self.head
+        value = 0
+        while temp:
+            value += temp.data
+            if not temp.data and value:
+                arr.append(value)
+                value = 0
+
+            temp =temp.next
+
+        temp = dummy = Node(0)
+        for i in arr: 
+            temp.next = Node(i)
+            temp = temp.next
+
+        self.printing(dummy.next)
+    
+    #Optimised version
+    #Time Complexcity O(n)
+    #Space Complexcity O(1)
+    
+    def merge_nodes_bw_zeros2(self):
+        dummy = Node(0)
+        temp1 = dummy
+        temp= self.head
+        value = 0
+        while temp:
+            value += temp.data
+            if value and not temp.data:
+                temp1.next = Node(value)
+                temp1 = temp1.next
+                value = 0
+            temp = temp.next
+        self.printing(dummy.next)
+        
+        
+    # More Optimised version🔥
+    # we are using the auxillary space of the programme
+    def merge_nodes_bw_zeros3(self):
+        temp1,temp2 = self.head,self.head.next
+        total = 0
+        while temp2:
+            total += temp2.data
+            if not temp2.data and total:
+                temp2.data,temp1.next  = total,temp2
+                temp1,total = temp1.next,0
+            temp2 = temp2.next
+        self.printing(self.head.next)
+     
+            
+    
+        
+    
             
 
 ll = Linkedlist()
@@ -155,7 +279,25 @@ ll = Linkedlist()
 
 
 # Odd Even Linked List
-arr = [1,2,3,4,5]
-for i in arr: ll.insert(i)
+# arr = [1,2,3,4,5]
+# for i in arr: ll.insert(i)
 # ll.oddEven_Linkedlist1()
-ll.oddEven_Linkedlist2()
+# ll.oddEven_Linkedlist2()
+
+
+#  Swapping Nodes in a Linked List
+# nums = [1,2,3,4,5]
+# k = 2
+# for i in nums: ll.insert(i)
+# ll.swap_k_node1(k)
+# ll.swap_k_node2(k)
+# ll.swap_k_node3(k)
+
+
+
+# Merge Nodes in Between Zeros
+arr = [0,3,1,0,4,5,2,0]
+for i in arr: ll.insert(i)
+# ll.merge_nodes_bw_zeros1()
+# ll.merge_nodes_bw_zeros2()
+ll.merge_nodes_bw_zeros3()
