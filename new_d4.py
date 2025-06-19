@@ -171,7 +171,7 @@ class Linkedlist:
         temp.data,secound.data =secound.data,temp.data
         self.printing()
         
-    def swap_k_node3(self):
+    def swap_k_node3(self,k):
         temp = self.head
         secound = self.head
         count = 0
@@ -256,8 +256,47 @@ class Linkedlist:
             temp2 = temp2.next
         self.printing(self.head.next)
      
-            
-    
+    #Time Complexcity O(n)
+    #Space Complexcity O(1)
+    def Minimum_and_Maximum_Number_of_Nodes_Between_Critical_Points1(self):
+        temp = self.head
+        ans = []
+        prev,temp = temp.data,self.head.next
+        count = 0
+        while temp.next:
+            count +=1
+            if prev < temp.data > temp.next.data or prev > temp.data < temp.next.data:
+                ans.append(count)
+            prev = temp.data
+            temp = temp.next
+
+        if len(ans) < 2: return [-1,-1]
+        mini = float("inf")
+        for i in range(len(ans)-1):
+            mini = min(mini,ans[i+1] - ans[i])
+        print([mini,ans[-1] - ans[0]])
+
+
+         
+    def Minimum_and_Maximum_Number_of_Nodes_Between_Critical_Points2(self):
+        temp = self.head
+        first = secound = -1
+        mini = float("inf")
+        prev,temp = temp.data,self.head.next
+        count = 0
+        while temp.next:
+            count +=1
+            if prev < temp.data > temp.next.data or prev > temp.data < temp.next.data:
+               if first == -1: 
+                   first = secound = count
+               else:
+                   mini = min(mini,abs(count - secound))
+                   secound = count
+            prev = temp.data
+            temp = temp.next
+        if mini == float("inf"): return [-1,-1]
+        print([mini,secound- first])
+
         
     
             
@@ -296,8 +335,70 @@ ll = Linkedlist()
 
 
 # Merge Nodes in Between Zeros
-arr = [0,3,1,0,4,5,2,0]
-for i in arr: ll.insert(i)
+# arr = [0,3,1,0,4,5,2,0]
+# for i in arr: ll.insert(i)
 # ll.merge_nodes_bw_zeros1()
 # ll.merge_nodes_bw_zeros2()
-ll.merge_nodes_bw_zeros3()
+# ll.merge_nodes_bw_zeros3()
+
+
+# Find the Minimum and Maximum Number of Nodes Between Critical Points
+# arr = [5,3,1,2,5,1,2]
+# for i in arr: ll.insert(i)
+# ll.Minimum_and_Maximum_Number_of_Nodes_Between_Critical_Points1()
+# ll.Minimum_and_Maximum_Number_of_Nodes_Between_Critical_Points2()
+
+
+
+
+# Stacks 
+# Remove All Adjacent Duplicates In String
+#Time Complexcity O(n)
+#Space Complexcity O(1)
+s = "abbaca"
+stack = []
+for i in s:
+    if stack and stack[-1] == i: stack.pop()
+    else: stack.append(i)
+# print(''.join(stack))
+
+
+
+#Time Complexcity O(n)
+#Space Complexcity O(n)
+tokens = ["2","1","+","3","*"]
+stack = []
+for i in tokens:
+    if i in '+-*/':
+        a = (stack.pop())
+        b = (stack.pop())
+        if i == "+":
+            stack.append(a+b)
+        elif i == "-":
+            stack.append(b-a)
+        elif i == "*":
+            stack.append(a*b)
+        else:
+            stack.append(int(float(b)/a))
+    else:
+        stack.append(int(i))
+# print(stack[-1])
+
+#Time Complexcity O(n^2)
+#Space Complexcity O(1)
+# Daily Temperatures
+
+t = [73,74,75,71,69,72,76,73]
+
+ans = []
+
+for i in range(len(t)):
+    for j in range(i+1,len(t)):
+        if t[j] > t[i]:
+            ans.append(j-i)
+            break
+    else:
+        ans.append(0)
+        
+print(ans)
+
