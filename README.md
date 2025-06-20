@@ -318,7 +318,7 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
 - Subarrays with Sum Equal to Goal
 - Count Number of Nice Subarrays
 
-[Day 03 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d3.py)
+[Day 04 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d4.py)
 ### Topics  Covered:
 
 Linked List Problems
@@ -334,3 +334,8 @@ Stack-Based Problems
 - Remove All Adjacent Duplicates in a String
 - Evaluate Reverse Polish Notation
 - Daily Temperatures
+ 
+[Day 05 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d5.py)
+### Topics  Covered:
+Stacks
+- 
