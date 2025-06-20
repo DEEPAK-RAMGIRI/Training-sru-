@@ -184,22 +184,6 @@ class Linkedlist:
         self.printing() 
         
         
-    def swap_k_node4(self):
-        pass
-    #have error herre
-    # dummy = ListNode()
-    #     secound = dummy
-    
-    #     temp = head
-    #     while temp and temp.next:
-    #         if temp.next.data >= x:
-    #             secound.next = temp.next
-    #             temp.next = temp.next.next
-    #             secound = secound.next
-    #         else:
-    #             temp = temp.next
-    #     temp.next = dummy.next
-    #     return head
     
     
     # Merge Nodes in Between Zeros
@@ -385,13 +369,12 @@ for i in tokens:
 # print(stack[-1])
 
 #Time Complexcity O(n^2)
-#Space Complexcity O(1)
+#Space Complexcity O(n)
 # Daily Temperatures
 
 t = [73,74,75,71,69,72,76,73]
 
 ans = []
-
 for i in range(len(t)):
     for j in range(i+1,len(t)):
         if t[j] > t[i]:
@@ -399,6 +382,17 @@ for i in range(len(t)):
             break
     else:
         ans.append(0)
-        
+# print(ans)
+
+#Time Complexcity O(n)
+#Space Complexcity O(1)
+temperatures = [73,74,75,71,69,72,76,73]
+stack = []
+ans = [0] * len(temperatures)
+for i in range(len(temperatures)-1,-1,-1):
+    while stack and temperatures[stack[-1]] <= temperatures[i]:
+        stack.pop()
+    if stack: ans[i] = stack[-1] - i
+    stack.append(i)
 print(ans)
 
