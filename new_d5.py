@@ -87,7 +87,7 @@ while start or goal:
         count+=1
     start = start >> 1
     goal = goal >> 1
-print(count)
+# print(count)
 
 
 
@@ -119,7 +119,7 @@ while m > 0:
 # print(ans)    
         
 # Counting Bits
-#Time COmplexcity O(n)
+#Time COmplexcity O(n log n)
 #Space Complexcuty O(1)
 n = 2
 ans = []
@@ -138,15 +138,41 @@ dp =[-1] * (n + 1)
 dp[0],dp[1] = 0,1
 for i in range(2,n+1):
     dp[i] = dp[i//2] + 1 if i & 1 else dp[i//2]
-print(dp[n])
-    
+# print(dp[n])
 
-        
-        
-    
-    
-        
+#Next greater element
+arr = [4,12,5,3,1,2,5,3,1,2,4,6]
+stack = []
+ans = [-1] * len(arr)
+for i in range(len(arr)-1,-1,-1):
+    while stack and stack[-1] <= arr[i]:
+        stack.pop() 
+    if stack: ans[i] = stack[-1]
+    stack.append(arr[i])
+# print(ans)
+
+#next smaller element 
+
+arr = [4,12,5,3,1,2,5,3,1,2,4,6]
+stack = []
+ans = [-1] * len(arr)
+for i in range(len(arr)-1,-1,-1):
+    while stack and stack[-1] >= arr[i]:
+        stack.pop() 
+    if stack: ans[i] = stack[-1]
+    stack.append(arr[i])
+# print(ans)
+
+
+#preveiouse smaller element
+arr = [4,12,5,3,1,2,5,3,1,2,4,6]
+stack = []
+ans = [-1] * len(arr)
+for i in range(len(arr)):
+    while stack and stack[-1] >= arr[i]:
+        stack.pop()
+    if stack:ans[i] = stack[-1]
+    stack.append(arr[i])
+print(ans)
+
  
-
-    
-    
