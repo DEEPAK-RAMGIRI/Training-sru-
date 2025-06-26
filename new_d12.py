@@ -201,7 +201,7 @@ for i in range(1,len(text1)+1):
     for j in range(1,len(text2)+1):
         if text1[i-1] == text2[j-1]: dp[i][j] = 1 + dp[i-1][j-1] 
         else: dp[i][j] = max(dp[i-1][j], dp[i][j-1])
-print("text",dp[len(text1)][len(text2)])
+# print("text",dp[len(text1)][len(text2)])
 
 #Best Time to Buy and Sell Stock II
 #Time Complexcity O(2 ^n)
@@ -264,5 +264,6 @@ def find(i,j):
     dp[i][j] =  min(1 + find(i+1,j) , 1 +find(i,j-1))
     return dp[i][j]
 # print(find(0,len(s)-1))
+
 
 
