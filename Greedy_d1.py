@@ -181,7 +181,7 @@ def find(path):
 
 
 #Time complexcity O(n)
-#Space Complexcity O(1)
+#Space Complexcity O(1  )
 nums = [2,3,1,1,4]  
 nums = [3,2,1,0,4]
 maxi = 0
