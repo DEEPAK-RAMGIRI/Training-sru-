@@ -1,5 +1,4 @@
 # Insert Interval
-
 intervals = [[1,3],[6,9]]
 newInterval = [2,5]
 #Time Complexcity O( n log n)
@@ -26,7 +25,6 @@ for i in range(1,len(intervals)):
         prev = intervals[i][-1]
         count+=1
 # print(len(intervals) - count)
-
 
 #graphs
 #way 01 representation
@@ -59,8 +57,6 @@ for i,j in edges:
     adjlist[j].append(i)
 # print(adjlist)
 
-
-
 #for weighted graph
 #using matrix
 n = 5 
@@ -79,7 +75,6 @@ wt_graph = [[0 for _ in range(n+1)] for _ in range(n+1)]
 for i,j,k in edges:
     arr[i][j] = k
     arr[j][i] = k
-
 # print(arr)  
 
 #Time Complexcity O(m)
