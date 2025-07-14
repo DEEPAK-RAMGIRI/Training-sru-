@@ -453,7 +453,6 @@ nums = [2,3,-2,4]
  
 preffix = suffix = 1
 maxi = nums[0]  
-
 for i in range(len(nums)):
     preffix *= nums[i]
     suffix *= nums[~i]
@@ -463,11 +462,293 @@ for i in range(len(nums)):
 print(maxi)
  
 
+# ❓❓❓  Search in Rotated Sorted Array II ❓❓❓
+
+nums = [2,5,6,0,0,1,2] 
+target = 0
+# Time complexcity O(n)
+#Space complexcity O(1)
+
+for i in nums:
+    if i == target: 
+        print(True)
+        break
+    else: False
+    
+#Time Complexcity O(log n)
+#Space Complexcity O(1)
+
+left = 0 
+right = len(nums) - 1
+
+while left <= right:
+    mid = left + ((right - left) >> 1)
+    if nums[mid] == target: 
+        print(True)
+        break
+    elif nums[left] == nums[mid] and nums[mid] == nums[right]:
+        left+=1
+        right-=1
+    elif nums[left] <= nums[mid]:
+        if nums[left] <= target < nums[mid]: right = mid - 1
+        else: left = mid + 1
+    else:
+        if nums[mid] < target <= nums[right]: left = mid + 1
+        else: right=  mid - 1 
+         
+else: print(False)
+
+# ❓❓❓ Find Minimum in Rotated Sorted Array❓❓❓
+
+#Time Complexcity O(n log n)
+#Space Complexcity O(1)
+nums = [3,4,5,1,2]
+nums.sort()
+print(nums[0])
+    
+    
+#Time Complexcity O(n)
+#Space Complexcity O(1)
+
+nums = [3,4,5,1,2]
+print(min(nums))
+
+# Time Complexcity O(n)
+#Space Complexcity O(1)
+
+nums = [3,4,5,1,2]
+mini = float("inf")
+for i in nums:
+    if mini > i: mini = i
+print(mini)
+
+    
+# Time Complexcity O(log n)
+#Space complexcity O(1)
+
+nums = [3,4,5,1,2]
+
+left = 0
+right = len(nums) - 1
+while left <= right:
+    mid = left + ((right - left) >> 1)
+    if left + 1 == right:
+        print(min(nums[left],nums[right]))
+        break
+    elif nums[left] < nums[mid] < nums[right]:
+        left = mid
+    else:
+        if nums[mid] < nums[right]:
+            right = mid
+        else:
+            left = mid
+else: print(nums[0])
+ 
+ 
+ 
+#❓❓❓ Find Peak Element ❓❓❓
+# Time COmplexcity O(n log n)
+# Space Complexcity O(1)
+nums = [1,2,3,1]
+nums.sort()
+print(nums[-1])
+
+#Time Complexcity O(n)
+# Space Complexcity O(1)
+
+print(max(nums))
+
+#Time Complexcity O(n)
+#Space Complexcity O(1)
+
+maxi = float("-inf")
+
+for i in nums:
+    maxi = max(maxi,i)
+print(maxi)
+
+
+#Time Complexcity O(log n)
+#Soace Complexcity O(1) 
+
+left = 0
+right = len(nums) - 1
+while left < right:
+    mid = left + ((right - left) >> 1)
+    if nums[mid] < nums[mid + 1]:
+        left = mid + 1
+    else: 
+        right = mid
+print(left)
+
+
+#❓❓❓ koko Eating Banana ❓❓❓
+
+#Time Complexcity O(n * m)
+#Space Complexcity O(1)
+piles = [3,6,7,11]
+h = 8
+
+maxi = sum(piles)
+mini = 1
+for i in range(mini,maxi+1):
+    hours = 0
+    for banana in piles:
+        hours += banana// i if banana % i == 0 else (banana // i )+1
+        if hours > h:
+            break
+    else: 
+        print(i,"enough")
+        break
+    
+    
+#Time COmplexcity O(logn *m)
+#space Complexcity O(1)
+
+nums = [3,6,7,11]
+ans = left = 1
+right = sum(nums)
+h = 8
+def okay(hours):
+    count = 0
+    for i in nums:
+        count += i//hours if not i%hours else (i//hours) + 1
+    return count <= h
+
+while left <= right:
+    mid = left + ((right - left) >> 1)
+    if okay(mid):
+        ans = mid
+        right=  mid - 1
+    else:
+        left = mid + 1
+print(ans)
+ 
+ 
+#❓❓❓ Aggressive Cows  ❓❓❓
+
+#Time Complexcity O(n * max(nums))
+#Space Comlexcity O(1)
+arr = [0,3,4,7,10,9]
+cows = 4
+
+start = 1
+end = arr[-1] - arr[0]
+arr.sort()
+for i in range(end,start-1,-1):
+    prev = arr[0]
+    count = 1
+    for j in range(1,len(arr)):
+        if arr[j] - prev >= i:
+            prev = arr[j] 
+            count+=1
+    if count >= cows:
+        print(i)
+        break
+    
+    
+# Time Complexcity O(n log max(nums))
+#Space Complrxcity O(1)
+nums = [0,3,4,7,10,9]
+cows = 4
+
+def count_cows(capacity):
+    prev = arr[0]
+    count = 1
+    for i in range(1,len(nums)):
+        if nums[i] - prev >= capacity:
+            count+=1
+            prev = nums[i]
+    return count >= cows
+        
+
+nums.sort()
+left = 1
+right = nums[-1] - nums[0] 
+while left <= right:
+    mid = left + ((right - left) >> 1)
+    if count_cows(mid):
+        ans = mid
+        left = mid + 1
+    else:
+        right = mid - 1 
+print(ans)
         
     
+# ❓❓❓ Allocate Books or Book Allocation❓❓❓
+arr = [25,46,28,49,24]
+students = 4
+
+#Time Complexcity O( n * (sum(arr) - max(arr))) ~ O(n*m)
+#Space Complexcity O(1)
+start = max(arr)
+end = sum(arr)
+for i in range(start,end+1):
+    count = 1
+    bag = arr[0]
+    for j in range(1,len(arr)):
+        if bag + arr[j] > i:
+            count+=1
+            bag = arr[j]
+        else: bag += arr[j]
+    if count <= students:
+        print(i)
+        break
     
+#Time Complexcity O(log n * (sum(arr) - max(arr))) ~ O(log n * m)
+#Space Complexcity O(1)
+
+nums = [25,46,28,49,24]
+students = 4
+left = max(nums)
+right = sum(nums)
+ans = -1
+
+def find_all(capacity):
+    count =1
+    bag = nums[0]
+    for i in range(1,len(nums)):
+        if nums[i] + bag > capacity:
+            count+=1
+            bag = nums[i]
+        else: bag += nums[i]
+    return count <= students
     
+while left < right:
+    mid = left + (( right - left) >> 1)
+    if find_all(mid):
+        ans = mid
+        right = mid - 1
+    else:
+        left = mid + 1
+print(ans)
     
+# ❓❓❓ Median of Two Sorted Arrays ❓❓❓
+#Time Complexcity O(m + n)
+#Space Complexcity O(n + m)
+nums1 = [1,3]
+nums2 = [2]
+i = 0 
+j = 0
+output = []
+median = (len(nums1) + len(nums2)) >> 1
+while i < len(nums1) and j < len(nums2):
+    if nums1[i] <= nums2[j]: 
+        output.append(nums1[i])
+        i+=1
+    else: 
+        output.append(nums2[j])
+        j+=1
+        
+if i < len(nums1):output.extend(nums1[i:])
+if j < len(nums2):output.extend(nums2[j:])
+
+if len(output) & 1:
+    print(output[median])
+else:
+    print((output[median] + output[median - 1])// 2)
+        
+        
 
 
 

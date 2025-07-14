@@ -104,10 +104,3 @@ for i in A:
 # print(mini) 
 
 
-def recursion(n,count):
-    if n == 1:return count
-    elif n <=0: return float("inf")
-    return min(recursion(n - 1,count + 1), recursion(n//2,count + 1), recursion( (n// 3),count + 1))
-
-
-print("recursion" , recursion(5,0))
