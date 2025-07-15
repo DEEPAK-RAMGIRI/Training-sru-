@@ -1075,9 +1075,12 @@ for i in range(1,target+1):
             
             
 
+
+# Time Complexcity O(2^n * n)
+#Space Complexcity O(2^n * n)
+
 candidates = [2,3,6,7]
 target = 7
-
 ans = []
 def find_combinations(index,arr,sums):
     if sums < 0: return 
@@ -1087,13 +1090,82 @@ def find_combinations(index,arr,sums):
         return
     find_combinations(index,arr + [candidates[index]],sums - candidates[index])
     find_combinations(index+1,arr,sums)
-find_combinations(0,[],target)
+# find_combinations(0,[],target)
+# print(ans)
+
+    
+    
+# ❓❓❓ N QUEENS❓❓❓
+n = 4
+
+#Time Complexcity O(n * n!)
+#Space Complexcity O(n ^ 2)
+def backtrack(n):
+    board = [['.' for _ in range(n)] for _ in range(n)]
+    ans = []
+    
+    def is_safe(row,col):
+        for i in range(row):
+            if board[i][col] == 'Q':
+                return False
+            
+        i,j = row-1,col-1
+        while i >=0 and j >=0:
+            if board[i][j] == 'Q':
+                return False
+            i-=1
+            j-=1
+        i,j = row-1,col+1
+        while j < n and i >= 0:
+            if board[i][j] == 'Q':
+                return False
+            i-=1
+            j+=1
+        return True
+    
+    def build(row):
+        if row == n:
+            ans.append([''.join(i) for i in board])
+            return
+        for col in range(n):
+            if is_safe(row,col):
+                board[row][col] = 'Q'
+                build(row + 1)
+                board[row][col] ='.'
+            
+    build(0)
+    return ans
+
+
+# print(backtrack(n))
+
+n = 4
+board = [ ['.' for _ in range(n)] for _ in range(n)]
+ans = []
+columns = set()
+diag1 = set()
+diag2 = set()
+def backtrack(row):
+    if row == n:
+        ans.append([''.join(i) for i in board])
+        return
+    for cols in range(n):
+        if cols in columns or row-cols in diag1 or row+cols in diag2:
+            continue
+        
+        board[row][cols] = 'Q'
+        columns.add(cols)
+        diag1.add(row-cols)
+        diag2.add(row+cols)
+        backtrack(row+1)
+        board[row][cols] = '.'
+        columns.remove(cols)
+        diag1.remove(row - cols)
+        diag2.remove(row + cols)
+backtrack(0)
 print(ans)
+        
     
     
-
-
-
-
 
 
