@@ -731,7 +731,6 @@ nums2 = [2]
 i = 0 
 j = 0
 output = []
-median = (len(nums1) + len(nums2)) >> 1
 while i < len(nums1) and j < len(nums2):
     if nums1[i] <= nums2[j]: 
         output.append(nums1[i])
@@ -742,6 +741,7 @@ while i < len(nums1) and j < len(nums2):
         
 if i < len(nums1):output.extend(nums1[i:])
 if j < len(nums2):output.extend(nums2[j:])
+median = (len(output)) >> 1
 
 if len(output) & 1:
     print(output[median])
@@ -749,6 +749,350 @@ else:
     print((output[median] + output[median - 1])// 2)
         
         
+# Linked lists
+
+print("--------------------------------------- Linked lists ---------------------------------------")
+
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+        
+
+def traveral(head):
+    temp = head 
+    while temp:
+        print(temp.data,end=" ")
+        temp = temp.next
+
+def insert(head,arr):
+    dummy = Node(arr[0])
+    head = dummy
+    for i in arr[1:]:
+        dummy.next = Node(i)
+        dummy = dummy.next  
+    return head      
+    
+    
+    
+# ❓❓❓ Middle of the Linked List ❓❓❓
+
+# Time Complexcity O(n) + O(n//2) ~ O(3n//2) ~ O(n)
+# Space Complexcity O(1)
+
+def find_middle1(head):
+    count = 0
+    temp = head
+    while temp:
+        count+=1
+        temp = temp.next
+    count = (count >> 1)
+    
+    temp = head
+    while count:
+        temp = temp.next
+        count-=1
+    return temp 
+
+
+#Time Complexcity O(n) 
+#Space Complexcity O(n)
+def find_middle2(head):
+    arr = []
+    temp = head
+    while temp:
+        arr.append(temp.data)
+        temp = temp.next
+    mid = len(arr) >> 1
+    print(arr[mid])
+    
+# Time Complexcity O(n) 
+#Space Complexcity O(1)
+
+def find_middle_optimal(head):
+    fast,slow = head,head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    return slow
+
+arr = [1,2,3,4,5]
+arr = [1,2,3,4,5,6]
+head = None
+# head = insert(head,arr)
+# head = find_middle1(head)
+# find_middle2(head)
+# head = find_middle_optimal(head)
+# traveral(head)
+
+# ❓❓❓ Linked List Cycle ❓❓❓
+
+# Time Complexcity O(n)
+# Space Complexcity O(n)
+ 
+def find_cycle(head):
+    sets = set()
+    while head:
+        if head in sets:
+            return True
+        sets.add(head)
+        head = head.next
+    return False
+     
+     
+# Time Complexcity O(n)
+# Space Complexcity O(1)
+
+def find_cycle_optimal(head):
+    fast,slow = head,head
+    while fast and fast.next:
+        if fast == slow: return True
+        fast = fast.next.next
+        slow = slow.next
+    return False
+
+
+arr = [3,2,0,-4]
+head = None
+# head = insert(head,arr)
+# print(find_cycle(head))
+
+
+#❓❓❓ Remove Nth Node From End of List ❓❓❓
+
+
+# Time Complexcity = O(n) + O(count - k)~ O(n) = O(2n) ~ O(n)
+# Space Complexcity = O(1)  
+
+def delete_k_node(head,k):
+    count = 0
+    temp = head
+    while temp:
+        temp = temp.next
+        count+=1
+    temp = head
+    if count < k: return -1
+    elif count-k == 0: return head.next
+    else:
+        count -= k+1
+        while count:
+            temp = temp.next
+            count-=1
+            
+        temp.next = temp.next.next if temp.next else None
+    return head
+        
+# Time Complexcity O(n)
+#Space Complexcity O(1) 
+def delete_k_node_optimal(head,k):
+    fast = head
+    for _ in range(k):
+        fast = fast.next
+    if not fast: return head.next 
+    slow = head
+    while fast.next:
+        fast = fast.next
+        slow = slow.next
+    slow.next = slow.next.next
+        
+    
+    
+        
+        
+arr = [1,2,3,4,5]
+n = 2
+head = None
+# head = insert(head,arr)
+# delete_k_node(head)
+
+
+# ❓❓❓ Intersection of Two Linked Lists❓❓❓
+
+# Time Complexcity O(m + n)
+# Space Complexcity O(m) 
+def intersection_point(headA,headB):
+    seen =set()
+    while headA:
+        seen.add(headA)
+        headA = headA.next
+    while headB:
+        if headB in seen:
+            return headB
+        seen.add(headB)
+        headB = headB.next
+        
+        
+#Time Complexcity O(m + n)
+#Space Complexcity O(1)
+    
+def insertion_point_optimal(headA,headB):
+    tempA,tempB = headA,headB
+    while tempA !=  tempB:
+        tempA =  headB if not tempA else tempA.next
+        tempB = headA if not tempB else  tempB.next
+    return tempA
+        
+        
+        
+# ❓❓❓ Sort LL ❓❓❓
+#Time Complexcity O(n log n) + O(n) + O(n) ~ o(2n) + O(n log n) ~ O(n log n)
+#Space Complexcity O(n) + O(n) ~ O(2n) ~ O(n)
+head = [4,2,1,3]
+def sort_linked_list(head):
+    temp = head
+    arr = []
+    while temp:
+        arr.append(temp.data)
+        temp = temp.next
+    arr.sort()
+    dummy = Node(arr[0])
+    head = dummy
+    for i in arr[1:]:
+        dummy.next = Node(i)
+        dummy = dummy.next
+    return head
+
+
+#Time Complexcity O( n log n)
+#Space complexcity O(1)
+def sort_optimal_ll(left,right):
+    temp = Node(0)
+    dummy = temp
+    while left and right:
+        if left.data <= right.data:
+            dummy.next = left
+            left = left.next
+        else:
+            dummy.next = right
+            right = right.next
+        dummy = dummy.next 
+        
+    dummy.next = left if left else right
+    return temp.next
+        
+    
+def sort_linked_list_optimal(head):
+    
+    if  head and head.next:
+        mid  = find_middle_optimal(head)
+        fast = mid.next
+        mid.next = None
+        left = sort_linked_list_optimal(head)
+        right = sort_linked_list_optimal(fast)
+        return sort_optimal_ll(left,right)
+    return head
+        
+      
+# ❓❓❓ Odd Even Linked List ❓❓❓
+        
+        
+#Time Complexcity O(n) + O(n) ~O(2n) ~O(n)
+#Space Complexcity O(n) +O(n) ~ O(2n) ~ O(n)
+def odd_even_ll(head):
+    temp = head
+    odd = []
+    even = []
+    count = 1
+    while temp:
+        if count & 1: odd.append(temp.data)
+        else: even.append(temp.data)
+        temp = temp.next
+        count+=1
+    
+    odd.extend(even)
+    dummy = Node(odd[0])
+    temp = dummy
+    for i in odd[1:]:
+        temp.next = Node(i)
+        temp = temp.next
+    return dummy
+
+
+# Time Complexcity O(n)
+#Space Complexcity O(1)
+
+def odd_even_ll_optimal(head):
+    if not head or not head.next:
+        return head
+    odd = head
+    even = head.next
+    start = even
+    
+    while even and even.next:
+        odd.next = even.next
+        odd = odd.next
+        even.next = odd.next
+        even = even.next
+    odd.next = start
+    
+    return head
+
+#❓❓❓ Backtracking && Recursion ❓❓❓ 
+print('--------------------------------------- Backtracking && Recursion ---------------------------------------')
+# Time Complexcity O(2^n * n) 
+# Space complexcity O(2^n * n)
+
+nums = [1,2,3]
+ans = []
+
+def find_subsets(index,arr):
+    if len(nums) == index:
+        ans.append(arr)
+        return
+    find_subsets(index+1,arr + [nums[index]]) 
+    find_subsets(index+1,arr)
+    
+# find_subsets(0,[])
+# print(ans)
+
+#Time Complexcity O(2 ^n *n)
+#Space Complexcity O(n)
+nums = [1,2,3]
+ans = []
+for i in range(1<<len(nums)):
+    arr = []
+    for j in range(len(nums)):
+        if i & (1 << j):
+            arr.append(nums[j])
+    ans.append(arr)
+# print(ans)
+
+
+# ❓❓❓ Combination Sum ❓❓❓ 
+
+#Time Complexcity O(k^target * target log target)
+#space complexcity O(K^target * target)
+
+candidates = [2,3,6,7]
+target = 7
+ans = set()
+from itertools import product
+for i in range(1,target+1):
+    for j in product(candidates,repeat=i):
+        if sum(j) == target:
+            ans.add(tuple(sorted(j)))
+# print(ans)
+            
+            
+
+candidates = [2,3,6,7]
+target = 7
+
+ans = []
+def find_combinations(index,arr,sums):
+    if sums < 0: return 
+    if index == len(candidates):
+        if sums == 0:
+            ans.append(arr)
+        return
+    find_combinations(index,arr + [candidates[index]],sums - candidates[index])
+    find_combinations(index+1,arr,sums)
+find_combinations(0,[],target)
+print(ans)
+    
+    
+
+
 
 
 
