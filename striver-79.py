@@ -1164,8 +1164,100 @@ def backtrack(row):
         diag2.remove(row + cols)
 backtrack(0)
 print(ans)
+
+
+
+#Time Complexcity O(9 ^ m)
+#Space complexcity O(m)
+from collections import defaultdict
+board = [
+    ["5","3",".",".","7",".",".",".","."],
+    ["6",".",".","1","9","5",".",".","."],
+    [".","9","8",".",".",".",".","6","."],
+    ["8",".",".",".","6",".",".",".","3"],
+    ["4",".",".","8",".","3",".",".","1"],
+    ["7",".",".",".","2",".",".",".","6"],
+    [".","6",".",".",".",".","2","8","."],
+    [".",".",".","4","1","9",".",".","5"],
+    [".",".",".",".","8",".",".","7","9"]
+]
+
+
+
+def find_value(row,col,value):
+    for k in range(0,9):
+        if board[row][k] == str(value):
+            return False
+        if board[k][col] == str(value):
+            return False
+        if board[3 *(row // 3) + k // 3][3 * (col // 3) + k % 3] == str(value):
+            return False
+    return True
+            
         
+def backtrack(board):
+    for i in range(len(board)):
+        for j in range(len(board[0])):
+            if board[i][j] == '.':
+                for value in range(1,10):
+                    if find_value(i,j,value):
+                        board[i][j] = str(value)
+
+                        if backtrack(board): return True
+                        else: board[i][j] = '.'
+                return False
+    return True
+
+# backtrack(board)
+
+
+# Optimised Version
+from collections import defaultdict
+
+rows = defaultdict(set)
+cols = defaultdict(set)
+boxs = defaultdict(set)
+
+for i in range(9):
+    for j in range(9):
+        if board[i][j] != '.':
+            value = str(board[i][j])
+            rows[i].add(value)
+            cols[j].add(value)
+            boxs[(i // 3 ,j//3)].add(value)
+            
+            
+def backtrack():
+    for i in range(9):
+        for j in range(9):
+            if board[i][j] == '.':
+                for value in range(1,10):
+                    value = str(value)
+                    if value not in rows[i] and value not in cols[j] and value not in boxs[(i//3,j//3)]:
+                        board[i][j] = value
+                        rows[i].add(value)
+                        cols[j].add(value)
+                        boxs[(i//3,j//3)].add(value)
+                        
+                        if backtrack(): return True
+                        
+                        board[i][j] = '.'
+                        rows[i].remove(value)
+                        cols[j].remove(value)
+                        boxs[(i//3,j//3)].remove(value)
+                return False
+    return True
+backtrack()
+print(board)
+                        
+                    
+
+
     
+               
+
+
+
     
 
 
