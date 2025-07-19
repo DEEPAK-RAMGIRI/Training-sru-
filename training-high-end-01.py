@@ -61,6 +61,17 @@ def rotate_linked_list(head,k):
     temp.next = head
     return new_head
 
+
+
+def cycle_in_linked_list(head):
+    slow = head
+    fast = head.next
+    while fast and fast.next:
+        fast = fast.next.next
+        slow = slow.next
+        if fast == slow:
+            return True
+    return False 
 arr = [1,2,3,4,5,6]
 head = None
 head = insert(arr,head)
@@ -136,6 +147,52 @@ def sort(head):
             temp = temp.next
     return head
         
+        
+def find_middle(head):
+    prev = None
+    fast = head
+    slow = head
+    while fast and fast.next:
+        prev = slow
+        fast = fast.next.next
+        slow = slow.next
+    if prev:
+        prev.next = None
+    return slow
+
+
+def conquer(first,secound):
+    dummy = Node2(0)
+    temp = dummy
+    
+    while first and secound:
+        if first.data > secound.data:
+            temp.next = secound
+            secound = secound.next
+        else:
+            temp.next = first
+            first = first.next
+        temp.next.prev = temp
+        temp = temp.next
+
+    if first: 
+        temp.next = first
+        first.prev = temp
+    else: 
+        temp.next = secound
+        secound.prev = temp
+    return dummy.next
+        
+def merge(head):
+    if head and head.next:
+        mid = find_middle(head)
+        first = merge(head)
+        secound = merge(mid)
+        return conquer(first,secound)
+    return head
+        
+        
+        
 
 
 head = None
@@ -144,5 +201,6 @@ head = insert_dll(head,arr)
 # # head = swap(head)
 # head = swap2(head)
 print()
-head = sort(head)
+# head = sort(head)
+head = merge(head)
 printing(head)
