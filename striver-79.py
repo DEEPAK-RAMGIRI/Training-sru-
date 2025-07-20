@@ -1152,7 +1152,6 @@ def backtrack(row):
     for cols in range(n):
         if cols in columns or row-cols in diag1 or row+cols in diag2:
             continue
-        
         board[row][cols] = 'Q'
         columns.add(cols)
         diag1.add(row-cols)
@@ -1249,15 +1248,138 @@ def backtrack():
     return True
 backtrack()
 print(board)
-                        
-                    
 
+board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+word = "ABCCED"
+
+list1 = [(0,1),(0,-1),(1,0),(-1,0)]
+def backtrack(i,j,k):
+    if k == len(word): return True
+    elif i < len(board) and i >= 0 and j < len(board[0]) and j >= 0:
+        if board[i][j] == word[k]:
+            temp,board[i][j] = board[i][j],'$'
+            for x,y in list1:
+                   if backtrack(i+x,j+y,k+1): return True
+            board[i][j] = temp
+    return False
+                   
+                     
+
+for i in range(len(board)):
+    for j in range(len(board[0])):
+        if backtrack(i,j,0):
+            print(True)
+            break
+else: 
+    print(False)
+    
+    
+# M - coloring problem
+
+edges = [[0,1],[0,2],[0,3],[1,2],[1,3]]
+from collections import defaultdict
+graph = defaultdict(list)
+m = 4
+
+for i,j in edges:
+    graph[i].append(j)
+    graph[j].append(i)
+    
+print(graph)
+color = [0]*m
+
+def is_safe(index,col):
+    for i in graph[index]:
+        if color[i] == col:
+            return False
+    return True
 
     
-               
-
-
-
+def colors(index):
+    if index == m:
+        return True
     
+    for i in range(1,m+1):
+        if is_safe(index,i):
+            color[index] = i
+            if colors(index+1):
+                return True
+            color[index] = 0
+    return False
+
+colors(0)
+print("color combinations",color)
+        
+print("--------------------------------------------STACKS--------------------------------------")
+
+
+#Next Smaller Element
+nums1 = [4,1,2]
+nums2 = [1,3,4,2]
+ans = []
+
+#Time Complexcity O(n^3)
+#Space complexcity O(m)
+for i in range(len(nums1)):
+    found = False
+    for j in range(len(nums2)):
+        if nums1[i] == nums2[j]:
+            for k in range(j,len(nums2)):
+                if nums1[i] < nums2[k]:
+                    ans.append(nums2[k])
+                    found = True
+                    break
+            if not found:ans.append(-1)
+print(ans)
+
+nums1 = [4,1,2]
+nums2 = [1,3,4,2]
+
+#Time complexcity O(n^2)
+#Space Complexcity O(m)
+ans = []
+for i in nums1:
+    prev = -1
+    for j in nums2[::-1]:
+        if i == j :
+            if prev > i:ans.append(prev)
+            else: ans.append(-1)
+        prev = j if i < j else prev
+print(ans) 
+
+
+#Time Complexcity O(N + M)
+#Space Complexcity O(N)
+
+
+stack = []
+dicts = {}
+for i in nums2:
+    while stack and i > stack[-1]:
+        dicts[stack.pop()] = i 
+    stack.append(i)
+for i in stack: dicts[i] = -1
+print([dicts[i] for i in nums1])
+# height = [0,1,0,2,1,0,1,3,2,1,2,1]
+# 
+# prefix =  or i in nums1])
+
+
+# Trapping Rain Water   
+height = [0,1,0,2,1,0,1,3,2,1,2,1]
+
+preffix = [height[0]] + [0] * (len(height) - 1)
+for i in range(1,len(height)):
+    preffix[i] = max(height[i] , preffix [i - 1])
+
+suffix = [0] * (len(height) - 1) + [height[-1]]
+for i in range(len(height) - 2,-1,-1):
+    suffix[i] = max(suffix[i + 1] , height[i])
+   
+total= 0 
+print(preffix,suffix)
+for i  in range(len(height)):
+    total += (min(preffix[i],suffix[i]) - height[i])
+print(total)
 
 
