@@ -131,6 +131,204 @@ for i in factors:
         count+=1
          
 print(count)
+
+    
+# Find the middle node in the circular double linked list
+
+print("linked list")
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+        self.prev = None
+
+#Time Complexcity O(n)
+#Space Complexcity O(1)
+                    
+def insert(head,arr):
+    dummy = Node(arr[0])
+    head = dummy
+    for i in arr[1:]:
+        dummy.next = Node(i)
+        dummy.next.prev = dummy
+        dummy = dummy.next
+        
+    dummy.next = head
+    head.prev = dummy
+    return head
+
+#Time Complexcity O(n)
+#Space Complexcity O(1)
+def printing(head):
+    if not head: 
+        print("head is empty")
+        return 
+    if head.next == head:
+        print(head.data)
+        return 
+    print(head.data,end=" ")
+    temp = head.next
+    while temp != head:
+        print(temp.data,end= " ")
+        temp = temp.next
+        
+#Time complexcity O(n)
+#Space Complexcity O(1)
+def find_middle_element(head):
+    slow,fast = head,head.next
+    while fast != head and fast.next != head:
+        slow = slow.next
+        fast = fast.next.next
+    return slow.data 
+arr = [1,2,3,4,5,6,7,8,9,10]
+head = insert(None,arr)
+print(find_middle_element(head))
+printing(head)
+
+
+
+arr = [1,10,2,25]
+#Time Complexcity O(n)
+#Space Complexcity O(11)
+# next Greater Element
+stack = []
+ans = []
+for i in arr[::-1]:
+    while stack and stack[-1] < i:
+        stack.pop()
+    if stack: ans.append(stack[-1])
+    else: ans.append(-1)
+    stack.append(i)
+print(ans[::-1])
+    
+    
+# subtraction linked list
+
+arr2=[2,4,3]
+arr1=[4,9,3,3]
+#ouput = 3052
+
+
+
+head1 = insert(None,arr1)
+head2 = insert(None,arr2)
+
+def subtract(head1,head2):
+    if not head1 and not head2: return None
+    if not head1: return head2
+    if not head2: return head1
+
+    
+    temp1 = head1.next
+    no1 = str(head1.data)
+    while temp1 != head1:
+        no1 += str(temp1.data)
+        temp1 = temp1.next
+    
+    no2 = str(head2.data)
+    temp2 = head2.next
+    
+    while temp2 != head2:
+        no2 += str(temp2.data)
+        temp2 = temp2.next
+        
+    diff = list(map(str,str(int(no2[::-1])-int(no1[::-1]))))
+    
+    dummy = Node(0)
+    head = dummy
+    for i in diff:
+        dummy.next = Node(i)
+        dummy.next.prev= dummy
+        dummy = dummy.next
+    dummy.next = head
+    head.prev = dummy
+        
+    return head.next
+    
+    
+head = subtract(head1,head2)
+printing(head)
+print()
+    
+    
+        
+class Stack:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+        
+def push(head,data):
+    node = Stack(data)
+    if not head:
+        return node
+    node.next = head
+    head = node
+    return head
+
+def pop(head):
+    if not head: 
+        return "Stack is Empty"
+    return head.next,head.data
+
+def peek(head):
+    if not head : return None
+    return head.data
+
+def printing(head):
+    while head:
+        print(head.data,end=" ")
+        head = head.next
+
+arr = [1,2,3,4,5]
+head = None
+
+for i in arr:
+    head = push(head,i)
+
+head,value = pop(head)
+head,value = pop(head)
+print(value)
+print(peek(head))
+     
+    
+stack1, stack2 = [], []
+
+def enque(data):
+    stack1.append(data)
+
+def deque():
+    if not stack2:
+        while stack1:
+            stack2.append(stack1.pop())
+    if stack2:
+        return stack2.pop()
+    return "Queue is Empty"
+
+def peek(): 
+    if not stack2:
+        while stack1:
+            stack2.append(stack1.pop())
+    if stack2:
+        return stack2[-1]
+    return "Queue is Empty"
+
+def printing():
+    if not stack2:
+        while stack1:
+            stack2.append(stack1.pop())
+    print(stack2[::-1])  
+
+for i in [1, 2, 3, 4]:
+    enque(i)
+
+printing()        # Output: [1, 2, 3, 4]
+print(deque())    # Output: 1
+printing()        # Output: [2, 3, 4]
+
+
+
     
 
-
+        
+   
+    
