@@ -1382,4 +1382,40 @@ for i  in range(len(height)):
     total += (min(preffix[i],suffix[i]) - height[i])
 print(total)
 
+# Largest rectangle
 
+# Time Complexcity O(n^2)
+#Space Complexciy O(1)
+
+heights = [2,1,5,6,2,3]
+total = 0
+for i in range(len(heights)):
+    maxi = heights[i]
+    for j in range(i,len(heights)):
+        maxi = min(maxi,heights[j])
+        total = max(total,maxi * (j - i + 1))
+print(total)
+
+#Time Complexcity O(n) + O(n) +O(n)
+#Space Complexcity O(n) + O(n) +O(n)
+n = len(heights)
+nse = [n] * n
+stack = []
+for i in range(n-1,-1,-1):
+    while stack and heights[stack[-1]] >= heights[i]:
+        stack.pop()
+    if stack: nse[i] = stack[-1]
+    stack.append(i)
+
+pse = [-1] * n
+stack = []
+for i in range(n):
+    while stack and heights[stack[-1]] >= heights[i]:
+        stack.pop()
+    if stack: pse[i] = stack[-1]
+    stack.append(i)
+total = 0
+for i in range(n):
+    total = max(total,heights[i] * (nse[i] - pse[i] -1))
+
+print(total)
