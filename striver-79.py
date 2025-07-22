@@ -1382,8 +1382,8 @@ for i  in range(len(height)):
     total += (min(preffix[i],suffix[i]) - height[i])
 print(total)
 
-# Largest rectangle
-
+#❓❓❓ Largest rectangle ❓❓❓
+ 
 # Time Complexcity O(n^2)
 #Space Complexciy O(1)
 
@@ -1419,3 +1419,158 @@ for i in range(n):
     total = max(total,heights[i] * (nse[i] - pse[i] -1))
 
 print(total)
+
+
+# more optimsed version
+# TIime Complexcity O(n)
+#Spaace complexcity O(n)
+
+
+total = []
+stack = []
+
+
+heights = [2,1,5,6,2,3]
+total = 0
+
+for i in range(len(heights)):
+    while stack and heights[stack[-1]] >= heights[i]:
+        index = stack.pop()
+        total = max(heights[index] * (i - (stack[-1] if stack else -1)-1),total)
+    stack.append(i) 
+    
+while stack: total = max(heights[stack.pop()] * ( len(heights) - (stack[-1] if stack else -1)-1),total)
+print(total)
+    
+    
+    
+#❓❓❓ ASTERIOD COLLISIONS ❓❓❓
+asteroids = [5,10,-5]
+stack = []
+for i in asteroids:
+    if i < 0:
+        while stack and stack[-1] > 0 and stack[-1] < abs(i):
+            stack.pop()
+        if stack and stack[-1] == abs(i):
+            stack.pop()
+            continue
+        if not stack or stack[-1] < 0: stack.append(i)
+    else:
+        stack.append(i)
+print(stack)
+
+#  ❓❓❓ Sliding Window Maximum ❓❓❓
+
+# Sliding Window Maximum
+# Time Complexcity O(n) * O(k)
+#Space Complexcity O(m)
+nums = [1,3,-1,-3,5,3,6,7]
+k = 3
+window = []
+for i in range(len(nums)-k+1):
+    ans = max(nums[i:i+k])
+    window.append(ans)
+print(window)
+
+
+#Time Complexcity O(n)
+#Space Complexcity O(n)
+from collections import deque
+nums = [1,3,-1,-3,5,3,6,7]
+k = 3
+ans = []
+queue = deque()
+
+for i in range(len(nums)):
+    while queue and nums[queue[-1]] <= nums[i]:
+        queue.pop()
+    
+    queue.append(i)
+    
+    if queue and i - k >= queue[0]:
+        queue.popleft()
+    
+    if i - k + 1 >= 0:
+        ans.append(nums[queue[0]])
+print(ans)
+        
+print("--------------------------------Heaps ------------------------------------------")
+
+print("--------------------------------Trees----------------------------")
+    
+
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.left = None
+        self.right = None
+        
+# Time Complexcity O(n)
+# Space Complexcity O(n)
+def create_tree(arr):
+    root = Node(arr[0])
+    queue = deque([root])
+    i = 1
+    while i < len(arr):
+        current = queue.popleft()
+        if i < len(arr):
+            current.left = Node(arr[i]) 
+            queue.append(current.left)
+            i+=1
+        if i < len(arr):
+            current.right = Node(arr[i])
+            queue.append(current.right)
+            i+=1
+    return root
+
+# Time Complexcity o(n)
+# Space Complexcity O(h)
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.data,end=" ")
+        inorder(root.right)
+    
+# No of nodes in the Tree
+#Time Complexcity O(n)
+#space Complexcity O(h)
+def no_of_nodes_the_tree(root):
+    if not root: return 0
+    return 1 + no_of_nodes_the_tree(root.left) + no_of_nodes_the_tree(root.right)
+
+#Time Complexcity O(n)
+#Space Complexcity O(h)
+#DFS
+def height_of_the_tree(root):
+    if not root: return 0
+    return 1 + max(height_of_the_tree(root.left),height_of_the_tree(root.right))
+
+#BFS
+def height_of_tree_dfs(root):
+    if not root: return 0
+    queue = deque([(root,1)])
+    total = 0
+    while queue:
+        current,height = queue.popleft()
+        total = max(total,height)
+        if current.left:
+            queue.append((current.left,height + 1))
+        if current.right:
+            queue.append((current.right,height + 1))
+    print(total)
+    
+        
+        
+
+arr = [1,2,3,4,5]
+root = create_tree(arr)
+# inorder(root)
+print(height_of_the_tree(root))
+height_of_tree_dfs(root)
+
+
+        
+    
+    
+    
+    
