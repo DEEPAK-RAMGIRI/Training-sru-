@@ -1543,10 +1543,14 @@ def no_of_nodes_the_tree(root):
 #DFS
 def height_of_the_tree(root):
     if not root: return 0
-    return 1 + max(height_of_the_tree(root.left),height_of_the_tree(root.right))
+    # return 1 + max(height_of_the_tree(root.left),height_of_the_tree(root.right))
+    return 1 + max(height_of_the_tree(root.right),height_of_the_tree(root.left))
+
 
 #BFS
-def height_of_tree_dfs(root):
+#Time Complexcity O(n)
+#Space complexcity O(w)
+def height_of_tree_bfs(root):
     if not root: return 0
     queue = deque([(root,1)])
     total = 0
@@ -1560,17 +1564,101 @@ def height_of_tree_dfs(root):
     print(total)
     
         
-        
+#Diameter of the tree
+# Time complexcity O(n)
+#space complexcity O(h)
+maxi = [0]
+def diameter_tree(root):
+    if not root: return 0
+    left = diameter_tree(root.left)
+    right = diameter_tree(root.right)
+    maxi[0] = max(left + right,maxi[0])
+    return 1 + max(left,right)
+     
 
 arr = [1,2,3,4,5]
 root = create_tree(arr)
 # inorder(root)
-print(height_of_the_tree(root))
-height_of_tree_dfs(root)
+# print(height_of_the_tree(root))
+# height_of_tree_bfs(root)
+diameter_tree(root)
+print("diameter",maxi[0])
 
 
+#❓❓❓Bottom view ❓❓❓
+root = Node(1)
+root.left = Node(2)
+root.left.right = Node(10)
+root.left.left = Node(4)
+root.left.left.right = Node(5)
+root.left.left.right.right = Node(6)
+root.right = Node(3)
+root.right.right = Node(11)
+root.right.left = Node(9)
+maps = dict()
+
+#Time Complexcity O(n)
+#Space complexcity O(h + k)
+
+def bottom_view_dfs(root,index,depth):
+    if not root: return None
+    if index not in maps or depth >= maps[index][-1]:
+        maps[index] = (root.data,depth)
+    bottom_view_dfs(root.left,index-1,depth+1)
+    bottom_view_dfs(root.right,index+1,depth+1)
+    
+# bottom_view_dfs(root,0,0)
+# print(maps)
+# for i in sorted(maps.keys()):
+#     print(maps[i][0], end=" ")
+    
+    
+#Time COmplexcity O(n)
+#Space complexcity O(h+k)
+maps = dict()
+from collections import deque
+def bottom_view_bfs(root,index):
+    queue = deque([(root,index)])
+    while queue:
+        current,ind = queue.popleft()
+        maps[ind] = current.data
+        if current.left:
+            queue.append((current.left,ind - 1))
+        if current.right:
+            queue.append((current.right,ind + 1))
+
+bottom_view_bfs(root,0)
+print(maps)
+for i,j in sorted(maps.items()):
+    print(j,end=" ")
         
     
-    
-    
-    
+#❓❓❓Maximum Path Sum❓❓❓
+#time Complexcity O(n)
+#Space complexcity O(h)
+maxi = [0]
+def maximum_path_sum(root):
+    if not root:
+        return 0 
+    left = max( 0, maximum_path_sum(root.left))
+    right = max(0,maximum_path_sum(root.right))
+    maxi[0] = max(maxi[0],left + right + root.val)
+    return root.val + max(left , right)
+
+#❓❓❓loweset common anscetors❓❓❓
+#Time Complexcity O(n)
+#Space Complexcity O(h)
+def find_LCA(root,p,q):
+    if not root:return 0
+    if root == p or root == q:
+        return root
+    left = find_LCA(root.left,p,q)
+    right = find_LCA(root.right,p,q) 
+    if left and right: return root
+    return left if left else right  
+
+
+
+
+      
+ 
