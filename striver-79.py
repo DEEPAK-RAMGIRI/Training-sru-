@@ -1496,6 +1496,74 @@ print(ans)
         
 print("--------------------------------Heaps ------------------------------------------")
 
+
+#❓❓❓kth largest element❓❓❓
+nums = [3,2,1,5,6,4]
+k = 2
+flag = True
+#Time Complexcity O(n^2)
+#Space Complexcity O(1)
+for i in range(k):
+    for j in range(len(nums)-i-1):
+        if nums[j] > nums[j+1]:
+            nums[j],nums[j+1] = nums[j+1],nums[j]
+
+print(nums[-k])
+
+#merge sort
+#Time Complexcity O(n log n)
+#Space Complexcity O(n)
+
+nums = [3,2,1,5,6,4]
+k = 2
+def conquer(left,mid,right):
+    ind1 = left
+    ind2 = mid + 1
+    output = []
+    while ind1 <= mid and ind2 <= right:
+        if nums[ind1] <= nums[ind2]:
+           output.append(nums[ind1])
+           ind1+=1
+        else:
+            output.append(nums[ind2])
+            ind2+=1
+    output.extend(nums[ind1:mid+1] if ind1 <= mid else nums[ind2:right+1])
+                  
+    for i in range(len(output)):
+        nums[i + left] = output[i]
+    
+def merge(left,right):
+    if left < right:
+        mid = left + ((right - left) >> 1)
+        merge(left,mid)
+        merge(mid+1,right)
+        conquer(left,mid,right)
+merge(0,len(nums)-1)
+print(nums[-k])
+
+
+# Time Complexcity O(n log n)
+#Space Complexity O(1)
+
+nums = [3,2,1,5,6,4]
+k = 2
+nums.sort()
+print(nums[-k])
+
+nums = [3,2,1,5,6,4]
+k = 2
+
+# Time Complexcity O(n log k)
+# Space Complexcity O(1)
+import heapq
+queue = []
+for i in nums:
+    heapq.heappush(queue,i)
+    if len(queue) > k:
+        heapq.heappop(queue)
+print(queue[0])
+    
+
 print("--------------------------------Trees----------------------------")
     
 
@@ -1657,8 +1725,48 @@ def find_LCA(root,p,q):
     if left and right: return root
     return left if left else right  
 
+# ❓❓❓ sum of parent nodes in the trees❓❓❓
+from collections import deque
+# Time Complexcity O(n)
+#Space Complexcity O(w) ~ O(n)
+def sum_of_parent_nodes(root):
+    queue = deque([root])
+    sums = 0
+    while queue:
+        current = queue.popleft()
+        if current.left:
+            queue.append(current.left)
+        if current.right:
+            queue.append(current.right)
+        if current.left or current.right:
+            sums += current.data
+    print("\n sum of parent nodes",sums)
+sum_of_parent_nodes(root)
 
 
+#❓❓❓  Minimum time to burn the trees ❓❓❓
 
-      
+root = Node(1)
+root.left = Node(2)
+root.left.right = Node(4)
+root.left.right.right = Node(7)
+root.right = Node(3)
+root.right.left = Node(5)
+root.right.right = Node(6)
  
+parentnode = dict()    
+
+from collections import deque
+def connect_parents(root):
+    queue = deque([root])
+    while queue:
+        current = queue.popleft()
+        if current.left:
+            queue.append(current.left)
+            parentnode[current.left.data] = current
+        if current.right:
+            queue.append(current.right)
+            parentnode[current.right.data] = current
+            
+connect_parents(root)
+print(parentnode)
