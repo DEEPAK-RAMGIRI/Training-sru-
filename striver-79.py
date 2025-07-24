@@ -1807,7 +1807,145 @@ def burnt_connect_nodes(burnt_guy): #Evil laugh (😈ha ha ha ha ha ha ha😈)
     return time
 print(burnt_connect_nodes(burnt))
 
+# ❓❓❓Construct Binary Tree from Preorder and Inorder Traversal ❓❓❓
 
+
+class TreeNode:
+    def __init__(self,data):
+        self.data = data
+        self.left = None
+        self.right = None
+        
+        
+        
+# Time Complexcity O(n)
+# Space Complexcity O(n)
+preorder = [3,9,20,15,7]
+inorder = [9,3,15,20,7]
+
+inorder_index = dict()
+for i in range(len(inorder)):
+    inorder_index[inorder[i]] = i
+
+def build_tree(prestart,preend,instart,inend):
+    if preend >= prestart and instart <= inend:
+        root = TreeNode(preorder[prestart])
+        index = inorder_index[root.val]
+        left_out = index - instart
+        root.left = build_tree(prestart+1,prestart+left_out,instart,index)
+        root.right = build_tree(prestart+left_out+1,preend,index+1,inend)
+        return root
+   
+   
+#❓❓❓ Traversal vs morris Traversal❓❓❓
+# Time Complexcity O(n)
+# Space Complexcity O(n)
+
+def inorder_traversal(root):
+    if root:
+        inorder_traversal(root.left)
+        print(root.data,end=" ")
+        inorder_traversal(root.right)
+        
+def preorder_traversal(root):
+    if root:
+        print(root.data,end=" ")
+        preorder_traversal(root.left)
+        preorder_traversal(root.right)
+        
+def postorder_traversal(root):
+    if root:
+        postorder_traversal(root.left)
+        postorder_traversal(root.right)
+        print(root.data,end=" ")
+        
+        
+# for above traversals takes time & space complexcitys are O(n)
+
+# but for this morris it takes time complexcity O(n) but space Complexcity O(1)
+
+
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
+root.left.right.left = TreeNode(9)
+root.left.right.right = TreeNode(6)
+
+print("\n preorder")
+preorder_traversal(root)
+print("\n preorder")
+
+# morris preorder traversal
+ans = []
+def morris_preorder(root):
+    while root:
+        if root.left:
+            ans.append(root.data)
+            temp = root.left
+            while temp.right:
+                temp = temp.right
+            temp.right = root.right
+            root = root.left
+        else:
+            ans.append(root.data)
+            root = root.right
+morris_preorder(root)            
+print(ans)
+                
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
+root.left.right.left = TreeNode(9)
+root.left.right.right = TreeNode(6)
+
+ans = []
+def morris_inorder(root):
+    curr = root
+    while curr:
+        if curr.left:
+            temp = curr.left
+            while temp.right and temp.right != curr:
+                temp = temp.right
+            if temp.right:
+                temp.right = None
+                ans.append(curr.data)
+                curr = curr.right
+            else:
+                temp.right = curr
+                curr = curr.left
+        else:
+            ans.append(curr.data)
+            curr = curr.right
+
+morris_inorder(root)
+print(ans)
+
+# Find the node in the binary search tree            
+# Time Complexcity O(n)
+# Space Complexcity O(n)
+def find(root,value):
+    if not root: return "not found"
+    elif root.data ==  value: return "found" 
+    elif value < root.data: return find(root.left,value)
+    else: return find(root.right,value)
+print(find(root,3))          
+
+# ❓❓❓ delete a node from the bst ❓❓❓
+root = TreeNode(5)
+root.left = TreeNode(3)
+root.right = TreeNode(6)
+root.left.left = TreeNode(2)
+root.left.right = TreeNode(4)
+root.right.right = TreeNode(7) 
+
+def delete_node(root,value):
+    if not root: return None
+    if root.data == value:
+        pass
 print("-------------------------------strings---------------------------------------------")
 
 
