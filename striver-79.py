@@ -1729,7 +1729,7 @@ def find_LCA(root,p,q):
 from collections import deque
 # Time Complexcity O(n)
 #Space Complexcity O(w) ~ O(n)
-def sum_of_parent_nodes(root):
+def sum_of_parent_nodes_bfs(root):
     queue = deque([root])
     sums = 0
     while queue:
@@ -1741,9 +1741,19 @@ def sum_of_parent_nodes(root):
         if current.left or current.right:
             sums += current.data
     print("\n sum of parent nodes",sums)
-sum_of_parent_nodes(root)
+sum_of_parent_nodes_bfs(root)
 
-
+sums = [0]
+def sum_of_parent_nodes_dfs(root):
+    if not root: return 0
+    sum_of_parent_nodes_dfs(root.left)
+    sum_of_parent_nodes_dfs(root.right)
+    if root.left or root.right:
+        sums[0] += root.data
+sum_of_parent_nodes_dfs(root)
+print(sums[0])
+    
+         
 #❓❓❓  Minimum time to burn the trees ❓❓❓
 
 root = Node(1)
@@ -1753,10 +1763,14 @@ root.left.right.right = Node(7)
 root.right = Node(3)
 root.right.left = Node(5)
 root.right.right = Node(6)
+
+burnt = root.left.right.right
  
 parentnode = dict()    
 
 from collections import deque
+# Time Complexity O(n)
+#Space complexcity O(n) 
 def connect_parents(root):
     queue = deque([root])
     while queue:
@@ -1767,6 +1781,50 @@ def connect_parents(root):
         if current.right:
             queue.append(current.right)
             parentnode[current.right.data] = current
+connect_parents(root) # we have parent connections in the maps
+
+visit = [True] + [False] * 8
+# Time Complexcity O(n)
+#Space Complexcity O(n)
+def burnt_connect_nodes(burnt_guy): #Evil laugh (😈ha ha ha ha ha ha ha😈)
+    queue = deque([(burnt_guy,0)])
+    visit[burnt_guy.data] = True
+    time = 0
+    while queue:
+        current,time = queue.popleft()
+        
+        parent = parentnode.get(current.data,None)
+        if parent and not visit[parent.data]:
+            visit[parentnode[current.data].data] = True
+            queue.append((parentnode[current.data],time + 1))
             
-connect_parents(root)
-print(parentnode)
+        if current.left and not visit[current.left.data]:
+            visit[current.left.data] = True
+            queue.append((current.left,time + 1))
+        if current.right and not visit[current.right.data]:
+            visit[current.right.data] = True
+            queue.append((current.right,time + 1))
+    return time
+print(burnt_connect_nodes(burnt))
+
+
+print("-------------------------------strings---------------------------------------------")
+
+
+# Minimum Add to Make Parentheses Valid
+
+
+s = "((("
+s = "()))(("
+# Time Complexcity O(n)
+#Space Complexcity O(1)
+freq = extra =0
+for i in s:
+    if i == "(":
+        freq +=1
+    elif  freq > 0:
+        freq-=1
+    else:
+        extra +=1
+print(freq + extra)
+            
