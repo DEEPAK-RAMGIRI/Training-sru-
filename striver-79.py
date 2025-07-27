@@ -1942,16 +1942,169 @@ root.left.left = TreeNode(2)
 root.left.right = TreeNode(4)
 root.right.right = TreeNode(7) 
 
+# Time Complexcity O(n)
+#Space Complexcity O(1)
+def find_last_guy(root):
+    while root.right:
+        root = root.right
+    return root
+def helper(root):
+    if root.left:
+        last_one_on_right = find_last_guy(root.left)
+        last_one_on_right.right = root.right
+        return root.left
+    return root.right
 def delete_node(root,value):
     if not root: return None
     if root.data == value:
-        pass
+        return helper(root)
+    dummy = root
+    while root:
+        if root.left and root.left.data == value:
+            root.left = helper(root.left)
+            break
+        elif root.right and root.right.data == value:
+            root.right = helper(root.right)
+            break
+        elif root.data < value:
+            root = root.right
+        else:
+            root = root.left
+    return dummy
+
+
+# ❓❓❓ Least Common Anscestors in BST❓❓❓
+# Time Complexcity O(n)
+#Space Complexcity O(1)
+
+def find_ancsectors(root,p,q):
+    if not root: return None
+    elif root.val < p and root.val < q:
+        return find_ancsectors(root.right)
+    elif root.val > p and root.val > q:
+        return find_ancsectors(root.right,p,q)
+    else: return root 
+    
+    
+# ❓❓❓TWO SUM❓❓❓
+# Time Complexcity O(n) + O(n) ~ O(2n) ~ O(n)
+#Space Complexcity O(n) + O(h)
+
+# intution inorder always make a sorted array from the binary seearch tree
+
+ans = []
+def convert_to_arr(root):
+    if not root:
+        convert_to_arr(root.left)
+        ans.append(root.data)
+        convert_to_arr(root.right)
+# convert_to_arr()
+
+left,right = 0,len(ans)-1
+while left < right:
+    sums = ans[left] + ans[right]
+    if sums == k: 
+        print(True)
+        break
+    
+    elif sums < k:
+        left+=1
+    else:
+        right-=1
+else:
+    print(False)
+    
+    
+    
+# Validate Binary  Search Tree
+root = TreeNode(13)
+root.left = TreeNode(10)
+root.left.left = TreeNode(7)
+root.left.right = TreeNode(12)
+root.left.left.right = TreeNode(9)
+root.left.left.right.left = TreeNode(8)
+root.right = TreeNode(15)
+root.right.left = TreeNode(14)
+root.right.right = TreeNode(17)
+root.right.right.left = TreeNode(20)
+
+def validate_BST(root,start,end):
+    if not root : return True
+    if start < root.data < end: 
+        return validate_BST(root.left,start,root.data-1) and validate_BST(root.right,root.data+1,end)    
+    return False
+print(validate_BST(root,float("-inf"),float("inf")))
+
+
+# largest validate binary Search tree
+# Time Complexcity O(n ^ 2)
+# Space Complexcity O(h) 
+
+def validate_bst(root,start,end):
+    if not root: return True
+    if start < root.data < end:
+        return validate_bst(root.left,start,root.data - 1) and validate_bst(root.right,root.data + 1, end)
+    return False
+
+def count_no_of_nodes(root):
+    if not root: return 0
+    return 1 + count_no_of_nodes(root.left) + count_no_of_nodes(root.right)
+
+def check_every_node_to_find_largest_binary_tree(root):
+    if not root: return 0,None
+    if validate_bst(root,float("-inf"),float("inf")): 
+        return count_no_of_nodes(root),root
+    
+    size1,left = check_every_node_to_find_largest_binary_tree(root.left)
+    size2,right = check_every_node_to_find_largest_binary_tree(root.right)
+    
+    return left if size1 > size2 else right 
+
+# largest  Binary serch Tree in binary tree
+class BigBST:
+    def __init__(self,maxi,mini,size,isbst):
+        self.maxi = maxi
+        self.mini = mini
+        self.size = size
+        self.isBST = isbst
+def find_largest_binary_tree(root):
+    if not root:
+        return BigBST(float("inf"),float("-inf"),0,True)
+    left = find_largest_binary_tree(root.left)
+    right = find_largest_binary_tree(root.right)
+    if left.isBST and  right.isBST and left.maxi < root.data < right.mini:
+        return BigBST(max(left.maxi,root.data),min(right.mini,root.data),1+left.size+right.size,True)
+    return BigBST(float("-inf"),float("inf"),max(left.size,right.size),False)
+     
+print("-------------------------------Graphs-----------------------------------------------")
+# Rotten Oranges
+
+from collections import deque
+grid = [[2,1,1],[1,1,0],[0,1,1]]
+
+fresh_count = 0
+queue = deque()
+for i in range(len(grid)):
+    for j in range(len(grid[0])):
+        if grid[i][j] == 2:
+            queue.append((i,j,0))
+        else: fresh_count += grid[i][j]
+        
+directions = [(0,1),(0,-1),(1,0),(-1,0)]
+
+time = 0
+while queue:
+    x,y,t = queue.popleft()
+    time = max(time,t)
+    for i,j in directions:
+        if 0 <= i+x < len(grid) and 0 <= j + y < len(grid[0]) and grid[i+x][j+y] == 1:
+            grid[i+x][j+y] = 2
+            fresh_count -= 1
+            queue.append((i+x,j+y,t+1))
+print(time if not fresh_count else -1)        
 print("-------------------------------strings---------------------------------------------")
 
-
 # Minimum Add to Make Parentheses Valid
-
-
 s = "((("
 s = "()))(("
 # Time Complexcity O(n)
