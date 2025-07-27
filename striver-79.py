@@ -2078,7 +2078,8 @@ def find_largest_binary_tree(root):
      
 print("-------------------------------Graphs-----------------------------------------------")
 # Rotten Oranges
-
+# Time Complexcity O(n ^ 2)
+# Space Complexcity O(n)
 from collections import deque
 grid = [[2,1,1],[1,1,0],[0,1,1]]
 
@@ -2101,7 +2102,33 @@ while queue:
             grid[i+x][j+y] = 2
             fresh_count -= 1
             queue.append((i+x,j+y,t+1))
-print(time if not fresh_count else -1)        
+print(time if not fresh_count else -1)    
+
+
+
+
+# ❓❓❓ NUMBER OF ISLANDS ❓❓❓
+islands = [['0', '1', '1', '1', '0', '0', '0'],['0', '0', '1', '1', '0', '1', '0']]
+islands = [['0', '1', '1', '1', '1', '0', '0'],['0', '0', '1', '1', '0', '1', '0']]
+
+directions = [(0,1),(0,-1),(1,0),(-1,0),(1,-1),(-1,1),(1,1),(-1,-1)]
+def count_islands(i,j):
+    if  i < 0 or j < 0 or i >= len(islands) or j >= len(islands[0]) or islands[i][j] == '0':
+        return 0
+    islands[i][j] = '0'
+    for x,y in directions:
+        count_islands(i+x,j+y)
+    return 1
+    
+count = 0
+for i in range(len(islands)):
+    for j in range(len(islands[0])):
+        count += count_islands(i,j)
+        
+print(count)
+
+
+
 print("-------------------------------strings---------------------------------------------")
 
 # Minimum Add to Make Parentheses Valid
