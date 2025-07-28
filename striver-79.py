@@ -2106,7 +2106,33 @@ print(time if not fresh_count else -1)
 
 
 
+# ❓❓❓ Word Ladder 1 ❓❓❓
 
+# Time Complexity O(m * n)
+# Space Complexcity O(n)
+beginWord = "hit"
+endWord = "cog"
+wordList = ["hot","dot","dog","lot","log","cog"]
+
+
+from collections import deque
+def convert_word(beginword,endword,wordlist):
+    words = set(wordlist)
+    queue = deque([(beginword,1)])
+
+    while queue:
+        word,count = queue.popleft()
+        if word == endword:return count
+        for i in range(len(word)):
+            for j in 'abcdefghijklmnopqrstuvwxyz':
+                new = word[:i] + j + word[i+1:]
+                if new in words:
+                    words.remove(new) # requre to avoid TLE
+                    queue.append((new,count+1))
+    return 0            
+
+print(convert_word(beginWord,endWord,wordList)) 
+    
 # ❓❓❓ NUMBER OF ISLANDS ❓❓❓
 islands = [['0', '1', '1', '1', '0', '0', '0'],['0', '0', '1', '1', '0', '1', '0']]
 islands = [['0', '1', '1', '1', '1', '0', '0'],['0', '0', '1', '1', '0', '1', '0']]
@@ -2128,7 +2154,63 @@ for i in range(len(islands)):
 print(count)
 
 
+# ❓❓❓ Cycle in graphs ❓❓❓
+from collections import defaultdict
+edges = [[0, 1], [1, 2], [2, 3]]
+edges= [[0, 1], [0, 2], [2, 3]]
+graph = defaultdict(list)
+maxi = 0
+for i,j in edges:
+    graph[i].append(j)
+    graph[j].append(i)
+    maxi = max(maxi,i,j)
+    
+visit = [True] * (maxi + 1)
 
+def detect_cycle_in_undirected_graph(index,parent):
+    queue = deque([(index,parent)])
+    visit[index] = False
+    while queue:
+        current,parent = queue.popleft()
+        for i in graph[current]:
+            if visit[i]:
+                queue.append((i,current))
+                visit[i] = False
+            elif parent != i:
+                return True
+    return False
+
+# for i in range(len(visit)):
+#     if visit[i]:
+#         if not detect_cycle_in_undirected_graph(i,-1):  print(False)
+# else: print(True)
+
+
+# detect cycle in directed graph
+
+edges= [[0, 1], [1, 0]]
+graph = defaultdict(list)
+maxi = 0
+for i,j in edges:
+    graph[i].append(j)
+    graph[j].append(i)
+    maxi = max(maxi,i,j)
+    
+visit = [True] * (maxi + 1)
+prev_path = [True] * (maxi + 1)
+def detect_cycle_in_directed_graph(index):
+    visit[index] = False
+    prev_path[index] = False
+    for i in graph[index]:
+        if visit[i]:
+            return detect_cycle_in_directed_graph(i)
+        elif not prev_path[i]:
+            return True
+    prev_path[index] = True
+    
+    return  False
+        
+print(detect_cycle_in_directed_graph(0))
 print("-------------------------------strings---------------------------------------------")
 
 # Minimum Add to Make Parentheses Valid
