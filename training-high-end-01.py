@@ -72,6 +72,7 @@ def cycle_in_linked_list(head):
         if fast == slow:
             return True
     return False 
+
 arr = [1,2,3,4,5,6]
 head = None
 head = insert(arr,head)
