@@ -1,4 +1,9 @@
 # Training-sru
+
+Algorithm & Data Structure Implementations
+Welcome to my personal collection of algorithm and data structure implementations! This repository serves as a comprehensive resource for various common problems, showcasing different approaches and optimizations. You'll find solutions primarily in Python, each accompanied by considerations for their time and space complexity.
+Whether you're brushing up on fundamentals, preparing for technical interviews, or just exploring.
+#
 ✅[Day 01 Topics:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/Day-01.py)
 
 - Prime Number Check 
