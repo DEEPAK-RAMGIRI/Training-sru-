@@ -285,8 +285,9 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
 - Coin Change – 2D DP with Memoization (Minimum coins)
 - Coin Change – 1D DP Tabulation (Minimum coins)
 - Longest Subsequence Match – Basic nested loop comparison
+- 
 ## TRAINING 02
-[Day 01 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d1.py)
+✅[Day 01 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d1.py)
 ### Topics Covered:
 - Single Number (All Approaches)
 - Sort Colors (Counting & Dutch National Flag)
@@ -297,7 +298,7 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
 - Rotate Matrix 90 Degrees (Transpose + Reverse & New Matrix)
 - Kadane algo subarray
 
-[Day 02 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d2.py)
+✅[Day 02 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d2.py)
 ### Topics Covered:
 - Search Insert Position
 - First and Last Occurrence of an Element in a Sorted Array
@@ -314,7 +315,7 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
   - Linear Search Approach
   - Binary Search Optimization
 
-[Day 03 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d3.py)
+✅[Day 03 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d3.py)
 ### Topics  Covered:
 - Maximum Points You Can Obtain from Cards
 - Maximum Number of Vowels in a Substring of Given Length
@@ -323,7 +324,7 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
 - Subarrays with Sum Equal to Goal
 - Count Number of Nice Subarrays
 
-[Day 04 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d4.py)
+✅[Day 04 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d4.py)
 ### Topics  Covered:
 
 Linked List Problems
@@ -340,7 +341,7 @@ Stack-Based Problems
 - Evaluate Reverse Polish Notation
 - Daily Temperatures
  
-[Day 05 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d5.py)
+✅[Day 05 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d5.py)
 ### Topics  Covered:
 Stacks
 1. Asteroid Collision  
@@ -358,9 +359,9 @@ Bit Manipulation
  Math / Exponentiation
 - Pow(x, n) using Fast Exponentiation    
 
-[Day 06 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d6.py)
-## Topics Covered
-# 🔁 Recursion
+✅[Day 06 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d6.py)
+### Topics Covered
+🔁 Recursion
 Basics
 - Print "Sru" n times  
 - Printing of n natural numbers  
@@ -376,8 +377,8 @@ Problems
 - K-th Grammar  
 - Reorder Linked List (Find middle, Reverse, Merge)
 
-[Day 07 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d7.py)
-## Topics Covered
+✅[Day 07 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d7.py)
+### Topics Covered
 🔁 Recursion (Extra Problems)
 
 Palindrome Based  
@@ -387,16 +388,17 @@ DP with Recursion
 - Staircase Problem (n steps, can take 1/2/3 steps at a time)  
 
 
-[Segment Trees:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/segment_tree01.py)  
-## Topics Covered
+✅[Segment Trees:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/segment_tree01.py)  
+### Topics Covered
 - Creation of Segment Tree (Sum Segment Tree)  
 - Range Sum Query  
 - Range Minimum Query (Min Segment Tree)  
 - Point Update in Segment Tree  
 - Lazy Propagation (Range Update)
 
-👍
-[Striver 79 Problems🔥:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/striver-79.py)
+
+✅[Striver 79 Problems🔥:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/striver-79.py)
+### Topics Covered
  Arrays  
 - Next Permutation  
 - 3Sum Problem  
@@ -465,8 +467,8 @@ Graphs
 Strings  
 - Minimum Add to Make Parentheses Valid  
 
-# [Training by kp day1:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/trainingday01.py)
-## Topics Covered
+✅[Training by kp day1:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/trainingday01.py)
+### Topics Covered
 Trees  
 
 - Binary Tree Traversals  
@@ -495,8 +497,8 @@ Trees
   - Time Complexity for all traversals: O(n)  
   - Space Complexity: O(h) where h = tree height  
 
-#[Training by kp day2:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/trainingday2.py)
-## topics Covered
+✅[Training by kp day2:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/trainingday2.py)
+### Topics Covered
 AVL Tree (Self-Balancing BST)  
 - Node structure with `height`  
 - Height and Balance Factor Calculation  
@@ -514,8 +516,8 @@ Min Heap (Array Based Implementation)
 - Extract Min (`get_top`)  
 - Heapify Down (`bubble_down`)  
 
-#[Training by kp day3:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/trainingday3.py)
-## Topics Covered
+✅[Training by kp day3:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/trainingday3.py)
+### Topics Covered
 AVL Tree (Self-Balancing BST)  
 - Node structure with `height`  
 - Height and Balance Factor calculation  
