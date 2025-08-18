@@ -342,5 +342,19 @@ Stack-Based Problems
  
 [Day 05 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d5.py)
 ### Topics  Covered:
+
 Stacks
-- 
+1. Asteroid Collision  
+2. Minimum Remove to Make Valid Parentheses  
+3. Simplify Path  
+4. Next Greater Element  
+5. Next Smaller Element  
+6. Previous Smaller Element  
+
+Bit Manipulation
+- Minimum Bit Flips to Convert Number (XOR, Left Shift, Right Shift)  
+- Generate Subsets (Power Set using Bitmasking)  
+- Counting Bits 
+
+ Math / Exponentiation
+- Pow(x, n) using Fast Exponentiation    
