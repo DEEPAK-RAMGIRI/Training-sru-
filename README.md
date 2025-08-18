@@ -285,8 +285,9 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
 - Coin Change – 2D DP with Memoization (Minimum coins)
 - Coin Change – 1D DP Tabulation (Minimum coins)
 - Longest Subsequence Match – Basic nested loop comparison
+- 
 ## TRAINING 02
-[Day 01 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d1.py)
+✅[Day 01 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d1.py)
 ### Topics Covered:
 - Single Number (All Approaches)
 - Sort Colors (Counting & Dutch National Flag)
@@ -297,7 +298,7 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
 - Rotate Matrix 90 Degrees (Transpose + Reverse & New Matrix)
 - Kadane algo subarray
 
-[Day 02 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d2.py)
+✅[Day 02 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d2.py)
 ### Topics Covered:
 - Search Insert Position
 - First and Last Occurrence of an Element in a Sorted Array
@@ -314,7 +315,7 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
   - Linear Search Approach
   - Binary Search Optimization
 
-[Day 03 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d3.py)
+✅[Day 03 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d3.py)
 ### Topics  Covered:
 - Maximum Points You Can Obtain from Cards
 - Maximum Number of Vowels in a Substring of Given Length
@@ -323,7 +324,7 @@ Random Problems (Python Binary Search, Greedy, Two Pointers)
 - Subarrays with Sum Equal to Goal
 - Count Number of Nice Subarrays
 
-[Day 04 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d4.py)
+✅[Day 04 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d4.py)
 ### Topics  Covered:
 
 Linked List Problems
@@ -340,7 +341,215 @@ Stack-Based Problems
 - Evaluate Reverse Polish Notation
 - Daily Temperatures
  
-[Day 05 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d5.py)
+✅[Day 05 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d5.py)
 ### Topics  Covered:
 Stacks
-- 
+1. Asteroid Collision  
+2. Minimum Remove to Make Valid Parentheses  
+3. Simplify Path  
+4. Next Greater Element  
+5. Next Smaller Element  
+6. Previous Smaller Element  
+
+Bit Manipulation
+- Minimum Bit Flips to Convert Number (XOR, Left Shift, Right Shift)  
+- Generate Subsets (Power Set using Bitmasking)  
+- Counting Bits 
+
+ Math / Exponentiation
+- Pow(x, n) using Fast Exponentiation    
+
+✅[Day 06 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d6.py)
+### Topics Covered
+🔁 Recursion
+Basics
+- Print "Sru" n times  
+- Printing of n natural numbers  
+- Sum of first n natural numbers  
+
+Sorting
+- Merge Sort (Divide & Conquer)
+
+Subsets / Backtracking
+- Generate all subsets of a list  
+
+Problems
+- K-th Grammar  
+- Reorder Linked List (Find middle, Reverse, Merge)
+
+✅[Day 07 advance training:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/new_d7.py)
+### Topics Covered
+🔁 Recursion (Extra Problems)
+
+Palindrome Based  
+- Count Palindromic Substrings (using expand-around-center + recursion)  
+
+DP with Recursion  
+- Staircase Problem (n steps, can take 1/2/3 steps at a time)  
+
+
+✅[Segment Trees:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/segment_tree01.py)  
+### Topics Covered
+- Creation of Segment Tree (Sum Segment Tree)  
+- Range Sum Query  
+- Range Minimum Query (Min Segment Tree)  
+- Point Update in Segment Tree  
+- Lazy Propagation (Range Update)
+
+
+✅[Striver 79 Problems🔥:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/striver-79.py)
+### Topics Covered
+ Arrays  
+- Next Permutation  
+- 3Sum Problem  
+- Maximum Subarray  
+- Majority Element  
+- Count Number of Subarrays with Given XOR K  
+- Find the Repeating and Missing Number  
+- Count Inversions  
+- Maximum Product Subarray  
+- Search in Rotated Sorted Array II  
+- Find Minimum in Rotated Sorted Array  
+- Find Peak Element  
+- Koko Eating Bananas  
+- Aggressive Cows  
+- Book Allocation Problem  
+- Median of Two Sorted Arrays  
+
+Linked Lists  
+- Middle of the Linked List  
+- Linked List Cycle  
+- Remove Nth Node From End of List  
+- Intersection of Two Linked Lists  
+- Sort Linked List  
+- Odd Even Linked List  
+
+Backtracking & Recursion  
+- Subsets (or Power Set)  
+- Combination Sum  
+- N-Queens  
+- Sudoku Solver  
+- Word Search  
+- M-Coloring Problem  
+
+Stacks  
+- Next Greater Element (or Next Smaller Element)  
+- Trapping Rain Water  
+- Largest Rectangle in Histogram  
+- Asteroid Collision  
+- Sliding Window Maximum  
+
+Heaps  
+- Kth Largest Element  
+
+Trees  
+- Binary Tree Basics (Node, Traversal, Height, etc.)  
+- Bottom View of Binary Tree  
+- Maximum Path Sum  
+- Lowest Common Ancestor (LCA)  
+- Sum of Parent Nodes in a Binary Tree  
+- Minimum Time to Burn a Binary Tree  
+- Construct Binary Tree from Preorder and Inorder Traversal  
+- Morris Traversal (Preorder and Inorder)  
+- Binary Search Tree (BST) Operations (Search, Delete)  
+- LCA in a BST  
+- Two Sum in a BST  
+- Validate Binary Search Tree  
+- Largest BST in a Binary Tree  
+
+Graphs  
+- Rotten Oranges  
+- Word Ladder  
+- Number of Islands  
+- Cycle Detection in Undirected Graph  
+- Cycle Detection in Directed Graph  
+
+Strings  
+- Minimum Add to Make Parentheses Valid  
+
+✅[Training by kp day1:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/trainingday01.py)
+### Topics Covered
+Trees  
+
+- Binary Tree Traversals  
+  - Inorder Traversal (Recursive)  
+  - Level Order Traversal (BFS)  
+  - Zigzag Level Order Traversal  
+  - Left View of Binary Tree  
+  - Right View of Binary Tree  
+
+- Views of Binary Tree  
+  - Top View (BFS and DFS)  
+  - Bottom View (BFS and DFS)  
+
+- Path Related Problems  
+  - Find Path from Root to Given Node  
+  - Print Path (Optimized with Backtracking)  
+
+- Lowest Common Ancestor (LCA)  
+  - LCA in a Binary Search Tree  
+  - LCA in a Binary Tree  
+
+- Binary Tree Monitoring  
+  - Minimum Number of Cameras to Monitor All Nodes  
+
+- Helper Notes  
+  - Time Complexity for all traversals: O(n)  
+  - Space Complexity: O(h) where h = tree height  
+
+✅[Training by kp day2:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/trainingday2.py)
+### Topics Covered
+AVL Tree (Self-Balancing BST)  
+- Node structure with `height`  
+- Height and Balance Factor Calculation  
+- Rotations  
+  - Left Rotation  
+  - Right Rotation  
+  - Left-Right (LR) Rotation  
+  - Right-Left (RL) Rotation  
+- Insertion with Automatic Rebalancing  
+- Traversal (with height information)  
+
+Min Heap (Array Based Implementation)  
+- Insertion (`bubbleup`)  
+- Deletion of an element  
+- Extract Min (`get_top`)  
+- Heapify Down (`bubble_down`)  
+
+✅[Training by kp day3:](https://github.com/DEEPAK-RAMGIRI/Training-sru-/blob/main/trainingday3.py)
+### Topics Covered
+AVL Tree (Self-Balancing BST)  
+- Node structure with `height`  
+- Height and Balance Factor calculation  
+- Rotations  
+  - Left Rotation  
+  - Right Rotation  
+  - Left-Right (LR) Rotation  
+  - Right-Left (RL) Rotation  
+- Insertion with balancing  
+- Deletion with balancing (using in-order predecessor)  
+- Traversal (prints node + height)  
+
+Graphs  
+
+Undirected Graph  
+- Add edge (send_auto_accepted_friend_request)  
+- Check edge (is_friend)  
+- Remove edge (remove_friend)  
+- Get neighbors (get_friends)  
+
+Directed Graph  
+- Add edge (follow)  
+- Check edge (is_following)  
+- Remove edge (unfollow)  
+- Get neighbors (get_followers)  
+
+Weighted Graph  
+- Add weighted edge (establish_route)  
+- Get edge weight (get_toll_price)  
+- Report damage (report_road_damage)  
+- Get neighbors (get_all_routes)  
+
+Graph Traversals  
+- BFS (Breadth First Search)  
+- DFS (Depth First Search)  
