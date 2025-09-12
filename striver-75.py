@@ -1,4 +1,4 @@
-# 1. Two Sum
+# ================================================== 1. Two Sum   ==================================================
 nums = [2,7,11,15]
 target = 9
 
@@ -38,7 +38,7 @@ def buy_sell():
     return ans
         
         
-# 217. Contains Duplicate
+#  ================================================== 217. Contains Duplicate  ==================================================
 nums = [1,2,3,1]
 
 #Time Complexcity O(n^2)
@@ -61,9 +61,9 @@ def duplicates():
         seen.add(i)
     return -1
 
+#  ================================================== 238. Product of Array Except Self ==================================================
 # Time Complexcity O(n^2):
 # Space Complexcity O(1)
-# 238. Product of Array Except Self
 nums = [1,2,3,4]
 def product():
     ans = []
@@ -89,8 +89,7 @@ def product():
 
     return [prefix[i] * suffix[i] for i in range(len(nums))]
         
-
-# 53. Maximum Subarray
+#  ================================================== 53. Maximum Subarray  ==================================================
 nums = [-2,1,-3,4,-1,2,1,-5,4]
 # Time Complexcity O(n^3)
 # Space Complexcity O(1)
@@ -128,3 +127,156 @@ for i in range(len(nums)):
     maxi = max(maxi + nums[i],nums[i])
     sums = max(sums,maxi)
 # print(sums) 
+
+# ================================================== 152. Maximum Product Subarray ==================================================
+# Time Complexcity O(n^3)
+# Space Complexcity O(1)
+nums = [2,3,-2,4]
+maxi = nums[0]
+def max_prod_subarray():
+    for i in range(len(nums)):
+        for j in range(i+1,len(nums)):
+            prod = 1
+            for k in range(i,j+1):
+                prod *= nums[k]
+            maxi = max(maxi,prod)
+    return(maxi)
+
+# Time Complexcity O(n^2)
+# Space Complexcity O(1)
+def max_prod_subarray():
+    maxi = nums[0]
+    for i in range(len(nums)):
+        prod = nums[i]
+        for j in range(i+1,len(nums)):
+            prod *= nums[j]
+            maxi = max(prod,maxi)
+    # return(maxi)
+    
+    
+# Time Complexcity O(n)
+# Space Complexcity O(1)
+def max_prod_subarray(nums):
+    maxi = mini = ans = nums[0]
+    for i in nums[1:]:
+        if i < 0:
+            maxi,mini = mini,maxi
+        maxi = max(i,maxi*i)
+        mini = min(i, mini * i)
+        ans = max(maxi,ans)
+        
+    return ans  
+
+# print(max_prod_subarray([2,3,-2,4]))  
+
+# ================================================== Find Minimum in Rotated Sorted Array ================================================== 
+nums = [3,4,5,1,2]
+
+# Time Complexcity O(n)
+# Space Complexcity O(1)
+def find_mini():
+    if not nums: return 0
+    mini = nums[0]
+    for i in nums[1:]:
+        mini = min(i,mini)
+    return mini
+
+# Time Complexcity O(log n)
+# Space Complexcity O(1)
+
+def find_mini():
+    if not nums: return 0
+    left = 0
+    right = len(nums)-1
+    while left < right:
+        mid = left + ((right - left) >> 1)
+        if left+1 == right:
+            return min(nums[left],nums[right])
+        elif nums[left] < nums[mid] < nums[right]:
+            right = mid
+        else:
+            if nums[mid] < nums[right]:
+                right = mid
+            else:
+                left = mid
+            
+#================================================== Search in Rotated Sorted Array  ==================================================  
+    
+nums = [4,5,6,7,0,1,2]
+target = 0
+# Time Complexcity O(n)
+# Space Complexcity O(1)
+def find_element():
+    for i in range(len(nums)):
+        if nums[i] == target:
+            return i
+    return -1
+
+def find_element():
+    left = 0
+    right = len(nums) - 1
+    while left < right:
+        mid = left + ((right - left) >> 1)
+        if nums[mid] == target:
+            return mid
+        elif nums[left] < nums[mid]:
+            if nums[left] <= target < nums[mid]:
+                right = mid - 1
+            else:
+                left = mid +1
+        else:
+            if nums[mid] < target <= nums[right]:
+                left = mid +1
+            else:
+                right = mid - 1
+# ============================================== 3Sum ====================================================
+# Time Complexcity O(n^3)
+# Space Complexcity O(1)
+
+nums = [-1,0,1,2,-1,-4]
+# ans = set()
+# for i in range(len(nums)):
+#     for j in range(i+1,len(nums)):
+#         for k in range(j+1,len(nums)):
+#             if not nums[k] + nums[j] + nums[i]:
+#                 ans.add(tuple(sorted([nums[k], nums[j], nums[i]])))
+# print(ans)
+
+# Time Complexcity O(n ^ 2)
+# Space Complexcity O(1)
+
+nums = [-1,0,1,2,-1,-4]
+nums.sort()
+ans = set()
+for i in range(len(nums)-2):
+    left = i + 1          
+    right = len(nums) -1
+    while left < right:
+        target = nums[left] + nums[right] + nums[i]
+        if  target == 0:
+             ans.add(tuple(sorted([nums[i], nums[left], nums[right]])))
+             left+=1
+             right-=1
+        elif target < 0:
+            left+=1
+        else:
+            right-=1
+# print(ans)
+
+# ====================================== Container With Most Water =======================================
+nums = [1,8,6,2,5,4,8,3,7]
+
+left = 0
+water = 0
+right = len(nums) - 1
+while left < right:
+    water = max(water,(min(nums[left] , nums[right])* (right - left)))
+    if nums[left] < nums[right]:
+        left+=1
+    else:
+        right -=1
+print(water)
+     
+
+        
+        
