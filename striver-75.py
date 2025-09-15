@@ -266,6 +266,9 @@ for i in range(len(nums)-2):
 # ====================================== Container With Most Water =======================================
 nums = [1,8,6,2,5,4,8,3,7]
 
+# Time complexcity O(n)
+# Space complexcity O(21)
+
 left = 0
 water = 0
 right = len(nums) - 1
@@ -275,8 +278,90 @@ while left < right:
         left+=1
     else:
         right -=1
-print(water)
+# print(water)
+# =================================    sum of two integers     =============================================
      
+# Time Complexcity O(32)
+# Space Complexcity O(1)
+def add(a,b):
+    mask = (1 << 32) - 1
+    while b:
+        carry = (a & b) & mask
+        a = (a ^ b) & mask
+        b = (carry << 1)
+    return a if a < ((1 << 31)-1) else ~(a ^ mask)
+      
+# =============================== 191. Number of 1 Bits ================================================
+# Time complexcity O(no_of_set_bits(no)) ~ O(32)
+# Space complexcity O(1)
+def no_of_one_bits(no):
+    count = 0
+    while no:
+        no = (no & (no - 1))
+        count+=1
+    return count
 
+# ============================== Counting Bits ========================================================
+# Time Complexcity O(n*32)
+# Space complexcity O(1)
+
+def counting_bits(no):
+    ans = []
+    for i in range(no+1):
+        ans.append(no_of_one_bits(i))
+    return ans
+
+# ============================= find missing number ==================================================
+
+# Time Complexcity O(n ^ 2)
+# Space complexcity O(1)
+def find_missing_no(nums):
+    if not nums: return 0
+    for i in range(len(nums)+1):
+        for j in nums:
+            if i == j:
+                break
+        else: return i
+        
+# Time Complexcity O(n)
+# Space Complexcity O(n)
+
+def find_missing_no(nums):
+    if not nums: return 0
+    temp = [0] * len(nums)
+    for i in nums:
+        temp[i] = 1
+    for i in range(len(nums)):
+        if nums[i] == 0: return i
+    return len(nums) + 1
+
+# Time Complexcity O(n)
+# Space Complexcity O(1)
+
+def find_missing_no(nums):
+    nos = (len(nums) * (len(nums) + 1) ) >> 1
+    for i in nums:
+        nos = i
+    return nos if nos else len(nums) + 1
+# ========================================= Reverse bits ============================================================
+        
+def reverse_bits(no):
+    binary = ''
+    while no:
+        binary += str(no % 2)
+        no >>= 1
+    for _ in range(32 - len(binary)): binary += '0'
+    power = ans = 0
+    for i in binary[::-1]:
+        ans += (2 ** power) * int(i)
+        power+=1
+    print(ans)
+        
+        
+print(reverse_bits(43261596))               
+        
+    
+        
+      
         
         
