@@ -356,12 +356,53 @@ def reverse_bits(no):
         ans += (2 ** power) * int(i)
         power+=1
     print(ans)
-        
-        
-print(reverse_bits(43261596))               
-        
+ 
+# ==================================================== DP =================================================================              
     
-        
-      
-        
-        
+# Time Complexcity O(2^(n))
+# Space Complexcity O(h) 
+n = 2
+def climbing_stairs(index):
+    if index <= 0:
+        return 1
+    return climbing_stairs(index - 1) + climbing_stairs(index - 2) 
+
+# Time Complexcity O(n)
+# Space Complexcity O(h)
+
+dp = [-1 for _ in range(n)]
+def climbing_stairs(index):
+    if index <= 0:
+        return 1
+    if dp[index] != -1:
+        return dp[index]
+    dp[index] = climbing_stairs(index - 1) + climbing_stairs(index - 2)
+    return dp[index]
+
+
+# Time Complexcity O(n)
+# Space Complexcity O(h)
+
+dp[0],dp[1] = 1,2
+def climbing_stairs(n):
+    for i in range(2,n):
+        dp[i] = dp[i - 1] + dp[i - 2]
+    return dp[n-1]
+
+# Time Complexcity O(n)
+# Space Complexcity O(1)
+def climbing_stairs(n):
+    prev,prev1 = 0,1
+    for i in range(n):
+        prev,prev1 =prev1,prev1+prev 
+    return prev1
+
+# ============================================ coin change ===========================================================================
+coins = [1,2,5]
+amount = 11
+# Time Complexcity O(2 ^n )
+# Space Complexcity O(h)
+def coin_change(index,amount):
+    if amount == 0: return 0
+    if index < 0 or amount < 0: return float("inf")
+    return min(1 + coin_change(index,amount-coins[index]) , coin_change(index - 1,amount))    
