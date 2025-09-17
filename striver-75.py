@@ -405,4 +405,49 @@ amount = 11
 def coin_change(index,amount):
     if amount == 0: return 0
     if index < 0 or amount < 0: return float("inf")
-    return min(1 + coin_change(index,amount-coins[index]) , coin_change(index - 1,amount))    
+    return min(1 + coin_change(index,amount-coins[index]) , coin_change(index - 1,amount))
+
+
+# Time complexcity O(n^2)
+# Space Complexcity O(n^2)
+dp = [[-1 for _ in range(amount+1)] for _ in range(len(coins))]
+def coin_change(index,amount):
+    if amount == 0: return 0
+    if index < 0 or amount < 0 : return float("inf")
+    if dp[index][amount] != -1:
+        return dp[index][amount]
+    dp[index][amount]=  min ( 1 + coin_change(index,amount - coins[index]),coin_change(index -1 ,amount))
+    return dp[index][amount]
+
+# Time Complexcity O(n^2)
+# Space Complexcity O(n ^ 2)
+def coin_change():
+    for index in range(len(coins)):
+        for amt in range(amount + 1):
+            if amt == 0:
+                dp[index][amt] = 0
+            else:
+                taken = not_taken = float("inf")
+                if amt - coins[index] >= 0: taken = 1 + dp[index][amt - coins[index]]
+                if index-1 >= 0: not_taken = dp[index - 1][amt]
+                dp[index][amt] = min(taken,not_taken)
+
+    return dp[len(coins)-1][amount]
+            
+            
+# Time Complexcity O(n^ 2)
+# Space complexcity O(n)       
+def coin_change():
+    prev = []
+    for index in range(len(coins)):
+        temp = [0] * (amount + 1)
+        for amt in range(amount + 1):
+            if amt != 0:
+                taken = not_taken = float("inf")
+                if amt - coins[index] >= 0: taken = 1 + temp[amt - coins[index]]
+                if index-1 >= 0: not_taken = prev[amt]
+                temp[amt] = min(taken,not_taken)
+        prev = temp
+
+    return temp[-1]
+  
