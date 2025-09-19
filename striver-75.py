@@ -450,4 +450,37 @@ def coin_change():
         prev = temp
 
     return temp[-1]
+# ========================================================= Longest Increasing Subsequence ==============================================
+nums = [10,9,2,5,3,7,101,18] 
+count = [0]
+# Time ComplexcityO(2 ^n)
+# Space Complexcity O(h)
+def lis(index,temp):
+    if index == len(nums):
+        return 0
+    not_taken = lis(index+1,temp)
+    taken = 0
+    if temp == -1 or nums[index] > nums[temp]:
+        taken = 1 + lis(index+1,index)
+    count[0] = max(not_taken,taken)
+    return count[0]
+
+dp = [[-1 for _ in range(len(nums) + 1)]for _ in range(len(nums))]
+def lis(index,temp):
+    if index == len(nums):
+        return 0
+    if dp[index][temp] != -1: return dp[index][temp]
+    not_taken = lis(index+1,temp)
+    taken = 0
+    if temp == -1 or nums[index] > nums[temp]:
+        taken = 1 + lis(index+1,index)
+    dp[index][temp] = max(not_taken,taken)
+    return dp[index][temp]
+print(lis(0,-1))
+print(dp)
+
+    
+
+        
+    
   
