@@ -1,7 +1,7 @@
 # ================================================== 1. Two Sum   ==================================================
 nums = [2,7,11,15]
 target = 9
-
+# 2 for loops
 # Time Complexcity O(n^2)
 # Space Complexcity O(1)
 def two_sum():
@@ -11,6 +11,7 @@ def two_sum():
                 return [i,j]
     return [-1,-1]
 
+# Binary 
 # Time Complexcity O(n)
 # Space Complexcity O(1) 
 def two_sum():
@@ -24,7 +25,7 @@ def two_sum():
         else:
             right -= 1
             
-# Best Time to Buy and Sell Stock
+#======================================================== Best Time to Buy and Sell Stock ===============================================
 # Time Complexcity O(n)
 #Space Complexcity O(1)
 prices = [7,1,5,3,6,4]
@@ -40,7 +41,7 @@ def buy_sell():
         
 #  ================================================== 217. Contains Duplicate  ==================================================
 nums = [1,2,3,1]
-
+#  for loops
 #Time Complexcity O(n^2)
 #Space Complexcity O(1)
 def duplicates():
@@ -50,6 +51,7 @@ def duplicates():
                 return nums[i]
     return nums[i]
 
+# using set
 #Time Complexcity O(n)
 #Space Complexcity O(n)
 nums = [1,2,3,1]
@@ -62,6 +64,7 @@ def duplicates():
     return -1
 
 #  ================================================== 238. Product of Array Except Self ==================================================
+# 2 loops
 # Time Complexcity O(n^2):
 # Space Complexcity O(1)
 nums = [1,2,3,4]
@@ -76,6 +79,7 @@ def product():
     return ans
 # print(product())
 
+# using suffix and preffix
 # Time Complexcity O(n ^ 2)
 # Space Complexcity O(n) 
 def product():
@@ -91,6 +95,7 @@ def product():
         
 #  ================================================== 53. Maximum Subarray  ==================================================
 nums = [-2,1,-3,4,-1,2,1,-5,4]
+# using 3 for loop
 # Time Complexcity O(n^3)
 # Space Complexcity O(1)
 def max_subarray():
@@ -104,7 +109,7 @@ def max_subarray():
     return maxi
 # print(max_subarray())
 
-
+# using 2 for loop
 # Time Complexcity O(n^2)
 # Space Complexcity O(1)
 def max_subarray():
@@ -117,7 +122,8 @@ def max_subarray():
     return maxi
 # print(max_subarray())
 
-  
+# Kadane's algorithm
+# using 1 for loop
 # Time Complexcity O(n)
 # Space Complexcity O(1)
 
@@ -129,6 +135,7 @@ for i in range(len(nums)):
 # print(sums) 
 
 # ================================================== 152. Maximum Product Subarray ==================================================
+# using 3 loops
 # Time Complexcity O(n^3)
 # Space Complexcity O(1)
 nums = [2,3,-2,4]
@@ -142,6 +149,7 @@ def max_prod_subarray():
             maxi = max(maxi,prod)
     return(maxi)
 
+# using 2 loops
 # Time Complexcity O(n^2)
 # Space Complexcity O(1)
 def max_prod_subarray():
@@ -171,7 +179,7 @@ def max_prod_subarray(nums):
 
 # ================================================== Find Minimum in Rotated Sorted Array ================================================== 
 nums = [3,4,5,1,2]
-
+#linear search
 # Time Complexcity O(n)
 # Space Complexcity O(1)
 def find_mini():
@@ -181,9 +189,9 @@ def find_mini():
         mini = min(i,mini)
     return mini
 
+# Binary search (modified)
 # Time Complexcity O(log n)
 # Space Complexcity O(1)
-
 def find_mini():
     if not nums: return 0
     left = 0
@@ -204,6 +212,7 @@ def find_mini():
     
 nums = [4,5,6,7,0,1,2]
 target = 0
+#Linear search
 # Time Complexcity O(n)
 # Space Complexcity O(1)
 def find_element():
@@ -212,6 +221,9 @@ def find_element():
             return i
     return -1
 
+# bianry search (modified)
+# Time Complexcity O(log n)
+# Space Complexcity O(1)
 def find_element():
     left = 0
     right = len(nums) - 1
@@ -230,38 +242,41 @@ def find_element():
             else:
                 right = mid - 1
 # ============================================== 3Sum ====================================================
+# using 3 loops
 # Time Complexcity O(n^3)
 # Space Complexcity O(1)
-
 nums = [-1,0,1,2,-1,-4]
-# ans = set()
-# for i in range(len(nums)):
-#     for j in range(i+1,len(nums)):
-#         for k in range(j+1,len(nums)):
-#             if not nums[k] + nums[j] + nums[i]:
-#                 ans.add(tuple(sorted([nums[k], nums[j], nums[i]])))
-# print(ans)
-
+def sum3(nums):
+    ans = set()
+    for i in range(len(nums)):
+        for j in range(i+1,len(nums)):
+            for k in range(j+1,len(nums)):
+                if not nums[k] + nums[j] + nums[i]:
+                    ans.add(tuple(sorted([nums[k], nums[j], nums[i]])))
+    print(ans)
+    
+    
+# binary search (modified)
 # Time Complexcity O(n ^ 2)
 # Space Complexcity O(1)
-
-nums = [-1,0,1,2,-1,-4]
-nums.sort()
-ans = set()
-for i in range(len(nums)-2):
-    left = i + 1          
-    right = len(nums) -1
-    while left < right:
-        target = nums[left] + nums[right] + nums[i]
-        if  target == 0:
-             ans.add(tuple(sorted([nums[i], nums[left], nums[right]])))
-             left+=1
-             right-=1
-        elif target < 0:
-            left+=1
-        else:
-            right-=1
-# print(ans)
+def sum3(nums):
+    nums = [-1,0,1,2,-1,-4]
+    nums.sort()
+    ans = set()
+    for i in range(len(nums)-2):
+        left = i + 1          
+        right = len(nums) -1
+        while left < right:
+            target = nums[left] + nums[right] + nums[i]
+            if  target == 0:
+                ans.add(tuple(sorted([nums[i], nums[left], nums[right]])))
+                left+=1
+                right-=1
+            elif target < 0:
+                left+=1
+            else:
+                right-=1
+    print(ans)
 
 # ====================================== Container With Most Water =======================================
 nums = [1,8,6,2,5,4,8,3,7]
@@ -331,6 +346,7 @@ def find_missing_no(nums):
     temp = [0] * len(nums)
     for i in nums:
         temp[i] = 1
+        
     for i in range(len(nums)):
         if nums[i] == 0: return i
     return len(nums) + 1
@@ -453,6 +469,7 @@ def coin_change():
 # ========================================================= Longest Increasing Subsequence ==============================================
 nums = [10,9,2,5,3,7,101,18] 
 count = [0]
+#Recursion
 # Time ComplexcityO(2 ^n)
 # Space Complexcity O(h)
 def lis(index,temp):
@@ -465,22 +482,76 @@ def lis(index,temp):
     count[0] = max(not_taken,taken)
     return count[0]
 
+# Memoization
+# Time Complexcity O(n^2)
+# Space Complexcity O(n^2)
 dp = [[-1 for _ in range(len(nums) + 1)]for _ in range(len(nums))]
 def lis(index,temp):
     if index == len(nums):
         return 0
     if dp[index][temp] != -1: return dp[index][temp]
     not_taken = lis(index+1,temp)
-    taken = 0
-    if temp == -1 or nums[index] > nums[temp]:
+    taken = 0 
+    if temp == -1 or nums[index] > nums[temp]: # instead of taking number take index and compare future me
         taken = 1 + lis(index+1,index)
     dp[index][temp] = max(not_taken,taken)
     return dp[index][temp]
-print(lis(0,-1))
-print(dp)
 
+# Time Complexcity O(n^2)
+# Space Complexcity O(n^2) #but efficent
+dp = dict()
+def lis(index,temp):
+    if index == len(nums):
+        return 0
+    if (index,temp) in dp:
+        return dp[index,temp]
+    not_taken = lis(index+1,temp)
+    taken = 0
+    if temp == -1 or nums[temp] < nums[index]:
+        taken = 1 + lis(index+1,index)
+    dp[index,temp] =  max(taken,not_taken)
+    return dp[index,temp]
+# print(lis(0,-1))
+
+# Tabulation
+def lis():
+    dp = [1] * len(nums)
+    for i in range(len(nums)):
+        for j in range(i):
+            if nums[i] < nums[j]:
+                dp[i] = max(dp[i],dp[j] + 1)
+    return max(dp)
+
+# ===================================================== Longest Common Subsequence ========================================================
+text1 = 'abcde'
+text2 = 'ace'
+
+#Time Complexcity O(2^(m + n))
+#Space Complexcity O(m+n) # stack space
+
+def lcs(i,j):
+    if i < 0 or j < 0: return 0
+    if text1[i] == text2[j]: return 1 + lcs(i-1,j-1)
+    else: return max(lcs(i-1,j),lcs(i,j-1))
+    
+# Time Complexcity O(n^2)
+# Space Complexcity O(n^2)
+
+dp = [[-1 for _ in range(len(text2))] for _ in range(len(text1))]
+def lcs(i,j):
+    if i< 0 or j < 0 : return 0
+    if text1[i] == text2[j]: return 1 + lcs(i-1,j-1)
+    elif dp[i][j] != -1: return dp[i][j]
+    dp[i][j] = max(lcs(i-1,j),lcs(i,j-1))
+    return dp[i][j]
+
+
+print(lcs(len(text1)-1,len(text2)-1))
+# print(dp)
+            
     
 
         
+    
     
   
