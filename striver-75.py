@@ -589,6 +589,251 @@ for i in range(len(text1)):
     dp = temp
 # ================================================== word Break ==========================================================================
 
+s = "leetcode"
+wordDict = ["leet","code"]  
+
+# Recursion
+# Time Complexcity O(2^n)
+# Space Complexcity O(n)
+seen = set(wordDict)
+def wordbreak(index):
+    if len(s) == index:
+        return True
+    for i in range(index+1,len(s)+1):
+        if s[index:i] in seen and wordbreak(i):
+            return True
+    return False
+# print(wordbreak(0))
+              
+              
+# Time Complexcity O()
+# Space Complecity O(n)
+
+dp = [-1 for _ in range(len(s)+1)]
+def word_break(index):
+    if len(s) == index: return True
+    if dp[index] != -1: return dp[index]
+    for i in range(index+1,len(s)+1):
+        if s[index:i] in seen and word_break(i):
+            dp[index] = True
+            return dp[index]
+    dp[index] = False
+    return dp[index]
+# print(word_break(0)) 
+
+# Time Complexcity O(n^2)
+# Space Complexcity O(n)
+dp = dict()
+def word_break(index):
+    if len(s) == index: return True
+    if index in dp: return dp[index]
+    for i in range(index+1,len(s)+1):
+        if s[index:i] in seen and word_break(i):
+            dp[index] = True
+            return True
+    dp[index] = False
+    return dp[index]
+# print(word_break(0))
+
+
+
+# Time Complexcity O(n^2)
+# Space Complexcity O(n)
+
+dp = [False for _ in range(len(s)+1)]
+dp[len(s)] = True
+
+for index in range(len(s),-1,-1):
+    for i in range(index+1, len(s)+1):
+        if s[index:i] in seen and dp[i]:
+            dp[index] = True
+            break
+# print(dp[0])
+# ============================================== Combination Sum =====================================
+
+
+# Time Complexcity O(2 ^ n)
+# Space Complexcity O(2^n)
+candidates = [2,3,6,7]
+target = 7        
+
+res = []
+def find_combinations(sums,temp,index):
+    if sums == target:
+        res.append(temp)
+        return
+    if index == len(candidates):
+        return
     
+    find_combinations(sums,temp,index + 1)
+    if sums + candidates[index] <= target:
+        find_combinations(sums + candidates[index], temp + [candidates[index]] , index )
+
+# find_combinations(0,[],0)
+
+
+# ============================================================ House Robber ================================================================
+
+nums = [1,2,3,1]
+maxi = [0]
+
+# Time Complexcity O(2 ^ n)
+# Space Complexcity O(n) # Stack Space
+
+def find(index):
+    if index < 0: return 0
+    skip = find(index-1)
+    cons = nums[index] + find(index - 2)
+    return max(cons, skip)
+
+
+# Time Complexcity O(n)
+# Space Complexcity O(n)
+dp = [-1] * len(nums)
+def find(index):
+    if index < 0: return 0
+    if dp[index] != -1: return dp[index] 
+    skip = find(index-1)
+    cons = nums[index] + find(index - 2)
+    dp[index] = max(cons, skip)
+    return dp[index]
+
+
+# Time Complexcity O(n)
+# Space Complexcity O(n) 
+
+dp = dict()
+def find(index):
+    if index < 0: return 0
+    if index in dp: return dp[index] 
+    skip = find(index-1)
+    cons = nums[index] + find(index - 2)
+    dp[index] = max(cons, skip)
+    return dp[index]
+
+
+# Time Complexcity O(n)
+# Space Complexcity O(n)
+dp = dict()
+def find():
+    for i in range(len(nums)):
+        skip = 0 if i - 1 < 0 else dp[i - 1] 
+        cons = (0 if i - 2 < 0 else dp[i - 2]) + nums[i]
+        dp[i] =  max(cons,skip)
+    return dp[len(nums)-1]
+
+# Time Complexcity O(n)
+# Space Complexcity O(1)
+def find():
+    temp1,temp2 = 0, 0
+    for i in range(len(nums)):
+        temp1,temp2 = max(temp1,temp2 + nums[i]),temp1
+    return (temp1)
+
+# ========================================================== House Robber II =========================================================
+
+nums = [2,3,2]
+# Time Complexcity O(2^n)
+# Space Complexcity O(n) 
+def houseRobber(nums,index):
+    if index < 0: return 0
+    skip = find(index-1)
+    cons = nums[index] + find(index - 2)
+    return max(cons, skip)
+# if nums.length == 1: print(nums[0])
+# else: print(max(houseRobber(nums[1:],len(nums)-1),houseRobber(nums[:-1],len(nums)-1)))
+
+# Time Complexcity O(2^n)
+# Space Complexcity O(n) 
+dp = [-1] * len(nums)
+def houseRobber(nums,index):
+    if index < 0: return 0
+    skip = find(index - 1)
+    cons = nums[index] +  find(index - 2)
+    dp[index] = max(skip,cons)
+    return dp[index]
+
     
-  
+# if nums.length == 1: print(nums[0])
+# else: print(max(houseRobber(nums[1:],len(nums)-1),houseRobber(nums[:-1],len(nums)-1)))
+
+
+# Time Complexcity O(n)
+# Space Complexcity O(n)
+dp = dict()
+def find(nums):
+    for i in range(len(nums)):
+        skip = 0 if i - 1 < 0 else dp[i - 1] 
+        cons = (0 if i - 2 < 0 else dp[i - 2]) + nums[i]
+        dp[i] =  max(cons,skip)
+    return dp[len(nums)-1]
+
+# if nums.length == 1: print(nums[0])
+# else: print(max(houseRobber(nums[1:]),houseRobber(nums[:-1]))
+
+# Time Complexcity O(n)
+# Space Complexcity O(1)
+def find(nums):
+    temp1,temp2 = 0, 0
+    for i in range(len(nums)):
+        temp1,temp2 = max(temp1,temp2 + nums[i]),temp1
+    return (temp1)
+
+
+# if nums.length == 1: print(nums[0])
+# else: print(max(houseRobber(nums[1:]),houseRobber(nums[:-1])))
+
+# ======================================== Decode Ways ================================================================================
+s = "12"
+
+# Time Complexcity O(2^n)
+# Space Complexcity O(n) # Stack Space
+def DecodeWays(index):
+    if index == len(s): return 1
+    if s[index] == '0': return 0
+    total = DecodeWays(index + 1)
+    if 10 <= int(s[index:index + 2] )<= 26:
+        total += DecodeWays(index + 2)
+    return total
+
+# Time Complexcity O(n)
+# Space Complexcity O(n)
+
+dp = [-1] * len(s)
+def DecodeWays(index):
+    if index == len(s): return 1
+    if s[index] == '0': return 0
+    total = DecodeWays(index + 1)
+    if 10 <= int(s[index:index + 2] )<= 26:
+        total += DecodeWays(index + 2)
+    return total
+
+
+# Time Complexcity O(n)
+# Space Complexcity O(n)
+
+dp = dict()
+def DecodeWays(index):
+    if index == len(s): return 1
+    if s[index] == '0': return 0
+    if index in dp: return dp[index]
+    dp[index] = DecodeWays(index + 1)
+    if 10 <= int(s[index:index + 2] )<= 26:
+        dp[index] += DecodeWays(index + 2)
+    return dp[index]
+
+dp = dict()
+dp[len(s)] = 1
+def DecodeWays():
+    for i in range(len(s)-1,-1,-1):
+        if s[i] == '0': 
+            dp[i] = 0 
+        else:
+            dp[i] = dp[i + 1]
+            if 10 <= int(s[i:i + 2]) <= 26:
+                dp[i] += dp[i + 2]
+    return dp[0]
+            
+print(DecodeWays())
+         
+     
