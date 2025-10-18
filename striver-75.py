@@ -373,7 +373,8 @@ def reverse_bits(no):
         power+=1
     print(ans)
  
-# ==================================================== DP =================================================================              
+# ==================================================== DP ================================================================= 
+# ===== ========================================= Climbing Stairs ========================================================            
     
 # Time Complexcity O(2^(n))
 # Space Complexcity O(h) 
@@ -752,8 +753,7 @@ def houseRobber(nums,index):
     cons = nums[index] +  find(index - 2)
     dp[index] = max(skip,cons)
     return dp[index]
-
-    
+ 
 # if nums.length == 1: print(nums[0])
 # else: print(max(houseRobber(nums[1:],len(nums)-1),houseRobber(nums[:-1],len(nums)-1)))
 
@@ -808,7 +808,6 @@ def DecodeWays(index):
         total += DecodeWays(index + 2)
     return total
 
-
 # Time Complexcity O(n)
 # Space Complexcity O(n)
 
@@ -822,6 +821,8 @@ def DecodeWays(index):
         dp[index] += DecodeWays(index + 2)
     return dp[index]
 
+# Time Complexcity O(n)
+# Space Complexcity O(n)
 dp = dict()
 dp[len(s)] = 1
 def DecodeWays():
@@ -833,7 +834,161 @@ def DecodeWays():
             if 10 <= int(s[i:i + 2]) <= 26:
                 dp[i] += dp[i + 2]
     return dp[0]
-            
-print(DecodeWays())
-         
-     
+
+# Time Complexcity O(n)
+# Space Complexcity O(1)
+def DecodeWays():
+    one,two = 1,0
+    for i in range(len(s)-1,-1,-1):
+        if s[i] == '0':
+            curr = 0
+        else: 
+            curr = one
+            if 10 <= int(s[i:i+2]) <= 26:
+                curr += two
+        two,one = one, curr
+    return one
+             
+# print(DecodeWays())
+
+# ========================================================== Unique Paths =================================================================
+m = 3
+n = 7
+
+# Time Complexcity O(2^(m + n))
+# Space Complecity O(n) # Stack Space
+def unique_paths(i,j):
+    if i == 0 and j == 0: return 1
+    if i < 0 or j < 0: return 0
+    return unique_paths(i-1,j) + unique_paths(i,j-1)
+
+# Time Complexcity O(m* n)
+# Space Complexcity O(m* n) 
+dp = [[-1 for _ in range(n)] for _ in range(m)]
+def unique_paths(i,j):
+    if i == 0 and j == 0: return 1
+    if i <0 or j < 0: return 0
+    if dp[i][j] != -1: return dp[i][j]
+    dp[i][j] = unique_paths(i-1,j) + unique_paths(i,j-1)
+    return dp[i][j]
+
+# Time Complexcity O(m * n)
+# Space Complexcity O(m * n)
+dp = dict()
+def unique_paths(i,j):
+    if i == 0 and j == 0: return 1
+    if i < 0 or j < 0: return 0
+    if (i,j)in dp: return dp[i,j]
+    dp[i,j] = unique_paths(i - 1,j) + unique_paths(i,j-1)
+    return dp[i,j]  
+
+# Time Complexcity O(m * n)
+# Space Complexcity O(m * n)
+def unique_paths():
+    dp = dict()
+    for i in range(m):
+        for j in range(n):
+            if i == 0 and j == 0: dp[i,j] = 1     
+            else: dp[i,j] = (dp[i-1,j] if i - 1 >= 0 else 0 )+ (dp[i,j-1] if j-1 >= 0 else 0)
+    return dp[m - 1, n - 1]
+
+# Space Optimzation
+# Time Complexcity O(n * m)
+# Space Complexcity O(n)
+
+def unique_paths():
+    dp = []
+    for i in range(m):
+        temp = [0] * n
+        for j in range(n):
+            if i==0 and j == 0: temp[j] = 1
+            else:
+                temp[j] = (dp[j] if i - 1 >= 0 else 0) + (temp[j-1] if j - 1 >= 0 else 0)
+        dp = temp.copy()
+    return  dp[-1] 
+
+# Time Complexcity O(1)
+# Space Complexcity O(1)
+import math
+def unique_paths(m, n):
+    return math.comb(m + n - 2, m - 1)
+# print(unique_paths(m,n)) 
+
+# ========================================= Jump Game ============================================================================
+nums = [2,3,1,1,4]
+
+# Recursion
+# Time Complexcity O(2 ^ n)
+# Space Complexcity O(n) # Stack Space
+def jumpGame(index):
+    if index == len(nums) - 1: return True
+    if index > len(nums) : return False
+    for i in range(1,nums[index]+1):
+        if jumpGame(index + i):
+            return True
+    return False
+
+
+# Memoization
+# Time Complexcity O(n)
+# Space Complexcity O(n) 
+
+dp = [-1] * len(nums)
+def jumpGame(index):
+    if index == len(nums) - 1: return True
+    if index > len(nums) : return False
+    if dp[index] != -1: return dp[index]
+    for i in range(1,nums[index]+1):
+        if jumpGame(index + i):
+            dp[index] = True
+            return dp[index] 
+    dp[index] = False
+    return dp[index]
+
+# Memoization
+# Time Complexcity O(n)
+# Space Complexcity O(n) 
+
+dp = dict()
+def jumpGame(index):
+    if index == len(nums) - 1: return True
+    if index > len(nums) : return False
+    if index in dp: return dp[index]
+    for i in range(1,nums[index]+1):
+        if jumpGame(index + i):
+            dp[index] = True
+            return dp[index] 
+    dp[index] = False
+    return dp[index]  
+
+
+
+# Tabulation
+# Time Complexcity O(n)
+# Space Complexcity O(n) 
+
+dp = [False] * len(nums)
+dp[-1] = True
+def jumpGame():
+    for index in range(len(nums)-2,-1,-1):
+        for i in range(1,nums[index]+1):
+            if dp[i + index]:
+                dp[index] = True
+                break
+        else:
+            dp[index] = False
+    return dp[0]
+        
+        
+# Space optimzation
+# Time Complexcity O(n)
+# Space Complexcity O(1)
+
+def jumpGame():
+    last = len(nums) - 1
+    for i in range(len(nums) - 2,-1,-1):
+        if last <= nums[i] + i:
+            last = i
+    return last == 0  
+print(jumpGame())
+        
