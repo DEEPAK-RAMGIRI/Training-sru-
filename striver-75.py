@@ -990,5 +990,54 @@ def jumpGame():
         if last <= nums[i] + i:
             last = i
     return last == 0  
-print(jumpGame())
+# print(jumpGame())
+
+# =========================================================== Graphs =======================================================================
+# ======================================================= Clone Graph ====================================================================
+
+
+class Node:
+    def __init__(self,node,neighbors = None):
+        self.val = node
+        self.neighbors = neighbors if neighbors is not None else []
         
+# DFS
+# Time Complexcity O(V + E)
+# Space Complexcity O(V)
+def clone(node):
+    graph = dict()
+    def dfs(node):
+        if not node: 
+            return None
+        
+        if node in graph:
+            return graph[node]
+        
+        copy = Node(node.val)
+        graph[node] = copy
+
+        for i in node.neighbors:
+            copy.neighbors.append(dfs(i))
+
+        return copy
+    return dfs(node)
+
+# BFS
+# Time complexcity (V + E)
+# Space Complexcity O(V)
+from collections import deque
+def bfs(node):
+    if not node: return None
+    graph = {node: Node(node.val)}  
+    queue = deque([node])
+
+    while queue:
+        curr = queue.popleft()
+
+        for nei in curr.neighbors:
+            if nei not in graph:
+                graph[nei] = Node(nei.val)
+                queue.append(nei)
+            graph[curr].neighbors.append(graph[nei])
+
+    return graph[node]
