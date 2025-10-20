@@ -1041,3 +1041,33 @@ def bfs(node):
             graph[curr].neighbors.append(graph[nei])
 
     return graph[node]
+
+# ===================================================== Course Schedule ============================================================
+
+from collections import defaultdict,deque
+# BFS
+# Time Complexcity O(V + E)
+# Space Complexcity O(V)
+def courseSchedule(numCourses,prerequisites):
+       
+        graph = defaultdict(list)
+        indeg = [0] * numCourses 
+        for i,j in prerequisites:
+            graph[j].append(i)
+            indeg[i]+=1
+        
+        queue = deque([])
+
+        for i,value in enumerate(indeg):
+            if value == 0:
+                queue.append(i)
+        
+        ans = []
+        while queue:
+            index = queue.popleft()
+            for i in graph[index]:
+                indeg[i]-=1
+                if indeg[i] == 0:
+                    queue.append(i)
+            ans.append(index)
+        return len(ans) == numCourses
