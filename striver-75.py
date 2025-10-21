@@ -1071,3 +1071,61 @@ def courseSchedule(numCourses,prerequisites):
                     queue.append(i)
             ans.append(index)
         return len(ans) == numCourses
+
+# DFS
+# Time Complexcity O( V + E)
+# Space Complexcity O(V)
+
+def find(numCourse,course):
+    graph = defaultdict(list)
+    for i, j in course:
+        graph[j].append(i)
+        
+    visit = [0] * numCourse
+    
+    def dfs(index):
+        if visit[index] == 1:
+            return False
+        if visit[index] == 2:
+            return True
+        
+        visit[index] = 1
+        for i in graph[i]:
+            if not dfs(i):
+                return False
+        visit[index] = 2
+        return True
+    
+    for i in range(numCourse):
+        if not dfs(i): return False
+    return True
+
+# ======================================================= Pacific Atlantic Water Flow ==================================================
+# DFS
+# Time Complexcity O(m * n) * O(m * n)
+#Space Complexcity O(m * n)
+
+heights = [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]
+m = len(heights) - 1
+n = len(heights[0]) - 1
+
+def pacificoratlantic(i,j,visit):
+    visit.add((i,j))
+    for x,y in [(-1,0),(1,0),(0,-1),(0,1)]:
+        if 0 <= x + i <= m and 0 <= y + j <= n and heights[i+x][j + y] >= heights[i][j] and (i+x,j+y) not in visit:
+            pacificoratlantic(i+x,j+y,visit)
+              
+pacific = set()
+atlantic = set()
+
+for i in range(m + 1):
+    pacificoratlantic(i,0,pacific)
+    pacificoratlantic(i,n,atlantic)
+    
+for i in range(n + 1):
+    pacificoratlantic(0,i,pacific)
+    pacificoratlantic(n-1,i,atlantic)
+    
+print(pacific & atlantic)
+    
+    
