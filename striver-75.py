@@ -1126,6 +1126,243 @@ for i in range(n + 1):
     pacificoratlantic(0,i,pacific)
     pacificoratlantic(n-1,i,atlantic)
     
-print(pacific & atlantic)
+# BFS
+# Time Complexcity O(m * n) * (m * n)
+# Space Complexcity O(m * n)
+
+from collections import deque
+def pacificoratlantic(i,j,visit):
+    queue = deque([(i,j)])
+    while queue:
+        i,j = queue.popleft()
+        visit.add((i,j))
+        for x,y in [(0,1),(0,-1),(1,0),(-1,0)]:
+            if 0<= x + i <= m and 0<= y + j <=  n and heights[i+x][j+y] >= heights[i][j] and (i+x,j+y) not in visit:
+                queue.append((i+x,j + y))
     
+pacific = set()
+atlantic = set()
+
+# for i in range(m + 1):
+#     pacificoratlantic(i,0,pacific)
+#     pacificoratlantic(i,m-1,atlantic)
+
+    
+# for i in range(n + 1):
+#     pacificoratlantic(0,i,pacific)
+#     pacificoratlantic((n-1),i,atlantic)
+    
+# print(pacific & atlantic)
+
+# ======================================= Number Of Islands =====================================================================
+
+grid = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+
+]
+
+# DFS
+# Time Complexcity O(m * n)
+# Space Complexcity O(m * n) 
+
+m = len(grid)
+n = len(grid[0])
+
+visited = [[False] * n for _ in range(m)]
+    
+def no_of_islands(i,j):
+    if  i < 0 or i >= m or j >= n or grid[i][j] == '0' or visited[i][j]: 
+        return 0
+    visited[i][j] = True
+    for x,y in [(0,1),(0,-1),(1,0),(-1,0)]:
+        no_of_islands(i+x,j+y)
+    return 1
+
+land = 0    
+# for i in range(m):
+#     for j in range(n):
+#         if grid[i][j] == '1':
+#             land += no_of_islands(i,j)
+# print(land)
+    
+    
+# BFS
+# Time Complexcity O(m * n)
+# Space Complexcity O(m * n)
+
+from collections import deque
+
+m = len(grid)
+n = len(grid[0])
+
+visited = [[False] * n for _ in range(m)]
+
+def no_of_islands(i,j):
+    queue = deque([(i,j)])
+    while queue:
+        i,j = queue.popleft()
+        for x,y in [(0,1),(0,-1),(1,0),(-1,0)]:
+            if 0 <= i + x < m and 0 <= j + y < n and not visited[i+x][j+y] and grid[i +x][j + y] == '1':
+                queue.append((i+x,j+y)) 
+                visited[i+x][j+y] = True
+    return 1
+
+count = 0
+for i in range(m):
+    for j in range(n):
+        if grid[i][j] == '1' and not visited[i][j]:
+            count += no_of_islands(i,j)
+# print(count)
+
+#===================================================== Longest Consecutive Sequence =====================================================
+
+# Time Complexcity O(n ^ 2)
+# Space Complexcity O(1)
+nums = [100,4,200,1,3,2]
+nums = [0,3,7,2,5,8,4,6,0,1]
+
+def lcs():
+    maxi = 0
+    for i in range(len(nums)):
+        temp = nums[i]
+        count = 1
+        while temp + 1 in nums:
+            temp = temp+1
+            count+=1
+        maxi = max(maxi,count)
+    return (maxi)
+
+# print(lcs())         
+
+# Time Complexcity O(n log n)
+# Space Complexcity O(1)
+def lcs():
+    nums.sort()   
+    maxi = 0
+    count = 1
+    prev = nums[0]
+    for i in range(1,len(nums)):
+        if prev + 1 == nums[i]:
+            count+=1
+            prev = nums[i]
+        else:
+            count = 1
+        maxi = max(maxi,count)
+    print(maxi)
+
+# Time Complexcity O(n)
+# Space Complexcity O(n)
+def lcs():
+    maxi = 0
+    count = 0
+    num_set = set(nums)
+    for i in nums:
+        if i-1 not in num_set:
+            count = 1
+            temp = i + 1
+            while temp in num_set:
+                temp+=1
+                count+=1
+        maxi = max(maxi,count)
+    return maxi
+            
+# lcs()
+# =========================== Alien Dictionary ========================================================
+
+# it is hard while implementing but method easy u had done this ur self future me
+dictionary = ['baa','abcd','abca','cab','cad']
+
+from collections import defaultdict,deque
+
+graph = defaultdict(list)
+indeg = [0] * 26
+exist = [False] * 26
+
+def create(string1,string2):
+    i = 0
+    j = 0
+    while i < len(string1) and j < len(string2):
+        if string1[i] != string2[j]:
+            graph[ord(string1[i]) - ord('a')].append(string2[j])
+            indeg[ord(string2[j]) - ord('a')]+=1
+            break
+        i+=1
+        j+=1
+for i in range(1,len(dictionary)):
+      create(dictionary[i-1],dictionary[i])
+
+for i in dictionary:
+    for j in i:
+        exist[ord(j) - ord('a')] = True
+      
+# BFS
+# Time Complexcity O(V + E)
+# Space Complexcity O(V)
+
+# print(indeg)
+queue = deque([])
+for i in range(26):
+    if exist[i] and indeg[i] == 0:
+        queue.append(i)
+        
+# print(graph)
+ans = []
+while queue:
+    index = queue.popleft()
+    ans.append(chr(index + ord('a')))
+    for i in graph[index]:
+        indeg[ord(i) - ord('a')]-=1
+        if indeg[ord(i) - ord('a')] == 0:
+            queue.append(ord(i) - ord('a'))
+# print(ans)     
+
+# ======================================= valid graph Tree ========================================================
+nums = [[0,1],[0,2],[0,3],[1,4]]
+
+graph = defaultdict(list)
+maxi = 0
+for i,j in nums:
+   graph[i].append(j)
+   graph[j].append(i)
+   maxi = max(i,j,maxi)
+   
+print(graph)
+start = 0
+# BFS
+# Time Complexcity O(V + E)
+# Space Complexcity O(V)
+
+visited = [False] * (maxi + 1)
+visited[start] = True
+
+def bfs():
+    queue = deque([(start , -1)])
+    while queue:
+        node,parent = queue.popleft()
+        for i in graph[node]:
+            if not visited[i]:
+                visited[i] = True
+                queue.append((i,node))
+            elif parent != i:
+                return False
+    return True        
+
+# DFS
+# Time Complexcity O( V + E)
+# Space Complexcity O(V)
+visited = [False] * (maxi + 1)
+def dfs(parent,node):
+    visited[node] = True
+    for i in graph[node]:
+        if not visited[i]:
+            if not dfs(node,i):
+                return False
+        elif parent != i:
+            return False
+    return True
+
+print(dfs(-1,0))
     
