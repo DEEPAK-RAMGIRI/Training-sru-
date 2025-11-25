@@ -110,7 +110,7 @@ def find_sum():
 arr = [3,2,4,7,6,5,8,9]
 # queries = [[1,2,5],[2,2,4],[1,1,5],[1,2,5],[2,4,1],[1,0,3]]
 queries = [[2,5],[0,3],[3,5],[4,6],[1,5],[0,1],[0,6]]
-ans = [0] * 16
+ans = [0] * (4 * len(arr))
 def Create_max(left,right,index):
     if left == right:
         ans[index] = arr[left]
@@ -127,17 +127,12 @@ def max_range(left,right,start,end,index):
         return ans[index]
     mid = left + ((right - left) >> 1)
     return max(max_range(left,mid,start,end,2 * index) , max_range(mid+1,right,start,end,2* index + 1))
-print(ans)
-for j,k in queries:
-    print(max_range(0,len(arr)-1,j,k,1))
-    
-
 
 arr = [3,2,4,6,5,8,1,3]
 # queries = [[1,2,5],[2,2,4],[1,1,5],[1,2,5],[2,4,1],[1,0,3]]
 queries = [[2,5],[0,3],[3,5],[4,6],[1,5],[0,1],[0,6]]
 
-ans = [0] * 16
+ans = [0] * (4 * len(arr))
 
 def Create(left,right,index):
     if left == right:
