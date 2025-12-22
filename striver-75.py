@@ -65,6 +65,15 @@ def duplicates():
             if nums[i] == nums[j]:
                 return nums[i]
     return nums[i]
+# using sort
+# Time complexcity O(n log n)
+# Space complexcity O(1)
+def duplicates():
+    nums.sort()
+    for i in range(1, len(nums)):
+        if nums[i] == nums[i-1]:
+            return nums[i]
+    return -1
 
 # using set
 #Time Complexcity O(n)
