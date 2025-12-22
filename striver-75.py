@@ -26,9 +26,6 @@
             else:
                 right -= 1
     
-    
-    
-    
     # Time Complexcity O(n)
     # Space Complexcity O(n)
     def two_sum():
