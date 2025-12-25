@@ -66,3 +66,52 @@ def memory_optimization():
 
     print(dp[bag])
     
+    
+# Subset Sum
+nums = [2,3,7,8,10]
+sums = 11
+
+# Time Complexcit O(2 ^ n)
+# Space Complexcity O(h)
+def recursion(index,sums):
+    if sums == 0:
+        return True
+    if index >= len(nums): return False
+    skip = recursion(index + 1,sums)
+    not_skip = False
+    if sums - nums[index]>= 0:
+        not_skip = recursion(index + 1,sums - nums[index])
+    return skip or not_skip
+# print(recursion(0,sums))
+
+#Time Complexcity O(n * sums)
+# space Complexcity O(n * sums)
+
+dp = [[-1 for _ in range(sums + 1)] for _ in range(len(nums) + 1)]
+def memoization(index,sums):
+    if sums == 0: return True
+    if index >= len(nums): return False
+    if dp[index][sums] != -1 : return dp[index][sums]
+    skip = memoization(index+ 1,sums)
+    not_skip = False
+    if sums - nums[index]>= 0:
+        not_skip = memoization(index + 1,sums - nums[index])
+    dp[index][sums] = skip or not_skip
+    return dp[index][sums]
+# print(memoization(0,sums))
+
+def tabulation(sums):
+    dp = [[False for _ in range(sums + 1)] for _ in range(len(nums) + 1)]
+    for i in range(len(nums)+1):
+        dp[i][0] = True
+    for i in range(len(nums)-1,-1,-1):
+        for j in range(sums,-1,-1):
+            skip = dp[i + 1][j]
+            not_skip = False
+            if j - nums[i] >= 0:
+                not_skip = dp[i + 1][j - nums[i]]
+            dp[i][j] = skip or not_skip
+    print(dp)
+    return dp[0][sums] 
+
+print(tabulation(sums))
