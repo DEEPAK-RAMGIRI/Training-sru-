@@ -1364,5 +1364,35 @@ def dfs(parent,node):
             return False
     return True
 
-print(dfs(-1,0))
+# print(dfs(-1,0))
+
+# ==================================================== Insert Interval ==================================================================
     
+# Time Complexcity O(n log n)
+# Space Complexcity O(n)
+
+intervals = [[1,3],[6,9]]
+newInterval = [2,5]
+
+intervals.extend([newInterval])
+stack =[intervals[0]]
+
+intervals.sort()
+
+for i in intervals[1:]:
+    if stack[-1][-1] > i[0]:
+        stack[-1] = [ min(stack[-1][0] ,i[0]), max(stack[-1][-1],i[-1])]
+    else:
+        stack.append(i)
+print(stack)
+        
+    
+        
+        
+        
+    
+        
+        
+
+    
+        
