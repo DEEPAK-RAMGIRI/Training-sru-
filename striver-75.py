@@ -1,29 +1,41 @@
-# ================================================== 1. Two Sum   ==================================================
-nums = [2,7,11,15]
-target = 9
-# 2 for loops
-# Time Complexcity O(n^2)
-# Space Complexcity O(1)
-def two_sum():
-    for i in range(len(nums)):
-        for j in range(i+1,len(nums)):
-            if nums[i] + nums[j] == target:
-                return [i,j]
-    return [-1,-1]
-
-# Binary 
-# Time Complexcity O(n)
-# Space Complexcity O(1) 
-def two_sum():
-    left = 0
-    right = len(nums) - 1
-    while left < right:
-        if left + right == target:
-            return [left,right]
-        elif left + right < target:
-            left+=1
-        else:
-            right -= 1
+    # ================================================== 1. Two Sum   ==================================================
+    nums = [2,7,11,15]
+    target = 9
+    # 2 for loops
+    # Time Complexcity O(n^2)
+    # Space Complexcity O(1)
+    def two_sum():
+        for i in range(len(nums)):
+            for j in range(i+1,len(nums)):
+                if nums[i] + nums[j] == target:
+                    return [i,j]
+        return [-1,-1]
+    
+    # Binary 
+    # Time Complexcity O(n log n)
+    # Space Complexcity O(1) 
+    nums.sort()
+    def two_sum():
+        left = 0
+        right = len(nums) - 1
+        while left < right:
+            if nums[left] + nums[right] == target:
+                return [left,right]
+            elif nums[left] + nums[right] < target:
+                left+=1
+            else:
+                right -= 1
+    
+    # Time Complexcity O(n)
+    # Space Complexcity O(n)
+    def two_sum():
+        maps = dict()
+        n = len(nums)
+        for i in range(n):
+            if  target - nums[i] in maps:
+                return [maps[target - nums[i]],i]
+            maps[nums[i]] = i
+        return []
             
 #======================================================== Best Time to Buy and Sell Stock ===============================================
 # Time Complexcity O(n)
@@ -50,6 +62,15 @@ def duplicates():
             if nums[i] == nums[j]:
                 return nums[i]
     return nums[i]
+# using sort
+# Time complexcity O(n log n)
+# Space complexcity O(1)
+def duplicates():
+    nums.sort()
+    for i in range(1, len(nums)):
+        if nums[i] == nums[i-1]:
+            return nums[i]
+    return -1
 
 # using set
 #Time Complexcity O(n)
