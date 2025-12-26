@@ -54,7 +54,7 @@ def tabulation():
             if j + wt[i] <= bag:
                 dp[i][j]  = max(dp[i][j],pt[i] + dp[i + 1][j + wt[i]])
     print(dp[0][0])        
-tabulation()  
+# tabulation()  
 
 
 def memory_optimization():
@@ -100,6 +100,8 @@ def memoization(index,sums):
     return dp[index][sums]
 # print(memoization(0,sums))
 
+#Time Complexcity O(n * sums)
+# space Complexcity O(n * sums)
 def tabulation(sums):
     dp = [[False for _ in range(sums + 1)] for _ in range(len(nums) + 1)]
     for i in range(len(nums)+1):
@@ -111,7 +113,51 @@ def tabulation(sums):
             if j - nums[i] >= 0:
                 not_skip = dp[i + 1][j - nums[i]]
             dp[i][j] = skip or not_skip
-    print(dp)
+
     return dp[0][sums] 
 
-print(tabulation(sums))
+# print(tabulation(sums))
+
+# Partition sums
+# Time Complexcity O(2^n)
+# Space Complexcity O(h)
+nums = [1,5,5,11]
+total = sum(nums)
+if total & 1: 
+    print(False)
+else:
+    target = total >> 1
+    def recursion(index,target):
+        if target == 0:
+            return True
+        if index >= len(nums):
+            return False
+        skip = recursion(index+1,target)
+        not_skip = False
+        if target - nums[index] >= 0:
+            not_skip = recursion(index + 1,target- nums[index])
+        return skip or not_skip
+            
+            
+# Time Complexcity O(n * target)
+# Space Complexcity O(n * target)
+
+nums = [1,5,5,11]
+total = sum(nums)
+if total & 1: 
+    print(False)
+else:
+    target = total >> 1
+    dp = [[-1 for _ in range(target + 1)] for _ in range(len(nums) + 1)]
+    def memoization(index,target):
+        if target == 0: return True
+        if index >= len(nums): return False
+        if dp[index][target] != -1: return dp[index][target]
+        skip = memoization(index + 1,target)
+        not_skip = False
+        if target - nums[index] >= 0:
+            not_skip = memoization(index + 1,target - nums[index])
+        dp[index][target] = skip or not_skip
+        return dp[index][target]
+        
+    print(memoization(0,target))
