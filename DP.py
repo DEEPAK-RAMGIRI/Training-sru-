@@ -49,7 +49,7 @@ def memoization(index,curr):
 def tabulation():
     dp = [[0 for _ in range(bag + 1)] for _ in range(len(wt) + 1)]
     for i in range(len(wt)-1,-1,-1):
-        for j in range(bag):
+        for j in range(bag +1):
             dp[i][j] = dp[i + 1][j]
             if j + wt[i] <= bag:
                 dp[i][j]  = max(dp[i][j],pt[i] + dp[i + 1][j + wt[i]])
@@ -107,7 +107,7 @@ def tabulation(sums):
     for i in range(len(nums)+1):
         dp[i][0] = True
     for i in range(len(nums)-1,-1,-1):
-        for j in range(sums,-1,-1):
+        for j in range(sums + 1):
             skip = dp[i + 1][j]
             not_skip = False
             if j - nums[i] >= 0:
@@ -172,7 +172,7 @@ def Tabulation():
         for i in range(len(nums)+1):
             dp[i][0] = True
         for i in range(len(nums)-1,-1,-1):
-            for j in range(target):
+            for j in range(target + 1):
                 skip = dp[i + 1][j]
                 not_skip = False
                 if j - nums[i] >= 0:
@@ -180,4 +180,56 @@ def Tabulation():
             dp[i][j] = skip or not_skip
         print(dp[0][target])
         
-Tabulation()
+# Tabulation()
+
+# Count of subset sum
+arr = [1,2,3,5,6,8,10]
+sums = 10
+
+# Time complexcity O(2 ^ n)
+# Space complexcity O(h)
+def recursion(index,sums):
+    if sums == 0: return 1
+    if index >= len(arr): return 0
+    skip = recursion(index + 1,sums)
+    not_skip = 0
+    if sums - arr[index] >= 0:
+        not_skip = recursion(index + 1,sums - arr[index])
+    return skip + not_skip
+# print(recursion(0,sums))
+
+# Time complexcity O(n * sums)
+# Space COmplexcity O(n * sums)
+dp = [[-1 for _ in range(sums + 1)] for _ in range(len(arr) + 1)]
+def memoization(index,sums):
+    if sums == 0: return 1
+    if index >= len(arr): return 0
+    if dp[index][sums] != -1: return dp[index][sums]
+    skip = memoization(index + 1,sums)
+    not_skip = 0
+    if sums - arr[index] >= 0:
+        not_skip = memoization(index + 1,sums - arr[index])
+    dp[index][sums] = skip + not_skip
+    return dp[index][sums]
+# print(memoization(0,sums))
+
+# Time complexcity O(n * sums)
+# Space COmplexcity O(n * sums)
+arr = [1,2,3,5,6,8,10]
+sums = 10
+def Tabulation():
+    dp = [[0 for _ in range(sums + 1)] for _ in range(len(arr) + 1)]
+    for i in range(len(arr) + 1):
+        dp[i][0] = 1
+    for i in range(len(arr)-1,-1,-1):
+        for j in range(sums + 1):
+            skip = dp[i + 1][j]
+            not_skip = 0
+            if j - arr[i] >= 0:
+               not_skip = dp[i + 1][j - arr[i]]
+            dp[i][j] = not_skip + skip
+    return dp[0][sums]
+# print(Tabulation())  
+    
+            
+    
