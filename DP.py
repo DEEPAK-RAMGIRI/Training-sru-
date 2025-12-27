@@ -118,7 +118,7 @@ def tabulation(sums):
 
 # print(tabulation(sums))
 
-# Partition sums
+# equal sum Partition problem
 # Time Complexcity O(2^n)
 # Space Complexcity O(h)
 nums = [1,5,5,11]
@@ -160,4 +160,24 @@ else:
         dp[index][target] = skip or not_skip
         return dp[index][target]
         
-    print(memoization(0,target))
+    # print(memoization(0,target))
+    
+def Tabulation():
+    
+    if total & 1: 
+        print(False)
+    else:
+        target = total >> 1
+        dp = [[False for _ in range(target + 1)] for _ in range(len(nums) + 1)]
+        for i in range(len(nums)+1):
+            dp[i][0] = True
+        for i in range(len(nums)-1,-1,-1):
+            for j in range(target):
+                skip = dp[i + 1][j]
+                not_skip = False
+                if j - nums[i] >= 0:
+                    not_skip = dp[i + 1][j - nums[i]]
+            dp[i][j] = skip or not_skip
+        print(dp[0][target])
+        
+Tabulation()
