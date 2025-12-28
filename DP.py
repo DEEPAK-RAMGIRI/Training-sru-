@@ -200,6 +200,8 @@ def recursion(index,sums):
 
 # Time complexcity O(n * sums)
 # Space COmplexcity O(n * sums)
+arr = [1,2,3,5,6,8,10]
+sums = 10
 dp = [[-1 for _ in range(sums + 1)] for _ in range(len(arr) + 1)]
 def memoization(index,sums):
     if sums == 0: return 1
@@ -212,6 +214,7 @@ def memoization(index,sums):
     dp[index][sums] = skip + not_skip
     return dp[index][sums]
 # print(memoization(0,sums))
+
 
 # Time complexcity O(n * sums)
 # Space COmplexcity O(n * sums)
@@ -228,8 +231,15 @@ def Tabulation():
             if j - arr[i] >= 0:
                not_skip = dp[i + 1][j - arr[i]]
             dp[i][j] = not_skip + skip
+    for i in range(len(arr)):
+        print(dp[i])
     return dp[0][sums]
-# print(Tabulation())  
-    
+
+print(Tabulation())  
+
+
+def recursion(index,sums):
+    if sums == 0:
+        pass
             
     
