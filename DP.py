@@ -231,15 +231,71 @@ def Tabulation():
             if j - arr[i] >= 0:
                not_skip = dp[i + 1][j - arr[i]]
             dp[i][j] = not_skip + skip
-    for i in range(len(arr)):
-        print(dp[i])
+    # for i in range(len(arr)):
+    #     print(dp[i])
     return dp[0][sums]
 
-print(Tabulation())  
+# print(Tabulation())  
 
+# Partition A Set Into Two Subsets With Minimum Absolute Sum Difference
+        
+    
+arr  = [2,3,7]
+sums =sum(arr)  # because this is the maximum number we get from the nums
+def tabulation():
+    dp = [[False for _ in range(sums + 1)] for _ in range(len(arr) + 1)]
+    
+    for i in range(len(arr) + 1):
+        dp[i][0] = True
+    for i in range(len(arr) - 1,-1,-1):
+        for j in range(sums + 1): 
+            skip = dp[i + 1][j]
+            take = False
+            if j - arr[i] >= 0:
+                take = dp[i + 1][j - arr[i]]
+            dp[i][j] = skip or take
+    return dp[0]
+                
+def find_min_diff():
+    dp = tabulation() # taking the elements in which i can find the all sums are possibles
+    min_diff = float("inf") 
+    for s1 in range(len(dp)):
+        if dp[s1]:
+            s2 = sums - s1 # finding secound subset value
+            # min_diff = min(min_diff,abs(s2 - s1)) # (sums -s1)-s1 = sums - (2 * s1)
+            min_diff = min(min_diff, abs(sums - (2 * s1)))
+    print(min_diff)
+# find_min_diff()
+    
+# Count the number of subset with a given difference
+# The Idea is to find the count for that 
+# diff = s2 - s1
+# sums = s2 + s1
+# we have 2s2 = diff + sums ~ s2 = (diff + sums) // 2
+# in question we have diff and we can find the sums with help sum(array)
+    
+# so we need to find the count of the subsets where target is s2
 
-def recursion(index,sums):
-    if sums == 0:
-        pass
+arr = [1,2,1,3]
+diff = 1
+def Tabulation(sums):
+    dp = [[0 for _ in range(sums + 1)] for _ in range(len(arr) + 1)]
+    for i in range(len(arr) + 1):
+        dp[i][0] = 1
+    for i in range(len(arr)-1,-1,-1):
+        for j in range(1,sums + 1):
+            skip = dp[i + 1][j]
+            take = 0
+            if j - arr[i] >= 0:
+                take = dp[i + 1][j - arr[i]]
+            dp[i][j] = skip + take
+    return dp[0][sums]
+
+print(Tabulation((sum(arr) + diff)//2))
+
+  
+                
+    
+        
             
     
