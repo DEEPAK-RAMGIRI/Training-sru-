@@ -267,7 +267,9 @@ def find_min_diff():
     print(min_diff)
 # find_min_diff()
     
-# Count the number of subset with a given difference
+# Count the number of subset with a given difference 
+# Target Sum is also similar to this 
+
 # The Idea is to find the count for that 
 # diff = s2 - s1
 # sums = s2 + s1
@@ -291,10 +293,56 @@ def Tabulation(sums):
             dp[i][j] = skip + take
     return dp[0][sums]
 
-print(Tabulation((sum(arr) + diff)//2))
+# print(Tabulation((sum(arr) + diff)//2))
+
+
 
   
-                
+# Random Question
+from collections import deque
+
+def is_valid(s):
+    bal = 0
+    for ch in s:
+        if ch == '(':
+            bal += 1
+        else:
+            bal -= 1
+        if bal < 0:
+            return False
+    return bal == 0
+
+
+def brackets_with_k_swaps(n, k):
+    start = "()" * n
+    q = deque([(start, 0)])
+    visited = set([(start, 0)])
+    result = set()
+
+    while q:
+        s, swaps = q.popleft()
+
+        if swaps == k:
+            if is_valid(s):
+                result.add(s)
+            continue
+
+        for i in range(len(s) - 1):
+            if s[i] != s[i + 1]:
+                new_s = s[:i] + s[i + 1] + s[i] + s[i + 2:]
+                state = (new_s, swaps + 1)
+                if state not in visited:
+                    visited.add(state)
+                    q.append(state)
+
+    return result
+
+
+# Example
+n = 3
+k = 2
+print(brackets_with_k_swaps(n, k))
+        
     
         
             
