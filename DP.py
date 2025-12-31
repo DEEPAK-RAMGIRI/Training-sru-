@@ -341,9 +341,206 @@ def brackets_with_k_swaps(n, k):
 # Example
 n = 3
 k = 2
-print(brackets_with_k_swaps(n, k))
-        
+# print(brackets_with_k_swaps(n, k))
+
+
+# unbonded Knapsack
+weights = [2, 3, 4]
+values  = [4, 5, 7]
+W = 7
+
+# Time Complexcity O(2 ^ n)
+# Space complexcity O(H)
+def recursion(index,W):
+    if index >= len(weights) or W == 0:
+        return 0
+    skip = recursion(index + 1,W)
+    take = 0
+    if W - weights[index] >= 0:
+        take = values[index] + recursion(index,W - weights[index])
+    return max(skip,take)
+# print(recursion(0,W)) 
+
+# Time Complexcity O(n * w)
+# Space Complexcity O(n * w)
+dp = [[-1 for _ in range(W + 1)]for _ in range(len(weights) + 1)]
+def memoization(index,W):
+    if index >= len(weights) or W == 0:
+        return 0
+    if dp[index][W] != -1:
+        return dp[index][W]
+    skip = memoization(index + 1, W)
+    take = 0
+    if W - weights[index] >= 0:
+        take = values[index] + memoization(index,W - weights[index])
+    dp[index][W] = max(skip,take)
+    return dp[index][W]
+
+# print(memoization(0,W))
+
+# Time Complexcity O(n * w)
+# Space Complexcity O(n * w)
+def Tabulation():
+    dp = [[0 for _ in range(W + 1)]for _ in range(len(weights) + 1)]
+    for i in range(len(weights)-1,-1,-1):
+        for j in range(W + 1):
+            dp[i][j] = dp[i + 1][j]
+            if j - weights[i] >= 0:
+                dp[i][j] = max(dp[i][j] , values[i] + dp[i][j - weights[i]])
+    # print(dp)
+    return dp[0][W]
+# print(Tabulation())
+
+# Time Complexcity O(n * w)
+# Space Complexcity O(w)
+def memoryOptimization():
+    prev = [0] * (W + 1)
+    for i in range(len(weights)-1,-1,-1):
+        temp = [0] * (W + 1)
+        for j in range(W + 1):
+            temp[j] = prev[j]
+            if j - weights[i] >=0 :
+                temp[j] = max(temp[j], values[i] + temp[j - weights[i]])
+        prev= temp[:]
+               
+    return prev[W]
+# print(memoryOptimization())
+
+
+# Rod Cutting Problem
+
+# Time Complexcity O(2 ^ n)
+# Space Complexcity O(h)
+
+length = [1,2,3,4]
+profit = [5,6,8,8]
+N = 4
+
+def recursion(index,N):
+    if N == 0 or index >= len(length):
+        return 0
+    skip = recursion(index + 1, N)
+    take = 0
+    if N - length[index] >= 0:
+        take = profit[index] + recursion(index ,N - length[index])
+    return max(skip,take)
+# print(recursion(0,N))
+
+# Time Complexcity O(n * m)
+# Space Complexcity O(n * m)
+dp = [[-1 for _ in range(N + 1)] for _ in range(len(length) + 1)]
+
+def memoization(index , n):
+    if n == 0 or index >= len(length):
+        return 0
+    if dp[index][n] != -1: return dp[index][n] 
+    skip = memoization(index + 1,n )
+    take = 0
+    if n - length[index] >= 0:
+        take = profit[index] + memoization(index, n - length[index])
+    dp[index][n] = max(skip , take)
+    return dp[index][n]
+# print(memoization(0,N))
+
+
+# Time Complexcity O(n * m)
+# Space Complexcity O(n * m)
+def Tabulation(n):
+    dp = [[0 for _ in range(N + 1)] for _ in range(len(length) + 1)]
+    for i in range(len(length)-1,-1,-1):
+        for j in range(n + 1):
+            dp[i][j] = dp[i + 1][j]
+            if j - length[i] >= 0:
+                dp[i][j] = max(dp[i][j] ,profit[i] + dp[i][j - length[i]])
+    return dp[0][n]
+# print(Tabulation(N))
+
+length = [1,2,3,4]
+profit = [5,6,8,8]
+N = 4
+
+# Time Complexcity O(n * m)
+# Space Complexcity O(N)
+def Space_Optimization():
+    dp = [0] * (N + 1)
+    for i in range(len(length)-1,-1,-1):
+        temp = [0] * (N + 1)
+        for j in range(N + 1):
+            temp[j] = dp[j]
+            if j - length[i] >= 0:
+                temp[j] = max(temp[j], profit[i] + temp[j - length[i]])
+        dp = temp[:]
+    print(dp[N])
+# Space_Optimization()
+
+# Coin change problem
+
+coins = [1,2,3,5]
+money = 8
+
+# Time Complexcity O(2 ^ n)
+# Space Complexcity O(h)
+def recursion(index,money):
+    if money == 0:
+        return 1
+    if index >= len(coins):
+        return 0
     
-        
+    total = recursion(index + 1,money)
+    
+    if money - coins[index] >= 0:
+        total += recursion(index,money - coins[index])
+    
+    return total
+
+# print(recursion(0,money))
+
+# Time Complexcity O(money * n)
+# Space Complexcity O(money * n)
+
+dp = [[-1 for _ in range(money + 1)] for _ in range(len(coins) + 1)]
+def Memoization(index,money):
+    if money == 0: return 1
+    if index >= len(coins):return 0
+    if dp[index][money] != -1: return dp[index][money]
+    total = Memoization(index + 1,money)
+    if money - coins[index] >= 0:
+        total += Memoization(index,money - coins[index])
+    dp[index][money] = total
+    return dp[index][money]
+# print(Memoization(0,money))
+     
+
+# Time Complexcity O(money * n)
+# Space Complexcity O(money * n)
+
+def Tabulation(money):
+    dp = [[0 for _ in range(money + 1)] for _ in range(len(coins) + 1)] 
+    for i in range(len(nums) + 1):
+        dp[i][0] = 1
+    for i in range(len(coins)-1,-1,-1):
+        for j in range(money + 1):
+            total = dp[i + 1][j]
+            if j - coins[i] >= 0:
+                total += dp[i][j - coins[i]]
+            dp[i][j] = total
+    return dp[0][money]
+
+# print(Tabulation(money))
+
+
+# Time Complexcity O(money * n)
+# Space Complexcity O(money)
+def Space_optimization(money):
+    dp = [1] + [0] * money
+    for i in range(len(coins)-1,-1,-1):
+        temp = [0] * (money + 1)
+        for j in range(money + 1):
+            temp[j] = dp[j]
+            if j - coins[i] >= 0:
+                temp[j] += temp[j - coins[i]]
+        dp = temp[:]
+    return dp[money]
             
+print(Space_optimization(money))
     
