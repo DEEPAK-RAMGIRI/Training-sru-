@@ -542,5 +542,185 @@ def Space_optimization(money):
         dp = temp[:]
     return dp[money]
             
-print(Space_optimization(money))
+# print(Space_optimization(money))
+
+# coin change 2 
+# minimum count
+
+money = 125
+moneys = [ 1,5,10,20,100 ]
+def recursion(index,money):
+    if money == 0: return 0
+    if index >= len(moneys):
+        return float("inf")
+    skip = recursion(index + 1,money)
+    if money - moneys[index] >= 0:
+        skip =min(skip,1 + recursion(index,money - moneys[index]))
+    return skip
+
+# print(recursion(0,money))
+
+dp = [[-1 for _ in range(money + 1)] for _ in range(len(moneys) +  1)]
+def memoization(index,money):
+    if money == 0: return 0
+    if index >= len(moneys):
+        return float("inf")
+    if dp[index][money] != -1:
+        return dp[index][money]
+    dp[index][money] = memoization(index + 1,money)
+    if money - moneys[index] >= 0:
+        dp[index][money] = min(dp[index][money],1 + memoization(index,money - moneys[index]))
+    return dp[index][money]
+
+# print(memoization(0,money))
+
+def Tabulation(m):
+    dp = [[float("inf") for _ in range(m + 1)] for _ in range(len(moneys) +  1)]
+    for i in range(len(moneys) + 1):
+        dp[i][0] = 0
+    for index in range(len(moneys)-1,-1,-1):
+        for money in range(1,m + 1): 
+            dp[index][money] = dp[index + 1][money]
+            if money - moneys[index] >= 0:
+                dp[index][money] = min(dp[index][money],1 + dp[index][money - moneys[index]])
+    print(dp[0][m])
     
+# space optimiatio may be wrong
+# best way to sort the coins and  do this
+def another_method():
+    money = int(input())
+    coins = [100, 20, 10, 5, 1]
+
+    count = 0
+    for coin in coins:
+        count += money // coin
+        money %= coin
+
+    print(count)
+    
+# longestCommonSubsequence LCS
+string1 = 'abcdgh'
+string2 = 'abedfhg'
+
+# Time Complexcity O(2^ (m + n))
+# Space Complexcity O(h) h= m* n
+def recursion(i,j):
+    if i >= len(string1) or j >= len(string2):
+        return 0
+    if string1[i] == string2[j]:
+        return 1 + recursion(i + 1, j + 1)
+    return max(recursion(i+1,j) , recursion(i,j + 1))
+# print(recursion(0,0))
+
+# Time Complexcity O(m * n)
+# Space Comnplexcity O(m * n)
+dp = [[-1 for _ in range(len(string2) + 1)] for _ in range(len(string1) + 1)]
+def memoization(i,j):
+    if i >= len(string1) or j >= len(string2): return 0
+    if dp[i][j] != -1: return dp[i][j]
+    if string1[i] == string2[j]:
+        dp[i][j] = 1 + memoization(i + 1,j +1)
+    else:
+        dp[i][j] = max(memoization(i + 1, j), memoization(i ,j + 1))
+    return dp[i][j]
+# print(memoization(0,0))
+
+
+# Time Complexcity O(m * n)
+# Space Comnplexcity O(m * n)
+def Tabulation():
+    dp = [[0 for _ in range(len(string2) + 1)] for _ in range(len(string1) + 1)]
+    for i in range(len(string1)-1,-1,-1):
+        for j in range(len(string2)-1,-1,-1):
+            if string1[i] == string2[j]:
+                dp[i][j] = 1 + dp[i + 1][j +1]
+            else:
+                dp[i][j] = max(dp[i + 1][j],dp[i][j + 1])
+    return dp[0][0]
+# print(Tabulation())
+
+# Time Complexcity O(m * n)
+# Space Comnplexcity O(n)
+def SpaceOptimization():
+    dp = [0] * (len(string2) + 1)
+    for i in range(len(string1)-1,-1,-1):
+        temp = [0] * (len(string2) + 1)
+        for j in range(len(string2)-1,-1,-1):
+            if string1[i] == string2[j]:
+                temp[j] = 1 + dp[j +1]
+            else:
+                temp[j] = max(dp[j],temp[j + 1])
+        dp = temp[:]
+    return dp[0]
+# print(SpaceOptimization())
+        
+# Longest Common Substring
+# Time Complexcity O(n * m)
+# Space Complexcity O(n)
+
+string1 = 'abcde'
+string2 = 'abfce'
+
+def Tabulation():
+    ans = 0
+    dp = [0] * (len(string2) + 1)
+    for i in range(len(string1)-1,-1,-1):
+        temp = [0] * (len(string2) + 1)
+        for j in range(len(string2)-1,-1,-1):
+            if string1[i] == string2[j]:
+                temp[j] = 1 + dp[j +1]
+                ans = max(ans,temp[j])
+        dp = temp[:]
+    return ans
+# print(Tabulation())
+
+# printing Longest CommonSubsequence
+
+string1 = 'abcde'
+string2 = 'abfce'
+
+def recursion(i,j):
+    if i >= len(string1) or j >= len(string2):
+        return ''
+    if string1[i] == string2[j]:
+        return string1[i] + recursion(i+1,j + 1)
+    else:
+        return max(recursion(i + 1,j) , recursion(i, j + 1) ,key = len)
+# print(recursion(0,0))
+
+dp = [[-1 for _ in range(len(string2) + 1)] for _ in range(len(string1) + 1)]
+def Memoization(i,j):
+    if i>= len(string1) or j >= len(string2):
+        return ''
+    if dp[i][j] != -1: return dp[i][j]
+    if string1[i] == string2[j]:
+        dp[i][j] =  string1[i] + Memoization(i + 1,j +1)
+    else:
+        dp[i][j] = max(Memoization(i+1,j),Memoization(i,j + 1),key = len) 
+    return dp[i][j]
+# print(Memoization(0,0))
+
+def Tabulation():
+    dp = [['' for _ in range(len(string2) + 1)] for _ in range(len(string1) + 1)]
+    for i in range(len(string1)-1,-1,-1):
+        for j in range(len(string2)-1,-1,-1):
+            if string1[i] == string2[j]:
+                dp[i][j] =  string1[i] + dp[i + 1][j +1]
+            else:
+                dp[i][j] = max(dp[i+1][j],dp[i][j + 1],key = len) 
+    return dp[0][0]
+# print(Tabulation())
+
+def spaceOptimization():
+    dp = [''] * (len(string2) + 1)
+    for i in range(len(string1)-1,-1,-1):
+        temp  = [''] * (len(string2) + 1)
+        for j in range(len(string2)-1,-1,-1):
+            if string1[i] == string2[j]:
+                temp[j] =  string1[i] + dp[j +1]
+            else:
+                temp[j] = max(dp[j],temp[j + 1],key = len) 
+        dp = temp[:]
+    return dp[0]
+
+# print(spaceOptimization())
