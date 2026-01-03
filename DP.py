@@ -674,7 +674,7 @@ def Tabulation():
     return ans
 # print(Tabulation())
 
-# printing Longest CommonSubsequence
+# printing Longest CommonSubsequence in string
 
 string1 = 'abcde'
 string2 = 'abfce'
@@ -724,3 +724,94 @@ def spaceOptimization():
     return dp[0]
 
 # print(spaceOptimization())
+
+# length of SuperSequence
+# we need to find the length of the super seqence 
+# so max to max the answer would be the size of m + n where m,n are string 1 and string2 respectively
+# we need to remove common values and we get the total remaining size of the answer string
+
+# code is similar to the longest common subsequence  
+
+def spaceOptimization():
+
+    dp = [0] * (len(string2) + 1)
+    for i in range(len(string1)-1,-1,-1):
+        temp = [0] * (len(string2) + 1)
+        for j in range(len(string2)-1,-1,-1):
+            if string1[i] == string2[j]:
+                temp[j] = 1 + dp[j +1]
+            else:
+                temp[j] = max(dp[j],temp[j + 1])
+        dp = temp[:]
+    
+    print((len(string1) + len(string2)) - dp[0])
+    
+# spaceOptimization()
+
+
+# printing minimum insertion and deletion
+
+
+# idea is to find longest common subsequence from a and b
+# then a - lcs we get the no of deletion
+# then b - lcs we get the no of insertion  
+
+string1 = 'heap'
+string2 = 'pea' 
+# ans  = 3
+def Spaceoptimization():
+    dp = [0] * (len(string2) + 1)
+    for i in range(len(string1)-1,-1,-1):
+        temp = [0] * (len(string2) + 1)
+        for j in range(len(string2)-1,-1,-1):
+            if string1[i] == string2[j]:
+                temp[j] = 1 + dp[j +1]
+            else:
+                temp[j] = max(dp[j],temp[j + 1])
+        dp = temp[:]
+    
+    deletion = len(string1) - dp[0]
+    insertion = len(string2) - dp[0]
+    print(deletion + insertion)
+    
+# Spaceoptimization()
+
+
+# Longest Palindrome subsequence
+# idea is to reverse the string and do lcs we will get common sbseqence and that to palindromez
+string1 = "bbbab"
+string2 = string1[::-1]
+def LPS():
+    
+    dp = [0] * (len(string2) + 1)
+    for i in range(len(string1)-1,-1,-1):
+        temp = [0] * (len(string2) + 1)
+        for j in range(len(string2)-1,-1,-1):
+            if string1[i] == string2[j]:
+                temp[j] = 1 + dp[j +1]
+            else:
+                temp[j] = max(dp[j],temp[j + 1])
+        dp = temp[:]
+    print(dp[0])
+    
+# LPS()
+
+# minum deletion to make the lonest palindrom subsequence
+# simple length - longest palindrome subsequencce 
+
+string1 = "bbbab"
+string2 = string1[::-1]
+def LPS():
+    
+    dp = [0] * (len(string2) + 1)
+    for i in range(len(string1)-1,-1,-1):
+        temp = [0] * (len(string2) + 1)
+        for j in range(len(string2)-1,-1,-1):
+            if string1[i] == string2[j]:
+                temp[j] = 1 + dp[j +1]
+            else:
+                temp[j] = max(dp[j],temp[j + 1])
+        dp = temp[:]
+    print(len(string1) - dp[0])
+    
+# LPS()
