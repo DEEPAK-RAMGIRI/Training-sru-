@@ -732,6 +732,21 @@ def spaceOptimization():
 
 # code is similar to the longest common subsequence  
 
+string1 = "acbcf"
+string2 = "abcdaf"
+
+def Tabulation():
+    dp = [[0 for _ in range(len(string2) + 1)] for _ in range(len(string1) + 1)]
+    for i in range(len(string1)-1,-1,-1):
+        for j in range(len(string2)-1,-1,-1):
+            if string1[i] == string2[j]:
+                dp[i][j] = 1 + dp[i + 1][j +1]
+            else:
+                dp[i][j] = max(dp[i + 1][j],dp[i][j + 1])
+    return dp[0][0]
+
+# print(len(string1) + len(string2) - Tabulation())
+
 def spaceOptimization():
 
     dp = [0] * (len(string2) + 1)
@@ -747,6 +762,47 @@ def spaceOptimization():
     print((len(string1) + len(string2)) - dp[0])
     
 # spaceOptimization()
+
+# printing  shortest subsequence or printing that super sequence
+# same code as lcs but we are printing the sequence here
+string1 = "acbcf"
+string2 = "abcdaf"
+
+def Tabulation():
+    dp = [[0 for _ in range(len(string2) + 1)] for _ in range(len(string1) + 1)]
+    for i in range(len(string1)-1,-1,-1):
+        for j in range(len(string2)-1,-1,-1):
+            if string1[i] == string2[j]:
+                dp[i][j] = 1 + dp[i + 1][j +1]
+            else:
+                dp[i][j] = max(dp[i + 1][j],dp[i][j + 1])
+    
+    i = 0
+    j = 0
+    ans = ''
+    while i < len(string1) and j < len(string2):
+        if string1[i] == string2[j]:
+            ans += string1[i]
+            i+=1
+            j+=1
+        elif dp[i + 1][j] > dp[i][j + 1]:
+            ans += string1[i]
+            i+=1
+        else:
+            ans += string2[j]
+            j+=1
+            
+    while i < len(string1):
+        ans += string1[i]
+        i+=1
+        
+    while j < len(string2):
+        ans += string2[j]
+        j+=1
+        
+    print(ans)            
+                
+# Tabulation()
 
 
 # printing minimum insertion and deletion
@@ -815,3 +871,143 @@ def LPS():
     print(len(string1) - dp[0])
     
 # LPS()
+
+
+# minimum deletion to make srting palindome
+# Time Complexcity O(2 ^ (m + n))
+# Space Complexcity O(h)
+string1 = 'agbcba'
+def recursion(i,j):
+    if i > j:
+        return 0
+    if string1[i] == string1[j]:
+        return recursion(i + 1, j - 1)
+    else:
+        return 1 + min(recursion(i + 1,j) , recursion(i,j - 1))
+# print(recursion(0,len(string1) - 1))
+
+# Time Complexcity O(n ^ 2)
+# space Complexcity O(n ^ 2)
+dp = [[-1 for _ in range(len(string1) + 1)] for _ in range(len(string1) + 1)]
+def memoization(i,j):
+    if i > j: return 0
+    if dp[i][j] != -1: return dp[i][j]
+    if string1[i] == string1[j]: 
+        dp[i][j] = memoization(i + 1,j - 1)
+    else:
+        dp[i][j] = 1 + min(memoization(i + 1,j) , memoization(i,j - 1))
+    return dp[i][j]
+# print(memoization(0,len(string1) - 1))
+
+
+def Tabulation():
+    dp = [[0 for _ in range(len(string1) + 1)] for _ in range(len(string1) + 1)]
+    for i in range(len(string1) -1,-1,-1):
+        for j in range(len(string1)):
+            if i > j: continue
+            elif string1[i] == string1[j]:
+                dp[i][j] = dp[i + 1][j - 1]
+            else:
+                dp[i][j] = 1 + min(dp[i + 1][j],dp[i][j - 1])
+    # print(dp)
+    return dp[0][len(string1)-1]
+# print(Tabulation())
+
+def SpaceOptimization():
+    dp = [0] * (len(string1) + 1)
+    for i in range(len(string1)-1,-1,-1):
+        temp = [0] * (len(string1) + 1)
+        for j in range(len(string1)):
+            if  i > j : continue
+            elif string1[i] == string1[j]:
+                temp[j] = dp[j - 1]
+            else:
+                temp[j] = 1 + min(dp[j],temp[j - 1])
+        dp = temp[:]
+    return dp[len(string1) - 1]
+
+# print(SpaceOptimization())
+     
+# longest_repeating_subsequence
+           
+string1 = "AABEBCDD"
+string2 = string1
+def Tabulation():
+    dp = [[0 for _ in range(len(string2) + 1)] for _ in range(len(string1) + 1)]
+    for i in range(len(string1)-1,-1,-1):
+        for j in range(len(string2)-1,-1,-1):
+            if string1[i] == string2[j] and i != j:
+                dp[i][j] = 1 + dp[i + 1][j +1]
+            else:
+                dp[i][j] = max(dp[i + 1][j],dp[i][j + 1])
+    return dp[0][0]
+
+# print(Tabulation())
+
+# Sequence Pattern matching
+# here we want to find that string1 present in the string2
+# if so we return True else False
+
+string1  = 'axy'
+string2 = 'advxcpy'
+
+def Tabulation():
+    dp = [[0 for _ in range(len(string2) + 1)] for _ in range(len(string1) + 1)]
+    for i in range(len(string1)-1,-1,-1):
+        for j in range(len(string2)-1,-1,-1):
+            if string1[i] == string2[j]:
+                dp[i][j] = 1 + dp[i +1][j +1]
+            else:
+                dp[i][j] = max(dp[i + 1][j], dp[i][j + 1])
+    if len(string1) == dp[0][0]:
+        return True
+    return False
+
+# print(Tabulation())               
+
+
+# minimum insertion to make the string palindrome
+
+string1 = "acbcbda"
+
+# Time Complexcity O (2 ^ n)
+# Space Complexcity O(2 ^ n)
+def recursion(i,j):
+    if i >= j: return 0
+    if string1[i] == string1[j]: return recursion(i + 1,j -1)
+    else: return 1 + min(recursion(i+1,j),recursion(i,j - 1))
+
+# print(recursion(0,len(string1)-1))
+
+dp = [[-1 for _ in range(len(string1) + 1)] for _ in range(len(string1) + 1)]
+def memoization(i,j):
+    if i >= j: return 0
+    if dp[i][j] != -1: return dp[i][j]
+    if string1[i] == string1[j]: return memoization(i + 1,j - 1)
+    else: return 1 + min(memoization(i + 1,j) ,memoization( i, j - 1))
+
+# print(memoization(0,len(string1)-1))
+
+def Tabulation():
+    dp = [[0 for _ in range(len(string1) + 1)] for _ in range(len(string1) + 1)]
+    for i in range(len(string1) -1,-1,-1):
+        for j in range(len(string1)-1,-1,-1):
+            if i >= j: continue
+            if string1[i] == string1[j]: dp[i][j] = dp[i + 1][j - 1]
+            else:
+                dp[i][j] = 1 + min(dp[i + 1][j],dp[i][j +1 ])
+    return dp[0][len(string1) -1]
+# print(Tabulation())
+
+def SpaceOptimiztion():
+    dp = [0] * (len(string1) + 1)
+    for i in range(len(string1) -1,-1,-1):
+        temp = [0] * (len(string1) + 1)
+        for j in range(len(string1)-1,-1,-1):
+            if i >= j: continue
+            if string1[i] == string1[j]: temp[j] = dp[j - 1]
+            else:
+                temp[j] = 1 + min(dp[j],temp[j +1 ])
+        dp = temp[:]
+    return dp[len(string1) -1]
+print(SpaceOptimiztion())
