@@ -1,3 +1,13 @@
+
+# sum of first n elements where it look like this -1 + 2 - 3 + 4 -5...
+# n = int(input())
+# if n % 2 == 0:
+#     print(n // 2)
+# else:
+#     print(-(n + 1) // 2)
+
+
+
 # Recursion 
 # dp = addvanced dp
 # in dp we have choice and ask for optimal like minimum or maximum
@@ -295,9 +305,6 @@ def Tabulation(sums):
 
 # print(Tabulation((sum(arr) + diff)//2))
 
-
-
-  
 # Random Question
 from collections import deque
 
@@ -979,6 +986,8 @@ def recursion(i,j):
 
 # print(recursion(0,len(string1)-1))
 
+# Time Complexcity O(n ^ 2)
+# Space Complexcity O(n ^ 2)
 dp = [[-1 for _ in range(len(string1) + 1)] for _ in range(len(string1) + 1)]
 def memoization(i,j):
     if i >= j: return 0
@@ -988,6 +997,8 @@ def memoization(i,j):
 
 # print(memoization(0,len(string1)-1))
 
+# Time Complexcity O(n ^ 2)
+# Space Complexcity O(n ^ 2)
 def Tabulation():
     dp = [[0 for _ in range(len(string1) + 1)] for _ in range(len(string1) + 1)]
     for i in range(len(string1) -1,-1,-1):
@@ -999,6 +1010,8 @@ def Tabulation():
     return dp[0][len(string1) -1]
 # print(Tabulation())
 
+# Time Complexcity O(n^ 2)
+# Space Complexcity O(n)
 def SpaceOptimiztion():
     dp = [0] * (len(string1) + 1)
     for i in range(len(string1) -1,-1,-1):
@@ -1010,4 +1023,91 @@ def SpaceOptimiztion():
                 temp[j] = 1 + min(dp[j],temp[j +1 ])
         dp = temp[:]
     return dp[len(string1) -1]
-print(SpaceOptimiztion())
+# print(SpaceOptimiztion())
+
+
+# MATRIX CHAIN MULTIPLICATION
+# time Complexcity O(2 ^ n)
+#Space Complexcity O(h)
+arr = [10,30,5,60]
+def recursion(i,j):
+    if i >= j: return 0
+    mini = float("inf")
+    for k in range(i , j):
+        temp = recursion(i,k) + recursion(k + 1,j) + arr[i - 1] * arr[j] * arr[k]
+        mini = min(mini,temp)
+    return mini
+# print(recursion(1,len(arr) - 1))
+
+# Time Complexcity O(n ^ 3)
+# Space Complexcity O(n ^ 2)
+dp = [[-1 for _ in range(len(arr))] for _ in range(len(arr))]
+def memoization(i,j):
+    if i >= j:
+        return 0
+    if dp[i][j] != -1: return dp[i][j]
+    dp[i][j] = float("inf")
+    for k in range(i,j):
+        temp = memoization(i ,k )+memoization(k + 1,j) + arr[i - 1] * arr[k] * arr[j]
+        dp[i][j] = min(temp,dp[i][j])
+    return dp[i][j]
+# print(memoization(1,len(arr) - 1))
+
+# Time Complexcity O(n ^ 3)
+# Space Complexcity O(n ^ 2)
+def Tabulation():
+    dp = [[float("inf") for _ in range(len(arr))] for _ in range(len(arr))]
+    for i in range(len(arr) -1,0,-1):
+        for j in range(len(arr)):
+            if i >= j: 
+                dp[i][j] = 0
+            else:
+                for k in range(i,j):
+                    temp = dp[i][k] + dp[k + 1][j] + arr[i - 1] * arr[k] * arr[j]
+                    dp[i][j] = min(dp[i][j],temp)
+    return dp[1][len(arr) - 1]
+                
+# print(Tabulation())
+
+# palindrome parition
+
+string1 = 'itin'
+
+def palindrome(i,j):
+    return string1[i : j + 1] == string1[i:j + 1][:: -1]
+
+# def recursion(i,j):
+#     if i >= j or palindrome(i,j): return 0
+#     mini = float("inf")
+#     for k in range(i,j):
+#         temp = recursion(i,k) + recursion(k + 1,j) + 1
+#         mini = min(mini,temp)
+#     return mini 
+# print(recursion(0,len(string1) - 1))
+
+dp = [[ -1 for _ in range(len(string1))] for _ in range(len(string1))]
+def memoization(i,j):
+    if i >= j or palindrome(i,j): return 0
+    if dp[i][j] != -1: return dp[i][j]
+    mini = float("inf")
+    for k in range(i,j):
+        temp = memoization(i,k) + memoization(k + 1,j)  + 1
+        mini = min(mini,temp)
+    dp[i][j] = mini
+    return dp[i][j]
+# print(memoization(0,len(string1)-1))
+
+def Tabulation():
+    dp = [[ 0 for _ in range(len(string1))] for _ in range(len(string1))]
+    for i in range(len(string1) - 1,-1,-1):
+        for j in range(len(string1) - 1,-1,-1):
+            if i >= j or palindrome(i,j):
+                continue
+            
+            mini = float("inf")
+            for k in range(i,j):
+                temp = dp[i][k] + dp[k + 1][j]  + 1
+                mini = min(mini,temp)
+            dp[i][j] = mini
+    return dp[0][len(string1) -1 ]
+print(Tabulation())
