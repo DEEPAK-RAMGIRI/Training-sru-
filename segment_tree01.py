@@ -80,6 +80,7 @@ def create_segement_tree(left,right,index):
     mid = left + ((right - left) >> 1)
     ans[index] = create_segement_tree(left,mid,2*index + 1) + create_segement_tree(mid+1,right,2*index+2)
     return ans[index]
+
 def update_range(start,end,index,left,right,value,lazy):
     if lazy[index] != 0:
         ans[index] += (right - left + 1) * lazy[index]
