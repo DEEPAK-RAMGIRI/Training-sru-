@@ -187,4 +187,95 @@ def cycle():
             if dfs(i):
                 return True
     return False
-print(cycle())
+
+from collections import deque, defaultdict
+
+def kahn_topo(n, edges):
+    graph = defaultdict(list)
+    indegree = [0] * n
+
+    # build graph & indegree
+    for u, v in edges:
+        graph[u].append(v)
+        indegree[v] += 1
+
+    q = deque()
+    for i in range(n):
+        if indegree[i] == 0:
+            q.append(i)
+
+    topo = []
+    while q:
+        node = q.popleft()
+        topo.append(node)
+
+        for nei in graph[node]:
+            indegree[nei] -= 1
+            if indegree[nei] == 0:
+                q.append(nei)
+
+ 
+    if len(topo) != n:
+        return "Cycle detected"
+
+    return topo
+
+n = 6
+edges = [(5,2),(5,0),(4,0),(4,1),(2,3),(3,1)]
+# print(kahn_topo(n, edges))
+
+# print(cycle())
+
+
+def isBipartite(self, graph):  
+    colors = [-1] * len(graph)
+    def bfs(root):
+        queue = deque([root])
+        colors[root] = 0
+        while queue:
+            node = queue.popleft()
+            for i in graph[node]:
+                if colors[i] == -1:
+                    colors[i] = 0 if colors[node] else 1
+                    queue.append(i)
+                elif colors[i] == colors[node]:
+                    return False
+        return True
+
+    for i in range(len(graph)):
+        if colors[i] == -1:
+            if not bfs(i):
+                return False
+    return True
+
+import heapq
+def dijkstra():
+    edges = [
+        [0,1,4],
+        [0,2,4],
+        [1,2,2],
+        [2,3,3],
+        [2,4,1],
+        [2,5,6],
+        [3,5,2],
+        [4,5,3]
+    ]
+    
+    graph = defaultdict(list)
+    
+    for i,j,k in edges:
+        graph[i].append((j,k))
+        graph[j].append((i,k))
+    
+    dist = [0] +[float("inf")] * 5
+    
+    queue = []
+    heapq.heappush(queue,(0,0))
+    while queue:
+        dis,node = heapq.heappop(queue)
+        for nod,di in graph[node]:
+            if di + dis < dist[nod]:
+                dist[nod] = di + dis
+                queue.append((di + dis,nod))
+    return dist
+print(dijkstra())
