@@ -173,13 +173,153 @@ def sumNumbers(self, root):
     find(root,0)
     return self.sums
                 
-        
+def maxPathSum(self, root):
+    self.maxi = root.val
+    def find(root):
+        if not root: return 0
+        left = find(root.left) 
+        right = find(root.right) 
+
+        inside_is_best = left + right + root.val
+        root_is_best = root.val
+        one_is_best = max(left,right) + root.val
+
+        self.maxi = max(self.maxi,inside_is_best,root_is_best,one_is_best)
+        return max(one_is_best, root_is_best)
+    find(root)
+    return self.maxi
+
+# iterator function    
+    def insert(self,root):
+        while root:
+            self.stack.append(root)
+            root = root.left
+
+    def __init__(self, root: Optional[TreeNode]):
+        self.stack = []
+        self.insert(root) 
+
+    def next(self) -> int:
+        if self.stack:
+            temp = self.stack.pop()
+            self.insert(temp.right)
+            return temp.val
+        return -1
+
+    def hasNext(self) -> bool:
+        if self.stack: return True
+        return False  
                 
-              
+          
+# right side view
+
+def rightSideView(self, root):
+    arr = []
+    if not root: return arr
+    queue = deque([root])
+    while queue:
+        n = len(queue)
+        for _ in range(n):
+            value = queue.popleft()
+            if value.left: queue.append(value.left)
+            if value.right:queue.append(value.right)
+        arr.append(value.val)
+    return arr
+
+def getMinimumDifference(self, root):
+    mini = [float("inf")]
+    self.prev = None
+    def find(root):
+        if root:
+            find(root.left)
+            if self.prev is not None:
+                mini[0] = min(mini[0],abs(root.val - self.prev))
+            self.prev = root.val
+            find(root.right)
+    find(root)
+    return mini[0]
+
+root = None
+def dfs(root,left,right):
+    if not root: return True
+    lefty = righty = False
+    if left < root.val < right:
+        lefty = dfs(root.left,left,root.val)
+        righty = dfs(root.right,root.val,right)
+        # print(lefty,righty)
+    return lefty and righty
+dfs(root,float("-inf"),float("inf"))
+
+         
+   
 arr = [5,1,2,6,7,3,4]
 root = None
 for i in arr:
     root = insert(root,i)
 
-print(height(root))
-traversal(root,"root")
+# print(height(root))
+# traversal(root,"root")
+
+arr = [1, 1, -10, 20]
+k = 1
+n = len(arr)
+ans = float("-inf")
+
+for l in range(n):
+    for r in range(l, n):
+        inside = arr[l:r+1]
+        outside = arr[:l] + arr[r+1:]
+
+        inside.sort()              # ascending
+        outside.sort(reverse=True) # descending
+
+        swaps = min(k, len(inside), len(outside))
+        curr_sum = sum(inside)
+
+        for i in range(swaps):
+            if inside[i] < outside[i]:
+                curr_sum += outside[i] - inside[i]
+            else:
+                break
+
+        ans = max(ans, curr_sum)
+
+# print(ans)
+
+
+# segment tree
+arr = [3,1,2,7]
+seg = [0] * (4 * len(arr))
+def create(index,left,right):
+    if left == right:
+        seg[index] = arr[left]
+    else:
+        mid = left + ((right - left) >> 1)
+        create(2 * index + 1,left,mid)
+        create(2 * index + 2,mid + 1,right)
+        seg[index] = seg[2 * index + 1] + seg[2 *index + 2]
+create(0,0,len(arr) - 1)
+
+def update(index,i,left,right,val):
+    if left == right:
+        seg[index] = val
+    else:
+        mid = left + ((right - left) >> 1)
+        if mid < i:
+            update(2 * index + 2,i,mid + 1,right,val)
+        else:
+            update(2 * index + 1,i,left, mid,val)
+        seg[index] = seg[2 *index + 1] + seg[2 *index + 2]
+        
+def range_sum(index,left,right,start,end):
+    if start > right or end < left:
+        return 0
+    if start <= left and end >= right:
+        return seg[index]
+    else:
+        mid = left + ((right - left) >> 1)
+        return range_sum(2 * index + 1,left,mid,start,end) + range_sum(2 * index + 2,mid + 1,right,start,end)
+    
+update(0,1,0,len(arr)-1,2)
+print(seg)
+print(range_sum(0,0,len(arr)- 1,1,3))
